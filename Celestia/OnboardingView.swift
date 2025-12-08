@@ -49,23 +49,22 @@ struct OnboardingView: View {
     @State private var selectedInterests: [String] = []
     @State private var selectedLanguages: [String] = []
 
-    // Step 6: Additional Details (Optional)
-    @State private var height: Int? = nil
-    @State private var relationshipGoal: String = "Prefer not to say"
-    @State private var ageRangeMin: Int = 18
-    @State private var ageRangeMax: Int = 50
-    @State private var maxDistance: Int = 50
+    // Step 6: Language Exchange Preferences
+    @State private var learningMotivation: String = "Personal Interest"
+    @State private var preferredSchedule: String = "Flexible"
+    @State private var sessionLength: String = "30 minutes"
+    @State private var maxDistance: Int = 0 // 0 = worldwide
 
-    // Step 7: Lifestyle (NEW)
+    // Step 7: Additional Language Details
+    @State private var proficiencyGoal: String = "Conversational"
+    @State private var preferredTopics: [String] = []
+    @State private var teachingStyle: String = ""
+    @State private var correctionPreference: String = "Gentle corrections"
+
+    // Step 8: About Your Background
     @State private var educationLevel: String = ""
-    @State private var religion: String = ""
-    @State private var smoking: String = ""
-    @State private var drinking: String = ""
-
-    // Step 8: More About You (NEW)
-    @State private var exercise: String = ""
-    @State private var pets: String = ""
-    @State private var diet: String = ""
+    @State private var occupation: String = ""
+    @State private var timezone: String = ""
 
     @State private var isLoading = false
     @State private var showError = false
@@ -74,21 +73,21 @@ struct OnboardingView: View {
     @State private var onboardingStartTime = Date()
     
     let genderOptions = ["Male", "Female", "Non-binary", "Other"]
-    let lookingForOptions = ["Men", "Women", "Everyone"]
+    let lookingForOptions = ["Any Partners", "Same Language Background", "Different Background"]
     let totalSteps = 8
 
-    // Step 6 options
-    let relationshipGoalOptions = ["Prefer not to say", "Casual Dating", "Long-term Relationship", "Marriage", "Friendship", "Not Sure Yet"]
-    let heightOptions: [Int] = Array(140...220) // cm range
+    // Step 6 options (Language Exchange Preferences)
+    let learningMotivationOptions = ["Personal Interest", "Travel", "Work/Career", "Family/Heritage", "Education", "Moving Abroad", "Making Friends"]
+    let scheduleOptions = ["Flexible", "Mornings", "Afternoons", "Evenings", "Weekends Only", "Weekdays Only"]
+    let sessionLengthOptions = ["15 minutes", "30 minutes", "45 minutes", "1 hour", "1+ hours"]
 
-    // Step 7 & 8 options (Lifestyle)
-    let educationOptions = ["", "High School", "Some College", "Associate's Degree", "Bachelor's Degree", "Master's Degree", "Doctorate", "Trade School", "Other"]
-    let religionOptions = ["", "Christian", "Catholic", "Jewish", "Muslim", "Hindu", "Buddhist", "Spiritual", "Agnostic", "Atheist", "Other", "Prefer not to say"]
-    let smokingOptions = ["", "Never", "Sometimes", "Regularly", "Trying to quit", "Prefer not to say"]
-    let drinkingOptions = ["", "Never", "Socially", "Occasionally", "Regularly", "Prefer not to say"]
-    let exerciseOptions = ["", "Daily", "Often (3-4x/week)", "Sometimes (1-2x/week)", "Rarely", "Never"]
-    let petsOptions = ["", "Dog", "Cat", "Both", "Other pets", "No pets", "Want pets", "Allergic"]
-    let dietOptions = ["", "Omnivore", "Vegetarian", "Vegan", "Pescatarian", "Keto", "Halal", "Kosher", "Other"]
+    // Step 7 options (Language Details)
+    let proficiencyGoalOptions = ["Survival Basics", "Conversational", "Fluent", "Native-like", "Business Proficient", "Academic Level"]
+    let correctionOptions = ["No corrections please", "Gentle corrections", "Correct me often", "Strict corrections welcome"]
+    let teachingStyleOptions = ["", "Patient & Encouraging", "Direct & Efficient", "Fun & Casual", "Structured & Methodical"]
+
+    // Step 8 options (Background)
+    let educationOptions = ["", "High School", "Some College", "Bachelor's Degree", "Master's Degree", "Doctorate", "Other"]
     
     let availableInterests = [
         "Travel", "Music", "Movies", "Sports", "Food",
@@ -336,7 +335,7 @@ struct OnboardingView: View {
         case 0: return "Tell us who you are"
         case 1: return "Share your story"
         case 2: return "Show your best self"
-        case 3: return "What you're looking for"
+        case 3: return "Language Goals"
         case 4: return "What makes you unique"
         case 5: return "Optional • Skip anytime"
         case 6: return "Your habits & preferences"
@@ -1136,7 +1135,7 @@ struct OnboardingView: View {
                 }
                 
                 VStack(spacing: 8) {
-                    Text("Dating Preferences")
+                    Text("Practice Preferences")
                         .font(.title)
                         .fontWeight(.bold)
                     
@@ -1342,7 +1341,7 @@ struct OnboardingView: View {
                         .font(.title)
                         .fontWeight(.bold)
 
-                    Text("These details help find your perfect match")
+                    Text("These details help find your ideal language partners")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -1364,31 +1363,31 @@ struct OnboardingView: View {
                 }
 
                 VStack(spacing: 20) {
-                    // Relationship Goal
+                    // Learning Motivation
                     VStack(alignment: .leading, spacing: 12) {
                         HStack(spacing: 8) {
-                            Image(systemName: "heart.text.square.fill")
-                                .foregroundColor(.pink)
-                            Text("What are you looking for?")
+                            Image(systemName: "lightbulb.fill")
+                                .foregroundColor(.orange)
+                            Text("Why are you learning?")
                                 .font(.headline)
                         }
 
-                        ForEach(relationshipGoalOptions.filter { $0 != "Prefer not to say" }, id: \.self) { goal in
+                        ForEach(learningMotivationOptions, id: \.self) { motivation in
                             Button {
                                 withAnimation(.spring(response: 0.3)) {
-                                    relationshipGoal = goal
+                                    learningMotivation = motivation
                                     HapticManager.shared.selection()
                                 }
                             } label: {
                                 HStack {
-                                    Text(goal)
+                                    Text(motivation)
                                         .fontWeight(.medium)
 
                                     Spacer()
 
-                                    if relationshipGoal == goal {
+                                    if learningMotivation == motivation {
                                         Image(systemName: "checkmark.circle.fill")
-                                            .foregroundColor(.pink)
+                                            .foregroundColor(.blue)
                                     } else {
                                         Image(systemName: "circle")
                                             .foregroundColor(.gray.opacity(0.3))
@@ -1396,9 +1395,9 @@ struct OnboardingView: View {
                                 }
                                 .padding()
                                 .background(
-                                    relationshipGoal == goal ?
+                                    learningMotivation == motivation ?
                                     LinearGradient(
-                                        colors: [Color.pink.opacity(0.1), Color.purple.opacity(0.05)],
+                                        colors: [Color.blue.opacity(0.1), Color.teal.opacity(0.05)],
                                         startPoint: .leading,
                                         endPoint: .trailing
                                     ) :
@@ -1408,7 +1407,7 @@ struct OnboardingView: View {
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 12)
                                         .stroke(
-                                            relationshipGoal == goal ? Color.pink.opacity(0.5) : Color.gray.opacity(0.2),
+                                            learningMotivation == motivation ? Color.blue.opacity(0.5) : Color.gray.opacity(0.2),
                                             lineWidth: 1
                                         )
                                 )
@@ -1417,37 +1416,35 @@ struct OnboardingView: View {
                         }
                     }
 
-                    // Height
+                    // Preferred Schedule
                     VStack(alignment: .leading, spacing: 12) {
                         HStack(spacing: 8) {
-                            Image(systemName: "ruler")
-                                .foregroundColor(.blue)
-                            Text("Your Height")
+                            Image(systemName: "calendar")
+                                .foregroundColor(.green)
+                            Text("Preferred Practice Time")
                                 .font(.headline)
 
                             Spacer()
 
-                            if let h = height {
-                                Text("\(h) cm (\(heightToFeetInches(h)))")
-                                    .font(.subheadline)
-                                    .fontWeight(.semibold)
-                                    .foregroundColor(.blue)
-                            }
+                            Text(preferredSchedule)
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundColor(.green)
                         }
 
                         HStack(spacing: 12) {
-                            // Height picker
+                            // Schedule picker
                             Menu {
-                                ForEach(heightOptions, id: \.self) { h in
-                                    Button("\(h) cm (\(heightToFeetInches(h)))") {
-                                        height = h
+                                ForEach(scheduleOptions, id: \.self) { schedule in
+                                    Button(schedule) {
+                                        preferredSchedule = schedule
                                         HapticManager.shared.selection()
                                     }
                                 }
                             } label: {
                                 HStack {
-                                    Text(height != nil ? "\(height!) cm" : "Select Height")
-                                        .foregroundColor(height != nil ? .primary : .gray)
+                                    Text(preferredSchedule)
+                                        .foregroundColor(.primary)
                                     Spacer()
                                     Image(systemName: "chevron.down")
                                         .font(.caption)
@@ -1458,63 +1455,55 @@ struct OnboardingView: View {
                                 .cornerRadius(12)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 12)
-                                        .stroke(Color.blue.opacity(0.3), lineWidth: 1)
+                                        .stroke(Color.green.opacity(0.3), lineWidth: 1)
                                 )
-                            }
-
-                            // Clear button
-                            if height != nil {
-                                Button {
-                                    height = nil
-                                    HapticManager.shared.impact(.light)
-                                } label: {
-                                    Image(systemName: "xmark.circle.fill")
-                                        .font(.title2)
-                                        .foregroundColor(.gray)
-                                }
                             }
                         }
                     }
 
-                    // Age Range Preference
+                    // Session Length Preference
                     VStack(alignment: .leading, spacing: 12) {
                         HStack(spacing: 8) {
-                            Image(systemName: "person.2.fill")
+                            Image(systemName: "clock.fill")
                                 .foregroundColor(.purple)
-                            Text("Preferred Age Range")
+                            Text("Ideal Session Length")
                                 .font(.headline)
 
                             Spacer()
 
-                            Text("\(ageRangeMin) - \(ageRangeMax)")
+                            Text(sessionLength)
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.purple)
                         }
 
-                        VStack(spacing: 16) {
-                            // Min Age
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Minimum: \(ageRangeMin)")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-
-                                Slider(
-                                    value: Binding(
-                                        get: { Double(ageRangeMin) },
-                                        set: { ageRangeMin = Int($0) }
-                                    ),
-                                    in: 18...Double(ageRangeMax - 1),
-                                    step: 1
-                                )
-                                .tint(.purple)
+                        HStack(spacing: 8) {
+                            ForEach(sessionLengthOptions, id: \.self) { length in
+                                Button {
+                                    sessionLength = length
+                                    HapticManager.shared.selection()
+                                } label: {
+                                    Text(length)
+                                        .font(.caption)
+                                        .fontWeight(.medium)
+                                        .padding(.horizontal, 12)
+                                        .padding(.vertical, 8)
+                                        .background(
+                                            sessionLength == length ?
+                                            Color.purple.opacity(0.2) : Color.gray.opacity(0.1)
+                                        )
+                                        .foregroundColor(sessionLength == length ? .purple : .secondary)
+                                        .cornerRadius(8)
+                                }
                             }
+                        }
+                        .frame(maxWidth: .infinity)
 
-                            // Max Age
-                            VStack(alignment: .leading, spacing: 8) {
-                                Text("Maximum: \(ageRangeMax)")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
+                        // Proficiency Goal
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Your Goal Level")
+                                .font(.caption)
+                                .foregroundColor(.secondary)
 
                                 Slider(
                                     value: Binding(
@@ -2060,9 +2049,8 @@ struct OnboardingView: View {
 
                 // Step 6 optional fields
                 user.height = height
-                user.relationshipGoal = (relationshipGoal == "Prefer not to say") ? nil : relationshipGoal
-                user.ageRangeMin = ageRangeMin
-                user.ageRangeMax = ageRangeMax
+                // Language exchange preferences stored via learningGoals and other language fields
+                // Note: learningMotivation, preferredSchedule, sessionLength captured in language settings
 
                 // Step 6 - maxDistance
                 user.maxDistance = maxDistance
@@ -2139,9 +2127,10 @@ struct OnboardingView: View {
 
             // Step 6: Better Matches
             height = user.height
-            relationshipGoal = user.relationshipGoal ?? "Prefer not to say"
-            ageRangeMin = user.ageRangeMin ?? 18
-            ageRangeMax = user.ageRangeMax ?? 50
+            // Language exchange preferences are loaded from language settings
+            learningMotivation = "Personal Interest"
+            preferredSchedule = "Flexible"
+            sessionLength = "30 minutes"
             maxDistance = user.maxDistance ?? 50
 
             // Step 7 & 8: Lifestyle
