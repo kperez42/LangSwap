@@ -45,7 +45,7 @@ struct CurrentUserProfileCard: View {
                 .padding(.vertical, 6)
                 .background(
                     LinearGradient(
-                        colors: [.purple, .pink],
+                        colors: [.teal, .blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
