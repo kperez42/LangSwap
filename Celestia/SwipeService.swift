@@ -1,17 +1,17 @@
 //
 //  SwipeService.swift
-//  Celestia
+//  LangSwap
 //
-//  Service for handling swipes (likes/passes) and creating matches
+//  Service for handling swipes (connections/skips) and creating language partner matches
 //
 
 import Foundation
 import Firebase
 import FirebaseFirestore
 
-// MARK: - Like Retry Configuration
+// MARK: - Connection Retry Configuration
 
-private struct LikeRetryConfig {
+private struct ConnectionRetryConfig {
     static let maxRetries = 3
     static let baseDelaySeconds: Double = 0.5
     static let maxDelaySeconds: Double = 4.0
@@ -31,7 +31,7 @@ class SwipeService: ObservableObject, SwipeServiceProtocol {
     private let matchService: MatchService
 
     // Track pending operations for recovery
-    private var pendingLikes: Set<String> = []
+    private var pendingConnections: Set<String> = []
 
     // Singleton for backward compatibility (uses default repository)
     static let shared = SwipeService(
@@ -45,7 +45,7 @@ class SwipeService: ObservableObject, SwipeServiceProtocol {
         self.matchService = matchService
     }
 
-    /// Record a like from user1 to user2 and check for mutual match
+    /// Record a connection request from user1 to user2 and check for mutual language partner match
     /// This method includes retry logic and is designed to be error-proof
     func likeUser(fromUserId: String, toUserId: String, isSuperLike: Bool = false) async throws -> Bool {
         // SECURITY: Validate input parameters
@@ -55,43 +55,43 @@ class SwipeService: ObservableObject, SwipeServiceProtocol {
         }
 
         guard fromUserId != toUserId else {
-            Logger.shared.warning("Attempted self-like prevented: \(fromUserId)", category: .matching)
-            throw CelestiaError.invalidOperation("Cannot like yourself")
+            Logger.shared.warning("Attempted self-connection prevented: \(fromUserId)", category: .matching)
+            throw CelestiaError.invalidOperation("Cannot connect with yourself")
         }
 
         // Create unique operation ID for tracking
         let operationId = "\(fromUserId)_\(toUserId)"
 
         // Prevent duplicate concurrent operations
-        guard !pendingLikes.contains(operationId) else {
-            Logger.shared.warning("Like operation already in progress: \(operationId)", category: .matching)
-            throw CelestiaError.invalidOperation("Like already in progress")
+        guard !pendingConnections.contains(operationId) else {
+            Logger.shared.warning("Connection operation already in progress: \(operationId)", category: .matching)
+            throw CelestiaError.invalidOperation("Connection already in progress")
         }
 
-        pendingLikes.insert(operationId)
-        defer { pendingLikes.remove(operationId) }
+        pendingConnections.insert(operationId)
+        defer { pendingConnections.remove(operationId) }
 
         // SECURITY: Backend rate limit validation for swipes
         try await validateRateLimit(userId: fromUserId, isSuperLike: isSuperLike)
 
-        // Save the like with retry logic
-        try await createLikeWithRetry(
+        // Save the connection with retry logic
+        try await createConnectionWithRetry(
             fromUserId: fromUserId,
             toUserId: toUserId,
-            isSuperLike: isSuperLike
+            isSuperConnect: isSuperLike
         )
 
-        // Check for mutual match with retry logic
-        let isMutualLike = await checkMutualLikeWithRetry(fromUserId: fromUserId, toUserId: toUserId)
+        // Check for mutual connection with retry logic
+        let isMutualConnection = await checkMutualConnectionWithRetry(fromUserId: fromUserId, toUserId: toUserId)
 
-        if isMutualLike {
-            // It's a match! Create the match
-            Logger.shared.info("🎉 Mutual like detected! Creating match: \(fromUserId) <-> \(toUserId)", category: .matching)
+        if isMutualConnection {
+            // Language partner found! Create the match
+            Logger.shared.info("🎉 Mutual connection detected! Creating language partner match: \(fromUserId) <-> \(toUserId)", category: .matching)
             await matchService.createMatch(user1Id: fromUserId, user2Id: toUserId)
             return true
         }
 
-        Logger.shared.debug("✅ Like recorded successfully: \(fromUserId) -> \(toUserId)", category: .matching)
+        Logger.shared.debug("✅ Connection request recorded successfully: \(fromUserId) -> \(toUserId)", category: .matching)
         return false
     }
 
@@ -100,7 +100,7 @@ class SwipeService: ObservableObject, SwipeServiceProtocol {
     /// Validate rate limit with fallback
     private func validateRateLimit(userId: String, isSuperLike: Bool) async throws {
         do {
-            let action: RateLimitAction = isSuperLike ? .sendSuperLike : .swipe
+            let action: RateLimitAction = isSuperLike ? .sendSuperConnect : .swipe
             let rateLimitResponse = try await BackendAPIService.shared.checkRateLimit(
                 userId: userId,
                 action: action
@@ -124,7 +124,7 @@ class SwipeService: ObservableObject, SwipeServiceProtocol {
 
             // Client-side rate limiting fallback
             if !isSuperLike {
-                guard RateLimiter.shared.canSendLike() else {
+                guard RateLimiter.shared.canSendConnection() else {
                     throw CelestiaError.rateLimitExceeded
                 }
             }
@@ -137,21 +137,21 @@ class SwipeService: ObservableObject, SwipeServiceProtocol {
         }
     }
 
-    /// Create like with automatic retry on transient failures
-    private func createLikeWithRetry(fromUserId: String, toUserId: String, isSuperLike: Bool) async throws {
+    /// Create connection with automatic retry on transient failures
+    private func createConnectionWithRetry(fromUserId: String, toUserId: String, isSuperConnect: Bool) async throws {
         var lastError: Error?
 
-        for attempt in 0..<LikeRetryConfig.maxRetries {
+        for attempt in 0..<ConnectionRetryConfig.maxRetries {
             do {
-                try await repository.createLike(fromUserId: fromUserId, toUserId: toUserId, isSuperLike: isSuperLike)
+                try await repository.createLike(fromUserId: fromUserId, toUserId: toUserId, isSuperLike: isSuperConnect)
                 return // Success!
             } catch {
                 lastError = error
 
                 // Check if error is retryable
-                if isRetryableError(error) && attempt < LikeRetryConfig.maxRetries - 1 {
-                    let delay = LikeRetryConfig.delay(for: attempt)
-                    Logger.shared.warning("Like failed (attempt \(attempt + 1)/\(LikeRetryConfig.maxRetries)), retrying in \(delay)s: \(error.localizedDescription)", category: .matching)
+                if isRetryableError(error) && attempt < ConnectionRetryConfig.maxRetries - 1 {
+                    let delay = ConnectionRetryConfig.delay(for: attempt)
+                    Logger.shared.warning("Connection failed (attempt \(attempt + 1)/\(ConnectionRetryConfig.maxRetries)), retrying in \(delay)s: \(error.localizedDescription)", category: .matching)
                     try await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
                 } else {
                     // Non-retryable error or max retries reached
@@ -161,51 +161,51 @@ class SwipeService: ObservableObject, SwipeServiceProtocol {
         }
 
         // All retries failed
-        Logger.shared.error("Like failed after \(LikeRetryConfig.maxRetries) attempts", category: .matching, error: lastError)
+        Logger.shared.error("Connection failed after \(ConnectionRetryConfig.maxRetries) attempts", category: .matching, error: lastError)
         throw lastError ?? CelestiaError.networkError
     }
 
-    /// Check mutual like with retry logic - never miss a match!
-    private func checkMutualLikeWithRetry(fromUserId: String, toUserId: String) async -> Bool {
+    /// Check mutual connection with retry logic - never miss a language partner match!
+    private func checkMutualConnectionWithRetry(fromUserId: String, toUserId: String) async -> Bool {
         var lastError: Error?
 
-        for attempt in 0..<LikeRetryConfig.maxRetries {
+        for attempt in 0..<ConnectionRetryConfig.maxRetries {
             do {
                 let isMutual = try await repository.checkMutualLike(fromUserId: fromUserId, toUserId: toUserId)
                 return isMutual
             } catch {
                 lastError = error
 
-                if attempt < LikeRetryConfig.maxRetries - 1 {
-                    let delay = LikeRetryConfig.delay(for: attempt)
-                    Logger.shared.warning("Mutual check failed (attempt \(attempt + 1)/\(LikeRetryConfig.maxRetries)), retrying in \(delay)s", category: .matching)
+                if attempt < ConnectionRetryConfig.maxRetries - 1 {
+                    let delay = ConnectionRetryConfig.delay(for: attempt)
+                    Logger.shared.warning("Mutual connection check failed (attempt \(attempt + 1)/\(ConnectionRetryConfig.maxRetries)), retrying in \(delay)s", category: .matching)
                     try? await Task.sleep(nanoseconds: UInt64(delay * 1_000_000_000))
                 }
             }
         }
 
-        // Log error but don't fail the like - match will be detected on next sync
-        Logger.shared.error("Mutual check failed after retries, match may be detected later", category: .matching, error: lastError)
+        // Log error but don't fail the connection - partner match will be detected on next sync
+        Logger.shared.error("Mutual connection check failed after retries, partner match may be detected later", category: .matching, error: lastError)
 
         // Schedule a background recheck
         Task {
             try? await Task.sleep(nanoseconds: 5_000_000_000) // 5 seconds
-            await self.recheckForMissedMatch(fromUserId: fromUserId, toUserId: toUserId)
+            await self.recheckForMissedPartnerMatch(fromUserId: fromUserId, toUserId: toUserId)
         }
 
         return false
     }
 
-    /// Background recheck for missed matches
-    private func recheckForMissedMatch(fromUserId: String, toUserId: String) async {
+    /// Background recheck for missed language partner matches
+    private func recheckForMissedPartnerMatch(fromUserId: String, toUserId: String) async {
         do {
             let isMutual = try await repository.checkMutualLike(fromUserId: fromUserId, toUserId: toUserId)
             if isMutual {
-                Logger.shared.info("🎉 Delayed mutual match detected: \(fromUserId) <-> \(toUserId)", category: .matching)
+                Logger.shared.info("🎉 Delayed mutual language partner match detected: \(fromUserId) <-> \(toUserId)", category: .matching)
                 await matchService.createMatch(user1Id: fromUserId, user2Id: toUserId)
             }
         } catch {
-            Logger.shared.error("Background mutual check failed", category: .matching, error: error)
+            Logger.shared.error("Background mutual connection check failed", category: .matching, error: error)
         }
     }
 
@@ -260,10 +260,10 @@ class SwipeService: ObservableObject, SwipeServiceProtocol {
 
         } catch let error as BackendAPIError {
             // Backend rate limit service unavailable - use client-side fallback
-            Logger.shared.error("Backend rate limit check failed for pass - using client-side fallback", category: .matching)
+            Logger.shared.error("Backend rate limit check failed for skip - using client-side fallback", category: .matching)
 
             // Client-side rate limiting fallback
-            guard RateLimiter.shared.canSendLike() else {
+            guard RateLimiter.shared.canSendConnection() else {
                 throw CelestiaError.rateLimitExceeded
             }
         } catch {
@@ -275,17 +275,17 @@ class SwipeService: ObservableObject, SwipeServiceProtocol {
         try await repository.createPass(fromUserId: fromUserId, toUserId: toUserId)
     }
 
-    /// Check if user1 has already liked/passed user2
+    /// Check if user1 has already connected/skipped user2
     func hasSwipedOn(fromUserId: String, toUserId: String) async throws -> (liked: Bool, passed: Bool) {
         return try await repository.hasSwipedOn(fromUserId: fromUserId, toUserId: toUserId)
     }
 
-    /// Get all users who have liked the current user
+    /// Get all users who have sent connection requests to the current user
     func getLikesReceived(userId: String) async throws -> [String] {
         return try await repository.getLikesReceived(userId: userId)
     }
 
-    /// Get all users the current user has liked
+    /// Get all users the current user has sent connection requests to
     func getLikesSent(userId: String) async throws -> [String] {
         return try await repository.getLikesSent(userId: userId)
     }
@@ -301,14 +301,14 @@ class SwipeService: ObservableObject, SwipeServiceProtocol {
         }
     }
 
-    /// Check if user has already liked another user
+    /// Check if user has already sent a connection request to another user
     func checkIfLiked(fromUserId: String, toUserId: String) async throws -> Bool {
         return try await repository.checkLikeExists(fromUserId: fromUserId, toUserId: toUserId)
     }
 
-    /// Unlike a user (remove the like)
+    /// Disconnect from a user (remove the connection request)
     func unlikeUser(fromUserId: String, toUserId: String) async throws {
         try await repository.unlikeUser(fromUserId: fromUserId, toUserId: toUserId)
-        Logger.shared.info("User unliked: \(fromUserId) -> \(toUserId)", category: .matching)
+        Logger.shared.info("User disconnected: \(fromUserId) -> \(toUserId)", category: .matching)
     }
 }

@@ -1,8 +1,8 @@
 //
 //  MatchService.swift
-//  Celestia
+//  LangSwap
 //
-//  Service for match-related operations
+//  Service for language partner matching operations
 //
 
 import Foundation
@@ -199,12 +199,12 @@ class MatchService: ObservableObject, MatchServiceProtocol, ListenerLifecycleAwa
         }
     }
 
-    /// Unmatch - Deactivate match and clean up related data
+    /// End partnership - Deactivate match and clean up related data
     func unmatch(matchId: String, userId: String) async throws {
         if let firestoreRepo = repository as? FirestoreMatchRepository {
             try await firestoreRepo.unmatch(matchId: matchId, userId: userId)
         }
-        Logger.shared.info("Unmatched successfully", category: .matching)
+        Logger.shared.info("Partnership ended successfully", category: .matching)
     }
 
     /// Deactivate a match (soft delete)

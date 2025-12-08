@@ -1,8 +1,8 @@
 //
 //  MutualLikesView.swift
-//  Celestia
+//  LangSwap
 //
-//  Shows people you both liked (mutual likes that haven't matched yet)
+//  Shows people you both connected with (mutual connections that haven't partnered yet)
 //
 
 import SwiftUI
@@ -27,7 +27,7 @@ struct MutualLikesView: View {
                     mutualLikesGrid
                 }
             }
-            .navigationTitle("Mutual Likes")
+            .navigationTitle("Mutual Connections")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -71,20 +71,20 @@ struct MutualLikesView: View {
 
     private var headerCard: some View {
         VStack(spacing: 8) {
-            Image(systemName: "heart.circle.fill")
+            Image(systemName: "person.2.circle.fill")
                 .font(.system(size: 50))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.pink, .purple],
+                        colors: [.teal, .blue],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
                 )
 
-            Text("\(viewModel.mutualLikes.count) Mutual Likes")
+            Text("\(viewModel.mutualLikes.count) Mutual Connections")
                 .font(.title2.bold())
 
-            Text("You both liked each other!")
+            Text("You both want to practice together!")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -101,7 +101,7 @@ struct MutualLikesView: View {
     private var loadingView: some View {
         VStack(spacing: 16) {
             ProgressView()
-            Text("Loading mutual likes...")
+            Text("Loading mutual connections...")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
         }
@@ -111,16 +111,16 @@ struct MutualLikesView: View {
 
     private var emptyStateView: some View {
         VStack(spacing: 24) {
-            Image(systemName: "heart.slash.circle")
+            Image(systemName: "person.2.slash")
                 .font(.system(size: 80))
                 .foregroundColor(.gray.opacity(0.5))
 
             VStack(spacing: 8) {
-                Text("No Mutual Likes Yet")
+                Text("No Mutual Connections Yet")
                     .font(.title2)
                     .fontWeight(.bold)
 
-                Text("Keep swiping to find people who like you back!")
+                Text("Keep exploring to find language partners who want to practice with you!")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -131,7 +131,7 @@ struct MutualLikesView: View {
     }
 }
 
-// MARK: - Mutual Like Card
+// MARK: - Mutual Connection Card
 
 struct MutualLikeCard: View {
     let user: User
@@ -149,7 +149,7 @@ struct MutualLikeCard: View {
                     CachedCardImage(url: url)
                 } else {
                     LinearGradient(
-                        colors: [.purple.opacity(0.6), .pink.opacity(0.5)],
+                        colors: [.teal.opacity(0.6), .blue.opacity(0.5)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
@@ -176,12 +176,12 @@ struct MutualLikeCard: View {
 
                     // Mutual indicator
                     HStack(spacing: 4) {
-                        Image(systemName: "heart.fill")
+                        Image(systemName: "person.2.fill")
                             .font(.caption2)
-                        Text("You both liked!")
+                        Text("You both want to practice!")
                             .font(.caption)
                     }
-                    .foregroundColor(.pink)
+                    .foregroundColor(.teal)
                 }
                 .padding(12)
             }
@@ -214,22 +214,22 @@ class MutualLikesViewModel: ObservableObject {
         defer { isLoading = false }
 
         do {
-            // Get users current user liked (likes sent by current user)
-            let myLikesSnapshot = try await db.collection("likes")
+            // Get users current user connected with (connections sent by current user)
+            let myConnectionsSnapshot = try await db.collection("likes")
                 .whereField("fromUserId", isEqualTo: currentUserId)
                 .getDocuments()
 
-            let myLikedUserIds = Set(myLikesSnapshot.documents.compactMap { $0.data()["toUserId"] as? String })
+            let myConnectedUserIds = Set(myConnectionsSnapshot.documents.compactMap { $0.data()["toUserId"] as? String })
 
-            // Get users who liked current user (likes received)
-            let likersSnapshot = try await db.collection("likes")
+            // Get users who connected with current user (connections received)
+            let connectorsSnapshot = try await db.collection("likes")
                 .whereField("toUserId", isEqualTo: currentUserId)
                 .getDocuments()
 
-            let likerIds = Set(likersSnapshot.documents.compactMap { $0.data()["fromUserId"] as? String })
+            let connectorIds = Set(connectorsSnapshot.documents.compactMap { $0.data()["fromUserId"] as? String })
 
-            // Find mutual likes (intersection)
-            let mutualLikeIds = myLikedUserIds.intersection(likerIds)
+            // Find mutual connections (intersection)
+            let mutualConnectionIds = myConnectedUserIds.intersection(connectorIds)
 
             // Check if they're already matched
             let matchesSnapshot = try await db.collection("matches")
@@ -238,13 +238,13 @@ class MutualLikesViewModel: ObservableObject {
 
             let matchedUserIds = Set(matchesSnapshot.documents.compactMap { $0.data()["user2Id"] as? String })
 
-            // Filter out already matched users
-            let unmatchedMutualLikes = mutualLikeIds.subtracting(matchedUserIds)
+            // Filter out already partnered users
+            let unmatchedMutualConnections = mutualConnectionIds.subtracting(matchedUserIds)
 
             // PERFORMANCE FIX: Batch fetch user details to prevent N+1 queries
             // Firestore 'in' query has a max of 10 items, so batch in groups of 10
             var users: [User] = []
-            let userIdArray = Array(unmatchedMutualLikes)
+            let userIdArray = Array(unmatchedMutualConnections)
 
             for i in stride(from: 0, to: userIdArray.count, by: 10) {
                 let batchEnd = min(i + 10, userIdArray.count)
@@ -261,9 +261,9 @@ class MutualLikesViewModel: ObservableObject {
             }
 
             mutualLikes = users
-            Logger.shared.info("Loaded \(users.count) mutual likes using batch queries", category: .matching)
+            Logger.shared.info("Loaded \(users.count) mutual connections using batch queries", category: .matching)
         } catch {
-            Logger.shared.error("Error loading mutual likes", category: .matching, error: error)
+            Logger.shared.error("Error loading mutual connections", category: .matching, error: error)
         }
     }
 }

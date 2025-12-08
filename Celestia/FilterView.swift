@@ -14,11 +14,11 @@ struct FilterView: View {
 
     @State private var ageRangeMin: Int = 18
     @State private var ageRangeMax: Int = 99
-    @State private var lookingFor = "Everyone"
+    @State private var practiceWith = "Everyone"
     @State private var isLoading = false
     @State private var showSaveConfirmation = false
 
-    let lookingForOptions = ["Men", "Women", "Everyone"]
+    let practiceWithOptions = ["Native Speakers", "Fellow Learners", "Everyone"]
 
     var body: some View {
         NavigationStack {
@@ -27,8 +27,8 @@ struct FilterView: View {
                     // Age Range Section
                     ageRangeSection
 
-                    // Gender Preference Section
-                    genderPreferenceSection
+                    // Practice Partner Preference Section
+                    practicePartnerSection
                 }
                 .padding()
             }
@@ -60,7 +60,7 @@ struct FilterView: View {
                     .padding()
                     .background(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -93,18 +93,18 @@ struct FilterView: View {
             HStack(spacing: 12) {
                 ZStack {
                     Circle()
-                        .fill(Color.pink.opacity(0.12))
+                        .fill(Color.teal.opacity(0.12))
                         .frame(width: 40, height: 40)
-                    Image(systemName: "heart.circle.fill")
+                    Image(systemName: "person.2.circle.fill")
                         .font(.title3)
-                        .foregroundColor(.pink)
+                        .foregroundColor(.teal)
                 }
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Age Preference")
+                    Text("Partner Age Range")
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                    Text("Who would you like to meet?")
+                    Text("Preferred age range for language partners")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -119,7 +119,7 @@ struct FilterView: View {
                     .padding(.vertical, 6)
                     .background(
                         LinearGradient(
-                            colors: [.pink, .purple],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -183,26 +183,26 @@ struct FilterView: View {
         .cornerRadius(16)
     }
 
-    // MARK: - Gender Preference Section
+    // MARK: - Practice Partner Section
 
-    private var genderPreferenceSection: some View {
+    private var practicePartnerSection: some View {
         VStack(spacing: 16) {
             // Header with icon
             HStack(spacing: 12) {
                 ZStack {
                     Circle()
-                        .fill(Color.purple.opacity(0.12))
+                        .fill(Color.blue.opacity(0.12))
                         .frame(width: 40, height: 40)
-                    Image(systemName: "person.2.fill")
+                    Image(systemName: "globe")
                         .font(.title3)
-                        .foregroundColor(.purple)
+                        .foregroundColor(.blue)
                 }
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Looking For")
+                    Text("Practice With")
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                    Text("Select your preference")
+                    Text("Select your partner preference")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -210,9 +210,9 @@ struct FilterView: View {
                 Spacer()
             }
 
-            // Gender picker
-            Picker("Looking for", selection: $lookingFor) {
-                ForEach(lookingForOptions, id: \.self) { option in
+            // Practice partner picker
+            Picker("Practice with", selection: $practiceWith) {
+                ForEach(practiceWithOptions, id: \.self) { option in
                     Text(option).tag(option)
                 }
             }
@@ -236,7 +236,7 @@ struct FilterView: View {
 
             do {
                 // Update user's preferences in their profile
-                currentUser.lookingFor = lookingFor
+                currentUser.lookingFor = practiceWith
                 currentUser.ageRangeMin = ageRangeMin
                 currentUser.ageRangeMax = ageRangeMax
 
@@ -246,7 +246,7 @@ struct FilterView: View {
                 // Fetch users with new filters
                 try await userService.fetchUsers(
                     excludingUserId: currentUserId,
-                    lookingFor: lookingFor == "Everyone" ? nil : lookingFor,
+                    lookingFor: practiceWith == "Everyone" ? nil : practiceWith,
                     ageRange: ageRangeInt,
                     country: nil
                 )
@@ -267,7 +267,7 @@ struct FilterView: View {
     private func loadCurrentPreferences() {
         guard let currentUser = authService.currentUser else { return }
 
-        lookingFor = currentUser.lookingFor
+        practiceWith = currentUser.lookingFor
         ageRangeMin = currentUser.ageRangeMin
         ageRangeMax = currentUser.ageRangeMax
     }
