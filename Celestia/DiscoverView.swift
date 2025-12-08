@@ -26,7 +26,7 @@ struct DiscoverView: View {
             ZStack {
                 // Background
                 LinearGradient(
-                    colors: [Color.purple.opacity(0.1), Color.pink.opacity(0.05)],
+                    colors: [Color.teal.opacity(0.1), Color.blue.opacity(0.05)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )

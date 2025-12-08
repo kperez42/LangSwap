@@ -131,13 +131,13 @@ class DeepLinkRouter: ObservableObject {
     // MARK: - URL Parsing
 
     private func parseURL(_ url: URL) -> DeepLink? {
-        // Handle Universal Links (https://celestia.app/...)
-        if url.scheme == "https" && (url.host == "celestia.app" || url.host == "www.celestia.app") {
+        // Handle Universal Links (https://langswap.app/...)
+        if url.scheme == "https" && (url.host == "langswap.app" || url.host == "www.langswap.app") {
             return parseUniversalLink(url)
         }
 
-        // Handle URL Scheme (celestia://...)
-        if url.scheme == "celestia" {
+        // Handle URL Scheme (langswap://...)
+        if url.scheme == "langswap" {
             return parseURLScheme(url)
         }
 
@@ -154,49 +154,49 @@ class DeepLinkRouter: ObservableObject {
 
         switch components[0] {
         case "join":
-            // celestia.app/join/REFERRAL_CODE
+            // langswap.app/join/REFERRAL_CODE
             guard components.count > 1 else { return .home }
             return .referral(code: components[1])
 
         case "profile":
-            // celestia.app/profile/USER_ID
+            // langswap.app/profile/USER_ID
             guard components.count > 1 else { return .home }
             return .profile(userId: components[1])
 
         case "match":
-            // celestia.app/match/MATCH_ID
+            // langswap.app/match/MATCH_ID
             guard components.count > 1 else { return .home }
             return .match(matchId: components[1])
 
         case "message":
-            // celestia.app/message/MATCH_ID
+            // langswap.app/message/MATCH_ID
             guard components.count > 1 else { return .home }
             return .message(matchId: components[1])
 
         case "verify-email":
-            // celestia.app/verify-email?token=TOKEN
+            // langswap.app/verify-email?token=TOKEN
             if let token = extractQueryParameter(from: url, parameter: "token") {
                 return .emailVerification(token: token)
             }
             return .home
 
         case "reset-password":
-            // celestia.app/reset-password?token=TOKEN
+            // langswap.app/reset-password?token=TOKEN
             if let token = extractQueryParameter(from: url, parameter: "token") {
                 return .resetPassword(token: token)
             }
             return .home
 
         case "upgrade":
-            // celestia.app/upgrade
+            // langswap.app/upgrade
             return .upgrade
 
         case "settings":
-            // celestia.app/settings
+            // langswap.app/settings
             return .settings
 
         case "notifications":
-            // celestia.app/notifications
+            // langswap.app/notifications
             return .notifications
 
         default:
@@ -212,21 +212,21 @@ class DeepLinkRouter: ObservableObject {
             return .home
 
         case "join":
-            // celestia://join?code=REFERRAL_CODE
+            // langswap://join?code=REFERRAL_CODE
             if let code = extractQueryParameter(from: url, parameter: "code") {
                 return .referral(code: code)
             }
             return .home
 
         case "profile":
-            // celestia://profile?id=USER_ID
+            // langswap://profile?id=USER_ID
             if let userId = extractQueryParameter(from: url, parameter: "id") {
                 return .profile(userId: userId)
             }
             return .home
 
         case "match":
-            // celestia://match?id=MATCH_ID
+            // langswap://match?id=MATCH_ID
             if let matchId = extractQueryParameter(from: url, parameter: "id") {
                 return .match(matchId: matchId)
             }
