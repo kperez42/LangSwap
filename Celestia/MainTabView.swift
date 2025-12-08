@@ -26,7 +26,7 @@ struct MainTabView: View {
             return true
         }
         guard let email = authService.currentUser?.email else { return false }
-        let adminEmails = ["perezkevin640@gmail.com", "admin@celestia.app"]
+        let adminEmails = ["perezkevin640@gmail.com", "admin@langswap.app"]
         return adminEmails.contains(email.lowercased())
     }
 

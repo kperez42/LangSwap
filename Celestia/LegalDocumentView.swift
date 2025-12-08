@@ -160,7 +160,7 @@ extension LegalDocumentView {
                     SimpleBulletPoint("Sharing: We do not sell, lease, trade, or profit from your biometric data")
                     SimpleBulletPoint("Third Parties: Biometric data may be processed by our secure verification partners under strict contractual obligations")
 
-                    Text("You may opt out of photo verification features. To request deletion of biometric data, contact privacy@celestia.app.")
+                    Text("You may opt out of photo verification features. To request deletion of biometric data, contact privacy@langswap.app.")
                         .font(.caption)
                         .padding(.top, 4)
                 }
@@ -283,7 +283,7 @@ extension LegalDocumentView {
                     }
 
                     LegalSubsection(title: "Colorado (CPA), Connecticut (CTDPA), Utah (UCPA)") {
-                        Text("Residents of these states have similar rights to access, delete, correct, and opt-out of certain data processing. Contact privacy@celestia.app to exercise your rights.")
+                        Text("Residents of these states have similar rights to access, delete, correct, and opt-out of certain data processing. Contact privacy@langswap.app to exercise your rights.")
                             .font(.caption)
                     }
                 }
@@ -316,7 +316,7 @@ extension LegalDocumentView {
                     HStack {
                         Image(systemName: "envelope")
                             .foregroundColor(.purple)
-                        Text("support@celestia.app")
+                        Text("support@langswap.app")
                     }
                     .font(.subheadline)
                 }
@@ -487,7 +487,7 @@ extension LegalDocumentView {
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.orange)
-                    Text("While we require users to confirm they are 18 years or older, Celestia cannot independently verify the age of all users. We rely on user-provided information and representations. If you become aware of any user who is under 18, please report them immediately to support@celestia.app.")
+                    Text("While we require users to confirm they are 18 years or older, Celestia cannot independently verify the age of all users. We rely on user-provided information and representations. If you become aware of any user who is under 18, please report them immediately to support@langswap.app.")
                         .font(.caption)
                 }
             }
@@ -500,7 +500,7 @@ extension LegalDocumentView {
                     SimpleBulletPoint("We cooperate fully with law enforcement investigations")
                     SimpleBulletPoint("Users who violate these provisions will be immediately banned and reported to authorities")
                     SimpleBulletPoint("We maintain records as required by 18 U.S.C. § 2257")
-                    Text("If you witness any suspicious activity, report it immediately to support@celestia.app or contact the National Human Trafficking Hotline at 1-888-373-7888.")
+                    Text("If you witness any suspicious activity, report it immediately to support@langswap.app or contact the National Human Trafficking Hotline at 1-888-373-7888.")
                         .font(.caption)
                         .fontWeight(.semibold)
                         .padding(.top, 4)
@@ -606,7 +606,7 @@ extension LegalDocumentView {
                         VStack(alignment: .leading, spacing: 4) {
                             Text("You may opt out of this arbitration agreement within 30 days of creating your account by sending written notice to:")
                                 .font(.caption)
-                            Text("legal@celestia.app")
+                            Text("legal@langswap.app")
                                 .font(.caption)
                                 .fontWeight(.semibold)
                             Text("Include your name, email, and a statement that you wish to opt out of the arbitration agreement.")
@@ -663,7 +663,7 @@ extension LegalDocumentView {
 
             LegalSection(title: "Copyright & DMCA") {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("If you believe content on Celestia infringes your copyright, please send a DMCA notice to support@celestia.app including:")
+                    Text("If you believe content on Celestia infringes your copyright, please send a DMCA notice to support@langswap.app including:")
                         .font(.subheadline)
                     SimpleBulletPoint("Identification of the copyrighted work")
                     SimpleBulletPoint("Identification of the infringing material")
@@ -727,13 +727,13 @@ extension LegalDocumentView {
                     HStack {
                         Image(systemName: "envelope")
                             .foregroundColor(.purple)
-                        Text("support@celestia.app")
+                        Text("support@langswap.app")
                     }
                     .font(.subheadline)
                     HStack {
                         Image(systemName: "doc.text")
                             .foregroundColor(.blue)
-                        Text("legal@celestia.app")
+                        Text("legal@langswap.app")
                     }
                     .font(.subheadline)
                 }
@@ -965,7 +965,7 @@ extension LegalDocumentView {
                         .font(.subheadline)
                     SimpleBulletPoint("Report suspicious profiles immediately")
                     SimpleBulletPoint("Report harassment or inappropriate messages")
-                    SimpleBulletPoint("Contact support@celestia.app for urgent concerns")
+                    SimpleBulletPoint("Contact support@langswap.app for urgent concerns")
                 }
             }
         }
@@ -1102,7 +1102,7 @@ extension LegalDocumentView {
                     HStack {
                         Image(systemName: "envelope")
                             .foregroundColor(.purple)
-                        Text("privacy@celestia.app")
+                        Text("privacy@langswap.app")
                     }
                     .font(.subheadline)
                 }
@@ -1341,7 +1341,7 @@ extension LegalDocumentView {
                     HStack {
                         Image(systemName: "envelope")
                             .foregroundColor(.indigo)
-                        Text("legal@celestia.app")
+                        Text("legal@langswap.app")
                     }
                     .font(.subheadline)
                 }
@@ -1456,7 +1456,7 @@ extension LegalDocumentView {
                         HStack {
                             Image(systemName: "envelope")
                                 .foregroundColor(.teal)
-                            Text("accessibility@celestia.app")
+                            Text("accessibility@langswap.app")
                         }
                         .font(.subheadline)
 

@@ -371,7 +371,7 @@ class DeepLinkRouter: ObservableObject {
     func generateReferralLink(code: String) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "celestia.app"
+        components.host = "langswap.app"
         components.path = "/join/\(code)"
 
         return components.url
@@ -381,7 +381,7 @@ class DeepLinkRouter: ObservableObject {
     func generateProfileLink(userId: String) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "celestia.app"
+        components.host = "langswap.app"
         components.path = "/profile/\(userId)"
 
         return components.url
@@ -391,7 +391,7 @@ class DeepLinkRouter: ObservableObject {
     func generateEmailVerificationLink(token: String) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "celestia.app"
+        components.host = "langswap.app"
         components.path = "/verify-email"
         components.queryItems = [URLQueryItem(name: "token", value: token)]
 
@@ -402,7 +402,7 @@ class DeepLinkRouter: ObservableObject {
     func generatePasswordResetLink(token: String) -> URL? {
         var components = URLComponents()
         components.scheme = "https"
-        components.host = "celestia.app"
+        components.host = "langswap.app"
         components.path = "/reset-password"
         components.queryItems = [URLQueryItem(name: "token", value: token)]
 
