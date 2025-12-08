@@ -172,7 +172,7 @@ struct UserDetailView: View {
                     .font(.system(size: 32, weight: .bold))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -191,7 +191,7 @@ struct UserDetailView: View {
 
             HStack(spacing: 6) {
                 Image(systemName: "mappin.circle.fill")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                 Text("\(user.location), \(user.country)")
                     .foregroundColor(.secondary)
             }
@@ -232,8 +232,8 @@ struct UserDetailView: View {
             ProfileSectionCard(
                 icon: "quote.bubble.fill",
                 title: "About",
-                iconColors: [.purple, .pink],
-                borderColor: .purple
+                iconColors: [.teal, .blue],
+                borderColor: .teal
             ) {
                 Text(user.bio)
                     .font(.body)
@@ -271,12 +271,12 @@ struct UserDetailView: View {
             ProfileSectionCard(
                 icon: "sparkles",
                 title: "Interests",
-                iconColors: [.orange, .pink],
+                iconColors: [.orange, .teal],
                 borderColor: .orange
             ) {
                 FlowLayout2(spacing: 10) {
                     ForEach(user.interests, id: \.self) { interest in
-                        ProfileTagView(text: interest, colors: [.orange, .pink], textColor: .orange)
+                        ProfileTagView(text: interest, colors: [.orange, .teal], textColor: .orange)
                     }
                 }
             }
@@ -291,8 +291,8 @@ struct UserDetailView: View {
             ProfileSectionCard(
                 icon: "quote.bubble.fill",
                 title: "Get to Know Me",
-                iconColors: [.purple, .pink],
-                borderColor: .purple
+                iconColors: [.teal, .blue],
+                borderColor: .teal
             ) {
                 VStack(spacing: 12) {
                     ForEach(user.prompts) { prompt in
@@ -872,7 +872,7 @@ struct PromptCard: View {
             Text(prompt.question)
                 .font(.subheadline)
                 .fontWeight(.semibold)
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
 
             Text(prompt.answer)
                 .font(.body)
@@ -883,7 +883,7 @@ struct PromptCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             LinearGradient(
-                colors: [Color.purple.opacity(0.05), Color.pink.opacity(0.03)],
+                colors: [Color.teal.opacity(0.05), Color.blue.opacity(0.03)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )

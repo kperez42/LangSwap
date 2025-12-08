@@ -18,7 +18,7 @@ struct TypingIndicator: View {
             Circle()
                 .fill(
                     LinearGradient(
-                        colors: [Color.purple.opacity(0.7), Color.pink.opacity(0.6)],
+                        colors: [Color.teal.opacity(0.7), Color.blue.opacity(0.6)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )

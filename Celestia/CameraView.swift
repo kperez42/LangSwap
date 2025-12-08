@@ -73,7 +73,7 @@ struct CameraView: View {
 
                         if isCapturing {
                             ProgressView()
-                                .tint(.purple)
+                                .tint(.teal)
                         }
                     }
                 }
@@ -87,14 +87,14 @@ struct CameraView: View {
             Circle()
                 .stroke(
                     LinearGradient(
-                        colors: [.purple.opacity(0.6), .pink.opacity(0.6)],
+                        colors: [.teal.opacity(0.6), .blue.opacity(0.6)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     ),
                     lineWidth: 3
                 )
                 .frame(width: 280, height: 280)
-                .shadow(color: .purple.opacity(0.3), radius: 8)
+                .shadow(color: .teal.opacity(0.3), radius: 8)
         }
         .background(Color.black)
         .onAppear {

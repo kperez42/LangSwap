@@ -49,7 +49,7 @@ struct NotificationSettingsView: View {
                                 .padding(.vertical, 12)
                                 .background(
                                     LinearGradient(
-                                        colors: [.purple, .pink],
+                                        colors: [.teal, .blue],
                                         startPoint: .leading,
                                         endPoint: .trailing
                                     )
@@ -96,7 +96,7 @@ struct NotificationSettingsView: View {
                         Image(systemName: "speaker.wave.2.fill")
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.purple, .pink],
+                                    colors: [.teal, .blue],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
@@ -116,7 +116,7 @@ struct NotificationSettingsView: View {
                         Image(systemName: "app.badge.fill")
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.purple, .pink],
+                                    colors: [.teal, .blue],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
@@ -139,7 +139,7 @@ struct NotificationSettingsView: View {
                         Image(systemName: "moon.fill")
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.purple, .pink],
+                                    colors: [.teal, .blue],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
@@ -184,7 +184,7 @@ struct NotificationSettingsView: View {
                         Image(systemName: "clock.fill")
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.purple, .pink],
+                                    colors: [.teal, .blue],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
@@ -267,7 +267,7 @@ struct NotificationToggle: View {
                 Image(systemName: icon)
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -345,13 +345,13 @@ struct NotificationHistoryRow: View {
                 .font(.title2)
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.purple, .pink],
+                        colors: [.teal, .blue],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
                 )
                 .frame(width: 40, height: 40)
-                .background(Color.purple.opacity(0.1))
+                .background(Color.teal.opacity(0.1))
                 .cornerRadius(10)
 
             // Content
@@ -378,7 +378,7 @@ struct NotificationHistoryRow: View {
     private func iconForType(_ type: NotificationType) -> String {
         switch type {
         case .newMatch:
-            return "heart.circle.fill"
+            return "person.2.circle.fill"
         case .newMessage:
             return "message.circle.fill"
         case .secretAdmirer:
