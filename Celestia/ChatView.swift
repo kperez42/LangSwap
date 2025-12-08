@@ -196,7 +196,7 @@ struct ChatView: View {
                 blockUser()
             }
         } message: {
-            Text("They won't be able to see your profile or contact you. This will also remove them from your matches.")
+            Text("They won't be able to see your profile or contact you. This will also remove them from your language partners.")
         }
         .detectScreenshots(
             context: ScreenshotDetectionService.ScreenshotContext.chat(

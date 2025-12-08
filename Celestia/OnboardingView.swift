@@ -690,7 +690,7 @@ struct OnboardingView: View {
                         .font(.title)
                         .fontWeight(.bold)
 
-                    Text("Great photos get 10x more matches")
+                    Text("Great photos get 10x more connections")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -1579,11 +1579,11 @@ struct OnboardingView: View {
                         .foregroundColor(.green)
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("40% More Matches")
+                        Text("40% More Connections")
                             .font(.subheadline)
                             .fontWeight(.semibold)
 
-                        Text("Users with complete profiles get significantly more matches")
+                        Text("Users with complete profiles get significantly more connections")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -1795,8 +1795,8 @@ struct OnboardingView: View {
                 // Completion stats
                 VStack(spacing: 16) {
                     HStack(spacing: 16) {
-                        statBadge(icon: "chart.line.uptrend.xyaxis", value: "3x", label: "More Matches", color: .green)
-                        statBadge(icon: "heart.fill", value: "85%", label: "Better Compatibility", color: .pink)
+                        statBadge(icon: "chart.line.uptrend.xyaxis", value: "3x", label: "More Partners", color: .green)
+                        statBadge(icon: "globe", value: "85%", label: "Better Language Match", color: .teal)
                     }
 
                     Text("Complete profiles get significantly more attention!")
@@ -1807,7 +1807,7 @@ struct OnboardingView: View {
                 .padding()
                 .background(
                     LinearGradient(
-                        colors: [Color.green.opacity(0.1), Color.pink.opacity(0.05)],
+                        colors: [Color.green.opacity(0.1), Color.teal.opacity(0.05)],
                         startPoint: .leading,
                         endPoint: .trailing
                     )

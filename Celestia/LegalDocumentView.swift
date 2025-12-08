@@ -14,7 +14,7 @@ enum LegalDocumentType: String, CaseIterable {
     case privacyPolicy = "Privacy Policy"
     case termsOfService = "Terms of Service"
     case communityGuidelines = "Community Guidelines"
-    case safetyTips = "Dating Safety Tips"
+    case safetyTips = "Language Exchange Safety Tips"
     case cookiePolicy = "Cookie & Data Policy"
     case eula = "End User License Agreement"
     case accessibility = "Accessibility Statement"
@@ -168,7 +168,7 @@ extension LegalDocumentView {
 
             LegalSection(title: "How We Use Your Information") {
                 VStack(alignment: .leading, spacing: 8) {
-                    SimpleBulletPoint("To provide and maintain our dating services")
+                    SimpleBulletPoint("To provide and maintain our language exchange services")
                     SimpleBulletPoint("To match you with other users based on your preferences")
                     SimpleBulletPoint("To process transactions and send related information")
                     SimpleBulletPoint("To send you technical notices and support messages")
@@ -234,7 +234,7 @@ extension LegalDocumentView {
                 VStack(alignment: .leading, spacing: 8) {
                     Text("We process your personal data under the following legal bases:")
                         .font(.subheadline)
-                    SimpleBulletPoint("Contract: To provide our dating services as agreed in our Terms of Service")
+                    SimpleBulletPoint("Contract: To provide our language exchange services as agreed in our Terms of Service")
                     SimpleBulletPoint("Consent: For marketing communications and optional features")
                     SimpleBulletPoint("Legitimate Interests: For fraud prevention, security, and service improvement")
                     SimpleBulletPoint("Legal Obligation: To comply with applicable laws and regulations")
@@ -248,7 +248,7 @@ extension LegalDocumentView {
                     HStack {
                         Image(systemName: "envelope")
                             .foregroundColor(.blue)
-                        Text("dpo@celestia.app")
+                        Text("dpo@langswap.app")
                     }
                     .font(.subheadline)
                     Text("EU Representative: Available upon request for EU/EEA residents")
@@ -467,9 +467,9 @@ extension LegalDocumentView {
                         .fontWeight(.semibold)
                         .foregroundColor(.red)
 
-                    SimpleBulletPoint("Online dating involves inherent risks including meeting strangers")
+                    SimpleBulletPoint("Online language exchange involves inherent risks including meeting strangers")
                     SimpleBulletPoint("You are solely responsible for your interactions with other users")
-                    SimpleBulletPoint("Celestia does not conduct criminal background checks on users")
+                    SimpleBulletPoint("LangSwap does not conduct criminal background checks on users")
                     SimpleBulletPoint("We cannot guarantee the identity, intentions, or conduct of any user")
                     SimpleBulletPoint("You should take appropriate safety precautions when meeting anyone in person")
                     SimpleBulletPoint("Any meetings or relationships that result from the app are at your own risk")
@@ -477,7 +477,7 @@ extension LegalDocumentView {
             }
 
             LegalSection(title: "No Background Checks") {
-                Text("CELESTIA DOES NOT CONDUCT CRIMINAL BACKGROUND CHECKS OR IDENTITY VERIFICATION ON ALL USERS. We are not responsible for the conduct of any user, whether online or offline. You are solely responsible for your safety and should exercise caution when communicating with or meeting other users.")
+                Text("LANGSWAP DOES NOT CONDUCT CRIMINAL BACKGROUND CHECKS OR IDENTITY VERIFICATION ON ALL USERS. We are not responsible for the conduct of any user, whether online or offline. You are solely responsible for your safety and should exercise caution when communicating with or meeting other users.")
                     .font(.caption)
             }
 
@@ -863,7 +863,7 @@ extension LegalDocumentView {
     private var safetyTipsContent: some View {
         VStack(alignment: .leading, spacing: 20) {
             LegalSection(title: "Your Safety Matters") {
-                Text("While we work hard to keep Celestia safe, online dating requires caution. These tips will help protect you while meeting new people.")
+                Text("While we work hard to keep LangSwap safe, meeting language partners requires caution. These tips will help protect you while practicing with new people.")
             }
 
             LegalSection(title: "Protect Your Personal Information") {

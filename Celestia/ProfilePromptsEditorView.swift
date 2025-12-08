@@ -95,7 +95,7 @@ struct ProfilePromptsEditorView: View {
                     .font(.headline)
             }
 
-            Text("Answer up to 3 prompts to help others get to know you better. Profiles with prompts get 2x more matches!")
+            Text("Answer up to 3 prompts to help others get to know you better. Profiles with prompts get 2x more connections!")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .fixedSize(horizontal: false, vertical: true)
@@ -104,7 +104,7 @@ struct ProfilePromptsEditorView: View {
         .padding(20)
         .background(
             LinearGradient(
-                colors: [Color.purple.opacity(0.08), Color.pink.opacity(0.06)],
+                colors: [Color.teal.opacity(0.08), Color.blue.opacity(0.06)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
