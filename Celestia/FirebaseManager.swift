@@ -1,8 +1,8 @@
 //
 //  FirebaseManager.swift
-//  Celestia
+//  LangSwap
 //
-//  Dating app for international connections
+//  Language exchange partner matching app
 //
 
 import Foundation

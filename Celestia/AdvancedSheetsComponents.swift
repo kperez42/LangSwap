@@ -460,7 +460,7 @@ struct BoostProfileSheet: View {
                 }
             }
             .alert("Boost Activated! ⚡", isPresented: $showPurchaseSuccess) {
-                Button("Start Swiping") {
+                Button("Find Partners") {
                     dismiss()
                 }
             } message: {
@@ -498,10 +498,10 @@ struct BoostProfileSheet: View {
             }
             
             VStack(spacing: 8) {
-                Text("Get More Matches")
+                Text("Get More Partners")
                     .font(.title2)
                     .fontWeight(.bold)
-                
+
                 Text("Boost your profile to be seen by more people")
                     .font(.subheadline)
                     .foregroundColor(.gray)
@@ -517,7 +517,7 @@ struct BoostProfileSheet: View {
         VStack(spacing: 12) {
             BenefitRow(icon: "eye.fill", text: "Be one of the top profiles in your area")
             BenefitRow(icon: "chart.line.uptrend.xyaxis", text: "Get up to 15x more profile views")
-            BenefitRow(icon: "heart.fill", text: "Increase your chances of matching")
+            BenefitRow(icon: "person.2.fill", text: "Increase your chances of connecting")
             BenefitRow(icon: "timer", text: "Instant activation")
         }
         .padding(16)

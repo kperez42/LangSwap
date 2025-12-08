@@ -267,10 +267,10 @@ struct ImprovedUserCard: View {
                             .accessibilityLabel("Height: \(height) centimeters")
                     }
 
-                    // Relationship Goal
+                    // Learning Goal
                     if let goal = user.relationshipGoal, goal != "Prefer not to say" {
-                        InfoChip(icon: "heart.circle", text: goal)
-                            .accessibilityLabel("Looking for: \(goal)")
+                        InfoChip(icon: "target", text: goal)
+                            .accessibilityLabel("Learning goal: \(goal)")
                     }
 
                     // Religion

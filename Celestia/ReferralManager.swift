@@ -1054,11 +1054,11 @@ class ReferralManager: ObservableObject {
 
     func getReferralShareMessage(code: String, userName: String) -> String {
         return """
-        Hey! Join me on Celestia, the best dating app for meaningful connections! 💜
+        Hey! Join me on LangSwap, the best app for finding language exchange partners! 🌍
 
         Use my code \(code) when you sign up and we'll both get 3 days of Premium free!
 
-        Download now: https://celestia.app/join/\(code)
+        Download now: https://langswap.app/join/\(code)
         """
     }
 
