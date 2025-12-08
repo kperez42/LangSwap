@@ -1,8 +1,8 @@
 //
 //  SeeWhoLikesYouView.swift
-//  Celestia
+//  LangSwap
 //
-//  Premium feature: See who has liked you
+//  Premium feature: See who wants to connect with you
 //
 
 import SwiftUI
@@ -45,7 +45,7 @@ struct SeeWhoLikesYouView: View {
                     .padding()
                 }
             }
-            .navigationTitle("Likes")
+            .navigationTitle("Connections")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -78,11 +78,11 @@ struct SeeWhoLikesYouView: View {
     private var headerView: some View {
         VStack(spacing: 8) {
             HStack(spacing: 12) {
-                Image(systemName: "heart.fill")
+                Image(systemName: "person.2.fill")
                     .font(.title)
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.pink, .purple],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -93,7 +93,7 @@ struct SeeWhoLikesYouView: View {
                     .foregroundColor(.primary)
             }
 
-            Text(viewModel.usersWhoLiked.count == 1 ? "person likes you" : "people like you")
+            Text(viewModel.usersWhoLiked.count == 1 ? "person wants to practice with you" : "people want to practice with you")
                 .font(.title3)
                 .foregroundColor(.secondary)
         }
@@ -118,7 +118,7 @@ struct SeeWhoLikesYouView: View {
                         .font(.headline)
                         .foregroundColor(.primary)
 
-                    Text("See who likes you without limits")
+                    Text("See who wants to practice with you")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -131,7 +131,7 @@ struct SeeWhoLikesYouView: View {
             .padding()
             .background(
                 LinearGradient(
-                    colors: [Color.orange.opacity(0.1), Color.pink.opacity(0.1)],
+                    colors: [Color.teal.opacity(0.1), Color.blue.opacity(0.1)],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -188,16 +188,16 @@ struct SeeWhoLikesYouView: View {
 
     private var emptyStateView: some View {
         VStack(spacing: 24) {
-            Image(systemName: "heart.slash")
+            Image(systemName: "person.2.slash")
                 .font(.system(size: 80))
                 .foregroundColor(.gray.opacity(0.5))
 
             VStack(spacing: 8) {
-                Text("No Likes Yet")
+                Text("No Connections Yet")
                     .font(.title2)
                     .fontWeight(.bold)
 
-                Text("Keep swiping to find your perfect match!")
+                Text("Keep exploring to find language partners!")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -372,7 +372,7 @@ class SeeWhoLikesYouViewModel: ObservableObject {
             lastFetchTime = Date()
             errorMessage = nil
 
-            Logger.shared.info("Loaded \(users.count) users who liked you (batch query)", category: .matching)
+            Logger.shared.info("Loaded \(users.count) users who want to connect (batch query)", category: .matching)
 
             // Prefetch images for smooth scrolling
             Task {
@@ -382,7 +382,7 @@ class SeeWhoLikesYouViewModel: ObservableObject {
             }
         } catch {
             Logger.shared.error("Error loading likes", category: .matching, error: error)
-            errorMessage = "Failed to load likes. Pull to refresh."
+            errorMessage = "Failed to load connections. Pull to refresh."
         }
     }
 
@@ -425,7 +425,7 @@ class SeeWhoLikesYouViewModel: ObservableObject {
         return users
     }
 
-    func likeBack(user: User) async -> Bool {
+    func connectBack(user: User) async -> Bool {
         guard let targetUserId = user.effectiveId else { return false }
         guard let currentUserId = AuthService.shared.currentUser?.effectiveId else { return false }
 
@@ -438,14 +438,14 @@ class SeeWhoLikesYouViewModel: ObservableObject {
 
             if isMatch {
                 HapticManager.shared.notification(.success)
-                Logger.shared.info("Liked back user - it's a match!", category: .matching)
+                Logger.shared.info("Connected back - it's a language partner!", category: .matching)
             } else {
                 HapticManager.shared.impact(.medium)
             }
 
             return isMatch
         } catch {
-            Logger.shared.error("Error liking back user", category: .matching, error: error)
+            Logger.shared.error("Error connecting back with user", category: .matching, error: error)
             HapticManager.shared.notification(.error)
             return false
         }
