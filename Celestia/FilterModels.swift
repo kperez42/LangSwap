@@ -79,47 +79,67 @@ enum ProficiencyLevel: String, Codable, CaseIterable, Comparable {
 // MARK: - Learning Goal
 
 enum LearningGoal: String, Codable, CaseIterable {
-    case conversation = "conversation"
-    case business = "business"
-    case academic = "academic"
-    case travel = "travel"
+    case conversationPractice = "conversation_practice"
+    case businessLanguage = "business_language"
+    case academicWriting = "academic_writing"
+    case travelPhrases = "travel_phrases"
     case examPrep = "exam_prep"
-    case cultural = "cultural"
-    case hobby = "hobby"
+    case culturalExchange = "cultural_exchange"
+    case pronunciationHelp = "pronunciation_help"
+    case grammarPractice = "grammar_practice"
+    case vocabularyBuilding = "vocabulary_building"
+    case listeningComprehension = "listening_comprehension"
+    case readingPractice = "reading_practice"
+    case writingFeedback = "writing_feedback"
 
     var displayName: String {
         switch self {
-        case .conversation: return "Casual Conversation"
-        case .business: return "Business/Professional"
-        case .academic: return "Academic/Study"
-        case .travel: return "Travel"
-        case .examPrep: return "Exam Preparation"
-        case .cultural: return "Cultural Exchange"
-        case .hobby: return "Hobby/Interest"
+        case .conversationPractice: return "Conversation Practice"
+        case .businessLanguage: return "Business Language"
+        case .academicWriting: return "Academic Writing"
+        case .travelPhrases: return "Travel Phrases"
+        case .examPrep: return "Exam Prep (TOEFL, IELTS, DELE, JLPT, HSK)"
+        case .culturalExchange: return "Cultural Exchange"
+        case .pronunciationHelp: return "Pronunciation Help"
+        case .grammarPractice: return "Grammar Practice"
+        case .vocabularyBuilding: return "Vocabulary Building"
+        case .listeningComprehension: return "Listening Comprehension"
+        case .readingPractice: return "Reading Practice"
+        case .writingFeedback: return "Writing Feedback"
         }
     }
 
     var icon: String {
         switch self {
-        case .conversation: return "bubble.left.and.bubble.right"
-        case .business: return "briefcase"
-        case .academic: return "graduationcap"
-        case .travel: return "airplane"
+        case .conversationPractice: return "bubble.left.and.bubble.right"
+        case .businessLanguage: return "briefcase"
+        case .academicWriting: return "graduationcap"
+        case .travelPhrases: return "airplane"
         case .examPrep: return "doc.text"
-        case .cultural: return "globe"
-        case .hobby: return "star"
+        case .culturalExchange: return "globe"
+        case .pronunciationHelp: return "waveform"
+        case .grammarPractice: return "textformat"
+        case .vocabularyBuilding: return "text.book.closed"
+        case .listeningComprehension: return "ear"
+        case .readingPractice: return "book"
+        case .writingFeedback: return "pencil.and.outline"
         }
     }
 
     var description: String {
         switch self {
-        case .conversation: return "Improve everyday speaking skills"
-        case .business: return "Professional vocabulary & communication"
-        case .academic: return "Academic writing & comprehension"
-        case .travel: return "Practical phrases for traveling"
-        case .examPrep: return "IELTS, TOEFL, DELE, DELF, etc."
-        case .cultural: return "Learn about culture & traditions"
-        case .hobby: return "Movies, music, books, games, etc."
+        case .conversationPractice: return "Improve everyday speaking skills"
+        case .businessLanguage: return "Professional vocabulary & communication"
+        case .academicWriting: return "Academic papers & formal writing"
+        case .travelPhrases: return "Practical phrases for traveling"
+        case .examPrep: return "Prepare for language proficiency exams"
+        case .culturalExchange: return "Learn about culture & traditions"
+        case .pronunciationHelp: return "Improve accent & pronunciation"
+        case .grammarPractice: return "Master grammar rules & structures"
+        case .vocabularyBuilding: return "Expand your word knowledge"
+        case .listeningComprehension: return "Understand native speakers better"
+        case .readingPractice: return "Improve reading speed & comprehension"
+        case .writingFeedback: return "Get feedback on your writing"
         }
     }
 }

@@ -1,8 +1,8 @@
 //
 //  MatchesView.swift
-//  Celestia
+//  LangSwap
 //
-//  ELITE MATCHES VIEW - Premium Dating Experience
+//  Language Partners View - Connect with language exchange partners
 //  ACCESSIBILITY: Full VoiceOver support, Dynamic Type, Reduce Motion, and WCAG 2.1 AA compliant
 //
 
@@ -143,14 +143,14 @@ struct MatchesView: View {
             .task {
                 await loadMatches()
                 updateFilteredMatches()
-                VoiceOverAnnouncement.screenChanged(to: "Matches view. \(matchService.matches.count) matches available.")
+                VoiceOverAnnouncement.screenChanged(to: "Language Partners view. \(matchService.matches.count) partners available.")
             }
             .refreshable {
                 HapticManager.shared.impact(.light)
                 await loadMatches()
                 updateFilteredMatches()
                 HapticManager.shared.notification(.success)
-                VoiceOverAnnouncement.announce("Matches refreshed. \(matchService.matches.count) matches available.")
+                VoiceOverAnnouncement.announce("Partners refreshed. \(matchService.matches.count) partners available.")
             }
             // PERFORMANCE: Update cached matches only when dependencies change
             .onChange(of: matchService.matches.count) { _, _ in
@@ -203,17 +203,17 @@ struct MatchesView: View {
             VStack(spacing: 12) {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Matches")
+                        Text("Partners")
                             .font(.largeTitle.weight(.bold))
                             .foregroundColor(.white)
                             .dynamicTypeSize(min: .large, max: .accessibility2)
                             .accessibilityAddTraits(.isHeader)
-                        
+
                         if !matchService.matches.isEmpty {
                             HStack(spacing: 8) {
-                                // Match count
+                                // Partner count
                                 HStack(spacing: 4) {
-                                    Image(systemName: "heart.fill")
+                                    Image(systemName: "person.2.fill")
                                         .font(.caption)
                                     Text("\(matchService.matches.count)")
                                         .fontWeight(.semibold)
@@ -234,12 +234,12 @@ struct MatchesView: View {
                                     }
                                 }
                                 
-                                // New matches
+                                // New partners
                                 if newMatchesCount > 0 {
                                     Circle()
                                         .fill(Color.white.opacity(0.5))
                                         .frame(width: 4, height: 4)
-                                    
+
                                     HStack(spacing: 4) {
                                         Image(systemName: "sparkles")
                                             .font(.caption)
@@ -299,19 +299,19 @@ struct MatchesView: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.white.opacity(0.8))
             
-            TextField("Search matches...", text: $searchText)
+            TextField("Search partners...", text: $searchText)
                 .foregroundColor(.white)
                 .accentColor(.white)
                 .placeholder(when: searchText.isEmpty) {
-                    Text("Search matches...")
+                    Text("Search partners...")
                         .foregroundColor(.white.opacity(0.6))
                 }
                 .onChange(of: searchText) { _, newValue in
                     searchDebouncer.search(newValue)
                 }
                 .accessibilityElement(
-                    label: "Search matches",
-                    hint: "Type to search your matches by name or location",
+                    label: "Search partners",
+                    hint: "Type to search your language partners by name or location",
                     identifier: AccessibilityIdentifier.searchField
                 )
             

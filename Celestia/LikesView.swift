@@ -1,8 +1,8 @@
 //
 //  LikesView.swift
-//  Celestia
+//  LangSwap
 //
-//  Likes view with three tabs: Liked Me, My Likes, Mutual Likes
+//  Connection Requests view with three tabs: Want to Connect, My Requests, Partners
 //
 
 import SwiftUI
@@ -72,7 +72,7 @@ struct LikesView: View {
         case nameAZ = "Name A-Z"
     }
 
-    private let tabs = ["Liked Me", "My Likes", "Mutual Likes"]
+    private let tabs = ["Want to Connect", "My Requests", "Partners"]
 
     // Check if user has premium access
     private var isPremium: Bool {
@@ -376,16 +376,16 @@ struct LikesView: View {
             VStack(spacing: 12) {
                 HStack(alignment: .top) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Likes")
+                        Text("Requests")
                             .font(.largeTitle.weight(.bold))
                             .foregroundColor(.white)
                             .dynamicTypeSize(min: .large, max: .accessibility2)
 
                         HStack(spacing: 8) {
                             HStack(spacing: 4) {
-                                Image(systemName: "heart.fill")
+                                Image(systemName: "person.badge.plus")
                                     .font(.caption)
-                                Text("\(viewModel.totalLikesReceived)")
+                                Text("\(viewModel.totalLikesReceived) received")
                                     .fontWeight(.semibold)
                             }
 
@@ -394,7 +394,7 @@ struct LikesView: View {
                                 .frame(width: 4, height: 4)
 
                             HStack(spacing: 4) {
-                                Image(systemName: "heart")
+                                Image(systemName: "paperplane")
                                     .font(.caption)
                                 Text("\(viewModel.totalLikesSent) sent")
                                     .fontWeight(.semibold)
@@ -406,9 +406,9 @@ struct LikesView: View {
                                     .frame(width: 4, height: 4)
 
                                 HStack(spacing: 4) {
-                                    Image(systemName: "heart.circle.fill")
+                                    Image(systemName: "person.2.fill")
                                         .font(.caption)
-                                    Text("\(viewModel.mutualLikes.count) mutual")
+                                    Text("\(viewModel.mutualLikes.count) partners")
                                         .fontWeight(.semibold)
                                 }
                             }
