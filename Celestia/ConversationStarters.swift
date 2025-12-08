@@ -69,25 +69,25 @@ class ConversationStarters {
             }
         }
 
-        // Generic starters
+        // Generic starters for language exchange
         let genericStarters = [
             ConversationStarter(
-                text: "What's something you're passionate about?",
-                icon: "heart.fill",
+                text: "What motivated you to learn this language?",
+                icon: "lightbulb.fill",
                 category: .generic
             ),
             ConversationStarter(
-                text: "If you could travel anywhere right now, where would you go?",
+                text: "If you could travel anywhere to practice the language, where would you go?",
                 icon: "airplane.departure",
                 category: .generic
             ),
             ConversationStarter(
-                text: "What's your idea of a perfect weekend?",
-                icon: "sun.max.fill",
+                text: "What's your favorite thing about learning languages?",
+                icon: "globe",
                 category: .generic
             ),
             ConversationStarter(
-                text: "What's something you've always wanted to try?",
+                text: "What topics do you enjoy practicing most?",
                 icon: "sparkles",
                 category: .generic
             )
