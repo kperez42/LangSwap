@@ -117,7 +117,7 @@ struct ProfileEnhancementView: View {
                     .font(.headline)
                     .foregroundColor(.primary)
 
-                Text("Help us find your perfect match")
+                Text("Help us find your ideal language partners")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }

@@ -380,7 +380,7 @@ struct MatchCelebrationView: View {
                 }
                 .floating()
 
-                Text("It's a Match! 🎉")
+                Text("Language Partner Found! 🎉")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)

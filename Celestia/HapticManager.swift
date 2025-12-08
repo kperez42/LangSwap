@@ -94,7 +94,7 @@ class HapticManager {
         impact(.heavy)
     }
 
-    // MARK: - Dating App Specific
+    // MARK: - Language Exchange App Specific
 
     func swipeLeft() {
         impact(.light)
@@ -105,7 +105,7 @@ class HapticManager {
     }
 
     func match() {
-        // Special pattern for matches - celebratory double tap
+        // Special pattern for language partner found - celebratory double tap
         notification(.success)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             self?.impact(.heavy)

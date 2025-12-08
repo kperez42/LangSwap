@@ -528,7 +528,7 @@ struct DiscoverView: View {
             }
             .task {
                 if let user = viewModel.matchedUser {
-                    VoiceOverAnnouncement.announce("It's a match! You and \(user.fullName) liked each other!")
+                    VoiceOverAnnouncement.announce("Language partner found! You and \(user.fullName) want to practice together!")
                 }
             }
             .padding(40)

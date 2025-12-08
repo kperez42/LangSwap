@@ -160,13 +160,13 @@ struct InterestsView: View {
                     .font(.system(size: 80))
                     .foregroundColor(.yellow)
                 
-                Text("It's a Match! 🎉")
+                Text("Language Partner Found! 🎉")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                
+
                 if let user = matchedUser {
-                    Text("You and \(user.fullName) liked each other!")
+                    Text("You and \(user.fullName) want to practice together!")
                         .font(.title3)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)

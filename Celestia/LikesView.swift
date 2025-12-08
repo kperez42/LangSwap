@@ -1638,11 +1638,11 @@ struct MatchCelebrationOverlay: View {
 
                 // Text
                 VStack(spacing: 12) {
-                    Text("It's a Match!")
+                    Text("Language Partner Found!")
                         .font(.system(size: 36, weight: .bold))
                         .foregroundColor(.white)
 
-                    Text("You and \(user.fullName) liked each other")
+                    Text("You and \(user.fullName) want to practice together")
                         .font(.subheadline)
                         .foregroundColor(.white.opacity(0.8))
                 }

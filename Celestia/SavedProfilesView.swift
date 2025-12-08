@@ -801,7 +801,7 @@ struct SavedProfilesView: View {
                 await MainActor.run {
                     if isMatch {
                         HapticManager.shared.notification(.success)
-                        Logger.shared.info("Liked saved profile - it's a match!", category: .matching)
+                        Logger.shared.info("Connected with saved profile - language partner found!", category: .matching)
                     } else {
                         HapticManager.shared.impact(.medium)
                         Logger.shared.info("Liked saved profile", category: .matching)
