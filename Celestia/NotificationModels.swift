@@ -43,9 +43,9 @@ enum NotificationCategory: String, CaseIterable, Codable {
         case .profileView:
             return "Profile View"
         case .newLike:
-            return "Someone Likes You!"
+            return "Someone Wants to Connect!"
         case .superLike:
-            return "Super Like!"
+            return "Super Connection!"
         case .dailyDigest:
             return "Your Daily Update"
         case .premiumOffer:

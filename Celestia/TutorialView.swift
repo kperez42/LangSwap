@@ -508,7 +508,7 @@ struct SwipeGestureDemo: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            Text("Try it! Swipe left or right")
+            Text("Try it! Swipe to connect or pass")
                 .font(.caption)
                 .foregroundColor(.secondary)
 

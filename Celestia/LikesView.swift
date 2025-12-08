@@ -542,9 +542,9 @@ struct LikesView: View {
         Group {
             if viewModel.usersWhoLikedMe.isEmpty {
                 emptyStateView(
-                    icon: "heart.fill",
-                    title: "No Likes Yet",
-                    message: "When someone likes you, they'll appear here. Keep swiping!"
+                    icon: "person.2.fill",
+                    title: "No Connections Yet",
+                    message: "When someone wants to connect with you, they'll appear here. Keep exploring!"
                 )
             } else if isPremium {
                 // Premium users see full profiles with filters applied
@@ -701,7 +701,7 @@ struct LikesView: View {
                     Image(systemName: "crown.fill")
                         .font(.body)
 
-                    Text("Unlock Who Likes You")
+                    Text("Unlock Who Wants to Connect")
                         .fontWeight(.semibold)
                 }
                 .foregroundColor(.white)
@@ -709,13 +709,13 @@ struct LikesView: View {
                 .padding(.vertical, 16)
                 .background(
                     LinearGradient(
-                        colors: [.pink, .purple],
+                        colors: [.teal, .blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
                 )
                 .cornerRadius(14)
-                .shadow(color: .pink.opacity(0.4), radius: 10, y: 5)
+                .shadow(color: .teal.opacity(0.4), radius: 10, y: 5)
             }
         }
         .padding(24)
