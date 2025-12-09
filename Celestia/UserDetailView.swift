@@ -247,16 +247,62 @@ struct UserDetailView: View {
 
     @ViewBuilder
     private var languagesSection: some View {
-        if !user.languages.isEmpty {
-            ProfileSectionCard(
-                icon: "globe",
-                title: "Languages",
-                iconColors: [.blue, .cyan],
-                borderColor: .blue
-            ) {
-                FlowLayout2(spacing: 10) {
-                    ForEach(user.languages, id: \.self) { language in
-                        ProfileTagView(text: language, colors: [.blue, .cyan], textColor: .blue)
+        let hasLanguages = !user.nativeLanguages.isEmpty || !user.learningLanguages.isEmpty || !user.languages.isEmpty
+
+        if hasLanguages {
+            VStack(spacing: 16) {
+                // Native Languages (what user speaks)
+                if !user.nativeLanguages.isEmpty {
+                    LanguageSectionCard(
+                        title: "Speaks",
+                        icon: "star.fill",
+                        iconColor: .teal,
+                        languages: user.nativeLanguages,
+                        style: .native,
+                        emptyMessage: ""
+                    )
+                }
+
+                // Learning Languages
+                if !user.learningLanguages.isEmpty {
+                    LanguageSectionCard(
+                        title: "Learning",
+                        icon: "book.fill",
+                        iconColor: .blue,
+                        languages: user.learningLanguages,
+                        style: .learning,
+                        emptyMessage: ""
+                    )
+                }
+
+                // Language compatibility with current user
+                if let currentUser = authService.currentUser {
+                    LanguageCompatibilityCard(currentUser: currentUser, otherUser: user)
+                }
+
+                // Learning Goals
+                if !user.learningGoals.isEmpty {
+                    LearningGoalsDisplay(goals: user.learningGoals)
+                }
+
+                // Practice Methods
+                if !user.practiceMethods.isEmpty {
+                    PracticeMethodsDisplay(methods: user.practiceMethods)
+                }
+
+                // Fallback to legacy languages display
+                if user.nativeLanguages.isEmpty && user.learningLanguages.isEmpty && !user.languages.isEmpty {
+                    ProfileSectionCard(
+                        icon: "globe",
+                        title: "Languages",
+                        iconColors: [.blue, .cyan],
+                        borderColor: .blue
+                    ) {
+                        FlowLayout2(spacing: 10) {
+                            ForEach(user.languages, id: \.self) { language in
+                                ProfileTagView(text: language, colors: [.blue, .cyan], textColor: .blue)
+                            }
+                        }
                     }
                 }
             }
