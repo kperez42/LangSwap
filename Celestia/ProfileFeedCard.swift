@@ -60,8 +60,13 @@ struct ProfileFeedCard: View {
                 // Age and Location
                 locationRow
 
-                // Seeking preferences
-                seekingRow
+                // Language Match (if current user available)
+                if let current = currentUser {
+                    languageMatchRow(currentUser: current)
+                }
+
+                // Quick language preview
+                languagePreviewRow
 
                 // Last active
                 lastActiveRow
@@ -255,6 +260,157 @@ struct ProfileFeedCard: View {
             }
 
             Spacer()
+        }
+    }
+
+    // MARK: - Language Components
+
+    private func languageMatchRow(currentUser: User) -> some View {
+        let matchInfo = calculateLanguageMatch(currentUser: currentUser, otherUser: user)
+
+        return HStack(spacing: 8) {
+            // Match type badge
+            HStack(spacing: 4) {
+                Image(systemName: matchInfo.icon)
+                    .font(.caption)
+                Text(matchInfo.label)
+                    .font(.caption)
+                    .fontWeight(.medium)
+            }
+            .foregroundColor(matchInfo.color)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 5)
+            .background(matchInfo.color.opacity(0.12))
+            .cornerRadius(12)
+
+            // Show what languages can be exchanged
+            if !matchInfo.details.isEmpty {
+                Text(matchInfo.details)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .lineLimit(1)
+            }
+
+            Spacer()
+        }
+    }
+
+    private var languagePreviewRow: some View {
+        HStack(spacing: 12) {
+            // Native languages (speaks)
+            if !user.nativeLanguages.isEmpty {
+                HStack(spacing: 4) {
+                    Image(systemName: "star.fill")
+                        .font(.caption2)
+                        .foregroundColor(.teal)
+
+                    ForEach(user.nativeLanguages.prefix(3)) { lang in
+                        if let language = lang.languageEnum {
+                            Text(language.flag)
+                                .font(.caption)
+                        }
+                    }
+
+                    if user.nativeLanguages.count > 3 {
+                        Text("+\(user.nativeLanguages.count - 3)")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+
+            // Learning languages
+            if !user.learningLanguages.isEmpty {
+                HStack(spacing: 4) {
+                    Image(systemName: "book.fill")
+                        .font(.caption2)
+                        .foregroundColor(.blue)
+
+                    ForEach(user.learningLanguages.prefix(3)) { lang in
+                        if let language = lang.languageEnum {
+                            Text(language.flag)
+                                .font(.caption)
+                        }
+                    }
+
+                    if user.learningLanguages.count > 3 {
+                        Text("+\(user.learningLanguages.count - 3)")
+                            .font(.caption2)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+
+            Spacer()
+        }
+    }
+
+    // MARK: - Language Match Calculation
+
+    private struct LanguageMatchInfo {
+        let icon: String
+        let label: String
+        let color: Color
+        let details: String
+    }
+
+    private func calculateLanguageMatch(currentUser: User, otherUser: User) -> LanguageMatchInfo {
+        var canTeach: [String] = []
+        var canLearn: [String] = []
+
+        // What current user can teach (their native languages that other is learning)
+        for native in currentUser.nativeLanguages {
+            for learning in otherUser.learningLanguages {
+                if native.language.lowercased() == learning.language.lowercased() {
+                    canTeach.append(native.language)
+                }
+            }
+        }
+
+        // What current user can learn (other's native languages that current is learning)
+        for learning in currentUser.learningLanguages {
+            for native in otherUser.nativeLanguages {
+                if learning.language.lowercased() == native.language.lowercased() {
+                    canLearn.append(native.language)
+                }
+            }
+        }
+
+        if !canTeach.isEmpty && !canLearn.isEmpty {
+            // Perfect match - both can help each other
+            let details = "Exchange: \(canTeach.first ?? "") ↔ \(canLearn.first ?? "")"
+            return LanguageMatchInfo(
+                icon: "arrow.left.arrow.right",
+                label: "Perfect Match",
+                color: .green,
+                details: details
+            )
+        } else if !canTeach.isEmpty {
+            // Current user can teach them
+            let details = "You can help with \(canTeach.joined(separator: ", "))"
+            return LanguageMatchInfo(
+                icon: "arrow.right",
+                label: "You can help",
+                color: .teal,
+                details: details
+            )
+        } else if !canLearn.isEmpty {
+            // They can teach current user
+            let details = "Can help you with \(canLearn.joined(separator: ", "))"
+            return LanguageMatchInfo(
+                icon: "arrow.left",
+                label: "Can help you",
+                color: .blue,
+                details: details
+            )
+        } else {
+            // No direct match
+            return LanguageMatchInfo(
+                icon: "globe",
+                label: "No direct match",
+                color: .gray,
+                details: ""
+            )
         }
     }
 

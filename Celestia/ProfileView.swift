@@ -137,15 +137,60 @@ struct ProfileView: View {
                                 }
                                 .padding(.top, 8)
 
-                                // ===== INTERESTS & LANGUAGES SECTION =====
+                                // ===== LANGUAGES SECTION =====
+                                VStack(spacing: 16) {
+                                    sectionDivider()
+                                    sectionHeader(title: "Languages", icon: "globe")
+
+                                    // Native Languages (what user speaks)
+                                    if !user.nativeLanguages.isEmpty {
+                                        LanguageSectionCard(
+                                            title: "I Speak",
+                                            icon: "star.fill",
+                                            iconColor: .teal,
+                                            languages: user.nativeLanguages,
+                                            style: .native,
+                                            emptyMessage: "No native languages added"
+                                        )
+                                        .padding(.horizontal, 20)
+                                    }
+
+                                    // Learning Languages
+                                    if !user.learningLanguages.isEmpty {
+                                        LanguageSectionCard(
+                                            title: "I'm Learning",
+                                            icon: "book.fill",
+                                            iconColor: .blue,
+                                            languages: user.learningLanguages,
+                                            style: .learning,
+                                            emptyMessage: "No learning languages added"
+                                        )
+                                        .padding(.horizontal, 20)
+                                    }
+
+                                    // Learning Goals
+                                    if !user.learningGoals.isEmpty {
+                                        LearningGoalsDisplay(goals: user.learningGoals)
+                                            .padding(.horizontal, 20)
+                                    }
+
+                                    // Practice Methods
+                                    if !user.practiceMethods.isEmpty {
+                                        PracticeMethodsDisplay(methods: user.practiceMethods)
+                                            .padding(.horizontal, 20)
+                                    }
+
+                                    // Fallback to legacy languages if new fields are empty
+                                    if user.nativeLanguages.isEmpty && user.learningLanguages.isEmpty && !user.languages.isEmpty {
+                                        languagesCard(languages: user.languages)
+                                    }
+                                }
+                                .padding(.top, 8)
+
+                                // ===== INTERESTS SECTION =====
                                 VStack(spacing: 16) {
                                     sectionDivider()
                                     sectionHeader(title: "Interests", icon: "sparkles")
-
-                                    // Languages
-                                    if !user.languages.isEmpty {
-                                        languagesCard(languages: user.languages)
-                                    }
 
                                     // Interests
                                     if !user.interests.isEmpty {
@@ -558,8 +603,11 @@ struct ProfileView: View {
                     if user.interests.count < 3 {
                         missingItem(icon: "star", text: "Add interests")
                     }
-                    if user.languages.isEmpty {
-                        missingItem(icon: "globe", text: "Add languages")
+                    if user.nativeLanguages.isEmpty && user.languages.isEmpty {
+                        missingItem(icon: "globe", text: "Add native languages")
+                    }
+                    if user.learningLanguages.isEmpty {
+                        missingItem(icon: "book", text: "Add learning languages")
                     }
                 }
             }
