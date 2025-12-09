@@ -272,9 +272,9 @@ struct ProfileInsightsView: View {
                 )
 
                 achievementBadge(
-                    icon: "heart.fill",
-                    title: "Heartthrob",
-                    subtitle: "50+ likes",
+                    icon: "star.fill",
+                    title: "Popular Partner",
+                    subtitle: "50+ connection requests",
                     isUnlocked: insights.likesReceived >= 50,
                     color: .blue
                 )

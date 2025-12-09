@@ -380,9 +380,9 @@ struct MatchQualityScoreCard: View {
 
     private func getQualityMessage(score: Double) -> String {
         switch score {
-        case 80...100: return "Excellent! You two have great chemistry 💕"
-        case 60..<80: return "Good connection! Keep the conversation going"
-        case 40..<60: return "Average. Try asking more questions"
+        case 80...100: return "Excellent! Great language exchange potential 🌟"
+        case 60..<80: return "Good connection! Keep practicing together"
+        case 40..<60: return "Average. Try more conversation topics"
         case 20..<40: return "Needs improvement. Engage more actively"
         default: return "Very low. Consider reaching out more"
         }
