@@ -393,7 +393,7 @@ struct OnboardingView: View {
                             .cornerRadius(12)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .stroke(Color.purple.opacity(0.2), lineWidth: 1)
+                                    .stroke(Color.teal.opacity(0.2), lineWidth: 1)
                             )
                             .accessibilityLabel("Full name")
                             .accessibilityHint("Enter your full name")
@@ -553,7 +553,7 @@ struct OnboardingView: View {
                             .cornerRadius(12)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .stroke(bio.isEmpty ? Color.red.opacity(0.5) : Color.purple.opacity(0.2), lineWidth: 1)
+                                    .stroke(bio.isEmpty ? Color.red.opacity(0.5) : Color.teal.opacity(0.2), lineWidth: 1)
                             )
                             .overlay(alignment: .topLeading) {
                                 if bio.isEmpty {
@@ -595,7 +595,7 @@ struct OnboardingView: View {
                             .cornerRadius(12)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .stroke(location.isEmpty ? Color.red.opacity(0.5) : Color.purple.opacity(0.2), lineWidth: 1)
+                                    .stroke(location.isEmpty ? Color.red.opacity(0.5) : Color.teal.opacity(0.2), lineWidth: 1)
                             )
                             .accessibilityLabel("City")
                             .accessibilityHint("Enter your city")
@@ -635,7 +635,7 @@ struct OnboardingView: View {
                             .cornerRadius(12)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
-                                    .stroke(country.isEmpty ? Color.red.opacity(0.5) : Color.purple.opacity(0.2), lineWidth: 1)
+                                    .stroke(country.isEmpty ? Color.red.opacity(0.5) : Color.teal.opacity(0.2), lineWidth: 1)
                             )
                         }
                         .accessibilityLabel("Country")
@@ -1465,7 +1465,7 @@ struct OnboardingView: View {
                     VStack(alignment: .leading, spacing: 12) {
                         HStack(spacing: 8) {
                             Image(systemName: "clock.fill")
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                             Text("Ideal Session Length")
                                 .font(.headline)
 
@@ -1474,7 +1474,7 @@ struct OnboardingView: View {
                             Text(sessionLength)
                                 .font(.subheadline)
                                 .fontWeight(.semibold)
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                         }
 
                         HStack(spacing: 8) {
@@ -1490,9 +1490,9 @@ struct OnboardingView: View {
                                         .padding(.vertical, 8)
                                         .background(
                                             sessionLength == length ?
-                                            Color.purple.opacity(0.2) : Color.gray.opacity(0.1)
+                                            Color.teal.opacity(0.2) : Color.gray.opacity(0.1)
                                         )
-                                        .foregroundColor(sessionLength == length ? .purple : .secondary)
+                                        .foregroundColor(sessionLength == length ? .teal : .secondary)
                                         .cornerRadius(8)
                                 }
                             }
@@ -1513,7 +1513,7 @@ struct OnboardingView: View {
                                     in: Double(ageRangeMin + 1)...99,
                                     step: 1
                                 )
-                                .tint(.purple)
+                                .tint(.teal)
                             }
                         }
                         .padding()

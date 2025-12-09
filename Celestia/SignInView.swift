@@ -30,9 +30,9 @@ struct SignInView: View {
                     VStack(spacing: 25) {
                         // Header
                         VStack(spacing: 10) {
-                            Image(systemName: "star.circle.fill")
+                            Image(systemName: "globe")
                                 .font(.system(size: 60))
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                             
                             Text("Welcome Back")
                                 .font(.title.bold())
@@ -140,7 +140,7 @@ struct SignInView: View {
                             } label: {
                                 Text("Forgot Password?")
                                     .font(.subheadline)
-                                    .foregroundColor(.purple)
+                                    .foregroundColor(.teal)
                             }
                             .scaleButton(scale: 0.97)
                         }

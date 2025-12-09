@@ -617,7 +617,7 @@ struct MessageDemo: View {
                     } label: {
                         Image(systemName: "arrow.up.circle.fill")
                             .font(.title2)
-                            .foregroundColor(message.isEmpty ? .gray : .purple)
+                            .foregroundColor(message.isEmpty ? .gray : .teal)
                     }
                 }
             }
