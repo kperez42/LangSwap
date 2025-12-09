@@ -520,7 +520,7 @@ struct UIJourneyTests {
         #expect(referralCode.count == 6)
 
         // Generate share message
-        let shareMessage = "Join Celestia using my code \(referralCode) and get free Super Likes!"
+        let shareMessage = "Join LangSwap using my code \(referralCode) and get free Super Connects!"
         #expect(!shareMessage.isEmpty)
         #expect(shareMessage.contains(referralCode))
 
