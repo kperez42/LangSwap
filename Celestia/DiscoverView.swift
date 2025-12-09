@@ -11,7 +11,7 @@ import SwiftUI
 struct SwipeAction {
     let user: User
     let index: Int
-    let wasLike: Bool
+    let wasConnect: Bool
 }
 
 struct DiscoverView: View {
@@ -521,7 +521,7 @@ struct DiscoverView: View {
                 .tint(.teal)
                 .controlSize(.large)
 
-                Button("Keep Swiping") {
+                Button("Keep Browsing") {
                     viewModel.dismissMatchAnimation()
                 }
                 .foregroundColor(.white)
@@ -548,9 +548,9 @@ struct DiscoverView: View {
                 }
             }
             .overlay(alignment: .topTrailing) {
-                // Like indicator
+                // Connect indicator
                 if cardIndex == 0 && viewModel.dragOffset.width > 50 {
-                    swipeIndicator(icon: "heart.fill", color: .green, text: "LIKE")
+                    swipeIndicator(icon: "person.badge.plus", color: .teal, text: "CONNECT")
                         .opacity(min(1.0, Double(viewModel.dragOffset.width) / 100.0))
                 }
             }
@@ -573,13 +573,13 @@ struct DiscoverView: View {
                 isHidden: cardIndex != 0
             )
             .accessibilityActions(cardIndex == 0 ? [
-                AccessibilityCustomAction(name: "Like") {
+                AccessibilityCustomAction(name: "Connect") {
                     Task { await viewModel.handleLike() }
                 },
                 AccessibilityCustomAction(name: "Pass") {
                     Task { await viewModel.handlePass() }
                 },
-                AccessibilityCustomAction(name: "Super Like") {
+                AccessibilityCustomAction(name: "Super Connect") {
                     Task { await viewModel.handleSuperLike() }
                 },
                 AccessibilityCustomAction(name: "View Profile") {
