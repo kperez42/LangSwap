@@ -1,6 +1,7 @@
 /*
- * Celestia Localization - Portuguese
+ * LangSwap Localization - Portuguese
  * Language: Português (pt)
+ * Practice Languages with Native Speakers
  */
 
 // MARK: - Common
@@ -40,38 +41,44 @@
 // MARK: - Profile
 
 "profile.profile" = "Perfil";
+"profile.my_language_profile" = "Meu Perfil de Idiomas";
 "profile.edit_profile" = "Editar Perfil";
-"profile.bio" = "Biografia";
+"profile.bio" = "Sobre Mim";
 "profile.photos" = "Fotos";
 "profile.add_photo" = "Adicionar Foto";
 "profile.settings" = "Configurações";
 "profile.age" = "Idade";
 "profile.location" = "Localização";
-"profile.gender" = "Gênero";
-"profile.looking_for" = "Procurando por";
-"profile.male" = "Masculino";
-"profile.female" = "Feminino";
-"profile.non_binary" = "Não-binário";
+"profile.native_languages" = "Idiomas Nativos";
+"profile.learning_languages" = "Idiomas que Estou Aprendendo";
+"profile.proficiency_level" = "Nível de Proficiência";
+"profile.learning_goals" = "Objetivos de Aprendizado";
+"profile.practice_methods" = "Métodos de Prática";
+"profile.availability" = "Disponibilidade";
+"profile.conversation_topics" = "Tópicos de Conversa";
 
-// MARK: - Swipe
+// MARK: - Discovery
 
-"swipe.discover" = "Descobrir";
-"swipe.like" = "Curtir";
-"swipe.dislike" = "Passar";
-"swipe.super_like" = "Super Curtida";
-"swipe.its_a_match" = "É um Match!";
-"swipe.send_message" = "Enviar Mensagem";
-"swipe.keep_swiping" = "Continuar Deslizando";
-"swipe.no_more_profiles" = "Não há mais perfis disponíveis";
+"discover.discover" = "Encontrar Parceiros";
+"discover.connect" = "Conectar";
+"discover.pass" = "Passar";
+"discover.super_connect" = "Super Conexão";
+"discover.language_partner_found" = "Parceiro de Idiomas Encontrado!";
+"discover.send_message" = "Enviar Mensagem";
+"discover.keep_browsing" = "Continuar Buscando";
+"discover.no_more_profiles" = "Não há mais perfis disponíveis";
+"discover.language_match" = "Combinação de Idiomas!";
+"discover.complementary_languages" = "Vocês podem se ajudar a aprender!";
 
-// MARK: - Matches
+// MARK: - Partners (formerly Matches)
 
-"matches.matches" = "Matches";
-"matches.new_match" = "Novo Match!";
-"matches.no_matches" = "Ainda sem matches";
-"matches.unmatch" = "Desfazer Match";
-"matches.unmatch_confirm" = "Tem certeza que deseja desfazer este match?";
-"matches.matched_with" = "Match com %@";
+"partners.partners" = "Parceiros de Idiomas";
+"partners.new_partner" = "Novo Parceiro de Idiomas!";
+"partners.no_partners" = "Ainda sem parceiros de idiomas";
+"partners.remove_partner" = "Remover Parceiro";
+"partners.remove_confirm" = "Tem certeza que deseja remover este parceiro?";
+"partners.connected_with" = "Conectado com %@";
+"partners.start_practicing" = "Começar a Praticar!";
 
 // MARK: - Messages
 
@@ -82,6 +89,7 @@
 "messages.delivered" = "Entregue";
 "messages.read" = "Lido";
 "messages.typing" = "digitando...";
+"messages.practice_tip" = "Tente usar seu idioma-alvo!";
 
 // MARK: - Premium
 
@@ -92,8 +100,8 @@
 "premium.subscribe" = "Assinar";
 "premium.restore_purchases" = "Restaurar Compras";
 "premium.features" = "Recursos Premium";
-"premium.unlimited_likes" = "Curtidas Ilimitadas";
-"premium.see_who_likes_you" = "Ver Quem Curtiu Você";
+"premium.unlimited_connections" = "Conexões Ilimitadas";
+"premium.see_who_connected" = "Ver Quem Quer se Conectar";
 "premium.rewind" = "Voltar Último Deslize";
 "premium.boost_profile" = "Impulsionar Seu Perfil";
 
@@ -103,11 +111,12 @@
 "settings.account" = "Conta";
 "settings.notifications" = "Notificações";
 "settings.privacy" = "Privacidade";
-"settings.language" = "Idioma";
+"settings.language" = "Idioma do App";
 "settings.help" = "Ajuda e Suporte";
 "settings.about" = "Sobre";
 "settings.terms_of_service" = "Termos de Serviço";
 "settings.privacy_policy" = "Política de Privacidade";
+"settings.safe_exchange_tips" = "Dicas de Intercâmbio Seguro";
 
 // MARK: - Errors
 
@@ -119,12 +128,26 @@
 "error.weak_password" = "A senha é muito fraca. Por favor, use uma senha mais forte.";
 "error.user_not_found" = "Nenhuma conta encontrada com este e-mail.";
 "error.wrong_password" = "Senha incorreta. Por favor, tente novamente.";
+"error.no_languages" = "Por favor, adicione pelo menos um idioma que você fala e um que está aprendendo.";
 
 // MARK: - Onboarding
 
-"onboarding.welcome" = "Bem-vindo ao Celestia";
-"onboarding.find_your_match" = "Encontre seu par perfeito";
+"onboarding.welcome" = "Bem-vindo ao LangSwap";
+"onboarding.tagline" = "Pratique Idiomas com Falantes Nativos";
+"onboarding.find_partners" = "Encontre seus parceiros de intercâmbio de idiomas";
 "onboarding.get_started" = "Começar";
+"onboarding.what_languages_speak" = "Quais idiomas você fala?";
+"onboarding.what_languages_learn" = "Quais idiomas você está aprendendo?";
+"onboarding.your_proficiency" = "Qual é seu nível de proficiência?";
+"onboarding.learning_goals" = "Quais são seus objetivos de aprendizado?";
+
+// MARK: - Languages
+
+"language.native" = "Nativo";
+"language.fluent" = "Fluente";
+"language.learning" = "Aprendendo";
+"language.add_language" = "Adicionar Idioma";
+"language.select_proficiency" = "Selecionar Nível";
 
 // MARK: - Referrals
 
@@ -132,3 +155,10 @@
 "referral.share_code" = "Compartilhe seu código de indicação";
 "referral.your_code" = "Seu Código";
 "referral.enter_code" = "Digite o Código de Indicação (Opcional)";
+
+// MARK: - Connections (formerly Likes)
+
+"connections.connections" = "Solicitações de Conexão";
+"connections.pending" = "Pendente";
+"connections.received" = "Recebidas";
+"connections.sent" = "Enviadas";
