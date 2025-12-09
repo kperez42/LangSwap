@@ -223,7 +223,7 @@ struct ProfileSubscriptionsView: View {
                                     .foregroundColor(selectedTab == index ? .green : .gray)
                             }
                         }
-                        .foregroundColor(selectedTab == index ? .purple : .gray)
+                        .foregroundColor(selectedTab == index ? .teal : .gray)
 
                         Rectangle()
                             .fill(selectedTab == index ? Color.teal : Color.clear)
@@ -559,7 +559,7 @@ struct ProfileSubscriptionsView: View {
 
                         Image(systemName: "arrow.left")
                             .font(.title2.weight(.semibold))
-                            .foregroundColor(currentFeatureIndex > 0 ? .purple : .gray.opacity(0.4))
+                            .foregroundColor(currentFeatureIndex > 0 ? .teal : .gray.opacity(0.4))
                     }
                 }
                 .disabled(currentFeatureIndex == 0)
@@ -602,7 +602,7 @@ struct ProfileSubscriptionsView: View {
 
                         Image(systemName: "arrow.right")
                             .font(.title2.weight(.semibold))
-                            .foregroundColor(currentFeatureIndex < featureCards.count - 1 ? .purple : .gray.opacity(0.4))
+                            .foregroundColor(currentFeatureIndex < featureCards.count - 1 ? .teal : .gray.opacity(0.4))
                     }
                 }
                 .disabled(currentFeatureIndex == featureCards.count - 1)

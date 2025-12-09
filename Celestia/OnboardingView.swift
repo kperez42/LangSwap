@@ -810,7 +810,7 @@ struct OnboardingView: View {
                         photoTipRow(icon: "face.smiling.fill", text: "Show your smile - it's your best feature!", color: .green)
                         photoTipRow(icon: "sun.max.fill", text: "Good lighting makes you shine", color: .orange)
                         photoTipRow(icon: "camera.fill", text: "Mix it up with different angles", color: .blue)
-                        photoTipRow(icon: "sparkles", text: "Be yourself - authenticity wins", color: .purple)
+                        photoTipRow(icon: "sparkles", text: "Be yourself - authenticity wins", color: .teal)
                     }
                 }
                 .padding(16)
@@ -1088,7 +1088,7 @@ struct OnboardingView: View {
         }
     }
 
-    private func photoTipRow(icon: String, text: String, color: Color = .purple) -> some View {
+    private func photoTipRow(icon: String, text: String, color: Color = .teal) -> some View {
         HStack(alignment: .center, spacing: 12) {
             ZStack {
                 Circle()
@@ -1679,7 +1679,7 @@ struct OnboardingView: View {
                     lifestyleOptionSelector(
                         title: "Religion / Spirituality",
                         icon: "sparkles",
-                        color: .purple,
+                        color: .teal,
                         options: religionOptions,
                         selection: $religion
                     )
@@ -1697,7 +1697,7 @@ struct OnboardingView: View {
                     lifestyleOptionSelector(
                         title: "Drinking",
                         icon: "wineglass.fill",
-                        color: .pink,
+                        color: .blue,
                         options: drinkingOptions,
                         selection: $drinking
                     )

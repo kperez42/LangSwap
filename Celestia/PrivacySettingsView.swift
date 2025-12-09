@@ -52,7 +52,7 @@ struct PrivacySettingsView: View {
                 Circle()
                     .fill(
                         LinearGradient(
-                            colors: [.purple.opacity(0.2), .blue.opacity(0.1)],
+                            colors: [.teal.opacity(0.2), .blue.opacity(0.1)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -63,7 +63,7 @@ struct PrivacySettingsView: View {
                     .font(.system(size: 40))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .blue],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -196,7 +196,7 @@ struct PrivacyToggleCard: View {
         Toggle(isOn: $isOn) {
             HStack(spacing: 12) {
                 Image(systemName: icon)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .frame(width: 30)
 
                 VStack(alignment: .leading, spacing: 2) {
@@ -210,7 +210,7 @@ struct PrivacyToggleCard: View {
                 }
             }
         }
-        .tint(.purple)
+        .tint(.teal)
         .padding()
         .background(Color(.systemBackground))
         .cornerRadius(12)

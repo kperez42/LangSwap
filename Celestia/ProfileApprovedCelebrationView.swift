@@ -23,9 +23,9 @@ struct ProfileApprovedCelebrationView: View {
             // Background gradient
             LinearGradient(
                 colors: [
-                    Color.purple.opacity(0.3),
+                    Color.teal.opacity(0.3),
                     Color.blue.opacity(0.2),
-                    Color.pink.opacity(0.2)
+                    Color.blue.opacity(0.2)
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -206,7 +206,7 @@ struct ProfileApprovedCelebrationView: View {
 
     private func generateConfetti() {
         let colors: [Color] = [
-            .red, .orange, .yellow, .green, .blue, .purple, .pink,
+            .red, .orange, .yellow, .green, .blue, .teal, .blue,
             .mint, .cyan, .indigo, .teal
         ]
         let shapes = [

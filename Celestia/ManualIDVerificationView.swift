@@ -257,7 +257,7 @@ struct ManualIDVerificationView: View {
                 // Step number
                 ZStack {
                     Circle()
-                        .fill(viewModel.selectedIDType != nil ? Color.green : Color.purple)
+                        .fill(viewModel.selectedIDType != nil ? Color.green : Color.teal)
                         .frame(width: 28, height: 28)
 
                     if viewModel.selectedIDType != nil {
@@ -283,7 +283,7 @@ struct ManualIDVerificationView: View {
 
                 Image(systemName: "doc.text.fill")
                     .font(.title2)
-                    .foregroundColor(viewModel.selectedIDType != nil ? .green : .purple)
+                    .foregroundColor(viewModel.selectedIDType != nil ? .green : .teal)
             }
             .padding()
 
@@ -297,7 +297,7 @@ struct ManualIDVerificationView: View {
                         HStack(spacing: 12) {
                             Image(systemName: idType.icon)
                                 .font(.body)
-                                .foregroundColor(viewModel.selectedIDType == idType ? .white : .purple)
+                                .foregroundColor(viewModel.selectedIDType == idType ? .white : .teal)
                                 .frame(width: 24)
 
                             Text(idType.rawValue)
@@ -413,7 +413,7 @@ struct ManualIDVerificationView: View {
 
                 Image(systemName: icon)
                     .font(.title2)
-                    .foregroundColor(image != nil ? .green : .purple)
+                    .foregroundColor(image != nil ? .green : .teal)
             }
             .padding()
 
