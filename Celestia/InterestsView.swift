@@ -140,7 +140,7 @@ struct InterestsView: View {
                 .font(.title3)
                 .fontWeight(.semibold)
             
-            Text("People who like you will appear here")
+            Text("People who want to practice with you will appear here")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -339,7 +339,7 @@ struct BasicInterestCard: View {
                         }
                         
                         Button(action: onAccept) {
-                            Image(systemName: "heart.fill")
+                            Image(systemName: "checkmark.circle.fill")
                                 .font(.caption)
                                 .foregroundColor(.green)
                                 .frame(maxWidth: .infinity)

@@ -446,7 +446,7 @@ extension LegalDocumentView {
 
             LegalSection(title: "Virtual Items & Consumables") {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("Celestia may offer virtual items (such as Super Likes or Boosts) for purchase:")
+                    Text("LangSwap may offer virtual items (such as Super Connects or Boosts) for purchase:")
                         .font(.subheadline)
                     SimpleBulletPoint("Virtual items have no cash value and cannot be exchanged for cash")
                     SimpleBulletPoint("Virtual items are non-refundable and non-transferable")
