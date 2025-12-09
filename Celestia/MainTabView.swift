@@ -248,7 +248,7 @@ struct MainTabView: View {
                     title: "Profile",
                     isSelected: selectedTab == 4,
                     badgeCount: 0,
-                    color: .purple
+                    color: .teal
                 ) {
                     selectedTab = 4
                 }
@@ -464,7 +464,7 @@ struct AnimatedTabIndicator: View {
             let tabWidth = geometry.size.width / CGFloat(totalTabs)
 
             RoundedRectangle(cornerRadius: 2)
-                .fill(Color.purple)
+                .fill(Color.teal)
                 .frame(width: tabWidth * 0.5, height: 3)
                 .offset(x: tabWidth * CGFloat(selectedTab) + tabWidth * 0.25)
         }
