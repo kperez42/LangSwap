@@ -118,9 +118,9 @@ struct ProfileSubscriptionsView: View {
             // Gradient background - matching LikesView and SavedProfilesView
             LinearGradient(
                 colors: [
-                    Color.purple.opacity(0.9),
-                    Color.pink.opacity(0.7),
-                    Color.orange.opacity(0.6)
+                    Color.teal.opacity(0.9),
+                    Color.blue.opacity(0.7),
+                    Color.cyan.opacity(0.6)
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -226,7 +226,7 @@ struct ProfileSubscriptionsView: View {
                         .foregroundColor(selectedTab == index ? .purple : .gray)
 
                         Rectangle()
-                            .fill(selectedTab == index ? Color.purple : Color.clear)
+                            .fill(selectedTab == index ? Color.teal : Color.clear)
                             .frame(height: 3)
                             .cornerRadius(1.5)
                     }
@@ -322,7 +322,7 @@ struct ProfileSubscriptionsView: View {
             HStack(spacing: 10) {
                 Image(systemName: icon)
                     .font(.subheadline)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .frame(width: 24)
 
                 Text(label)
@@ -376,7 +376,7 @@ struct ProfileSubscriptionsView: View {
                     .font(.title2)
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -428,10 +428,10 @@ struct ProfileSubscriptionsView: View {
                     Text("Manage")
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 8)
-                        .background(Color.purple.opacity(0.1))
+                        .background(Color.teal.opacity(0.1))
                         .cornerRadius(8)
                 }
             }
@@ -494,7 +494,7 @@ struct ProfileSubscriptionsView: View {
                 HStack(spacing: 6) {
                     ForEach(0..<featureCards.count, id: \.self) { index in
                         Circle()
-                            .fill(index == currentFeatureIndex ? Color.purple : Color.gray.opacity(0.3))
+                            .fill(index == currentFeatureIndex ? Color.teal : Color.gray.opacity(0.3))
                             .frame(width: index == currentFeatureIndex ? 10 : 8, height: index == currentFeatureIndex ? 10 : 8)
                             .animation(.spring(response: 0.3), value: currentFeatureIndex)
                     }
@@ -581,13 +581,13 @@ struct ProfileSubscriptionsView: View {
                         .padding(.vertical, 14)
                         .background(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
                         )
                         .cornerRadius(25)
-                        .shadow(color: .purple.opacity(0.4), radius: 10, y: 5)
+                        .shadow(color: .teal.opacity(0.4), radius: 10, y: 5)
                     }
                 }
 
@@ -753,7 +753,7 @@ struct ProfileSubscriptionsView: View {
                             .frame(width: 20, height: 20)
                     } else {
                         Image(systemName: "arrow.clockwise")
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                     }
                     Text(isRestoring ? "Restoring..." : "Restore Purchases")
                         .font(.subheadline)
@@ -779,7 +779,7 @@ struct ProfileSubscriptionsView: View {
             } label: {
                 HStack {
                     Image(systemName: "gear")
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
                     Text("Manage Subscriptions")
                         .font(.subheadline)
                         .fontWeight(.medium)
