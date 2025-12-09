@@ -56,7 +56,7 @@ class SwipeScreen: BaseScreen {
     }
 
     private var matchAlert: XCUIElement {
-        app.alerts["It's a Match!"]
+        app.alerts["Language Partner Found!"]
     }
 
     private var sendMessageButton: XCUIElement {

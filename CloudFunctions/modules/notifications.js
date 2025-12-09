@@ -137,8 +137,8 @@ async function sendMatchNotification(userId, matchData) {
   }
 
   const notification = {
-    title: "It's a Match! 💕",
-    body: `You and ${matchData.matchedUserName} liked each other!`,
+    title: "Language Partner Found! 🎉",
+    body: `You and ${matchData.matchedUserName} want to practice together!`,
     sound: 'match_sound.wav',
     badge: await getUnreadCount(userId),
     category: 'MATCH',
@@ -236,17 +236,17 @@ async function sendLikeNotification(userId, likeData) {
     return;
   }
 
-  const isSuperLike = likeData.isSuperLike || false;
+  const isSuperConnect = likeData.isSuperLike || false;
 
   const notification = {
-    title: isSuperLike ? 'Someone Super Liked You! ⭐' : 'Someone Likes You! ❤️',
-    body: `${likeData.likerName} ${isSuperLike ? 'super liked' : 'liked'} your profile`,
-    sound: isSuperLike ? 'super_like_sound.wav' : 'default',
+    title: isSuperConnect ? 'Someone Super Connected! ⭐' : 'Someone Wants to Practice! 🌍',
+    body: `${likeData.likerName} wants to practice languages with you`,
+    sound: isSuperConnect ? 'super_like_sound.wav' : 'default',
     badge: await getUnreadCount(userId),
     category: 'LIKE',
     imageUrl: likeData.likerPhoto,
     data: {
-      type: isSuperLike ? 'super_like' : 'like',
+      type: isSuperConnect ? 'super_connect' : 'connection',
       likerId: likeData.likerId,
       likerName: likeData.likerName
     }
@@ -256,7 +256,7 @@ async function sendLikeNotification(userId, likeData) {
 
   await admin.firestore().collection('notification_logs').add({
     userId,
-    type: isSuperLike ? 'super_like' : 'like',
+    type: isSuperConnect ? 'super_connect' : 'connection',
     likerId: likeData.likerId,
     sentAt: admin.firestore.FieldValue.serverTimestamp(),
     delivered: true
