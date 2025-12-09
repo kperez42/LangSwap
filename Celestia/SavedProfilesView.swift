@@ -230,8 +230,8 @@ struct SavedProfilesView: View {
             LinearGradient(
                 colors: [
                     Color.orange.opacity(0.9),
-                    Color.pink.opacity(0.7),
-                    Color.purple.opacity(0.6)
+                    Color.teal.opacity(0.7),
+                    Color.blue.opacity(0.6)
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -528,7 +528,7 @@ struct SavedProfilesView: View {
                 .foregroundColor(.white)
                 .background(
                     LinearGradient(
-                        colors: [.purple, .pink],
+                        colors: [.teal, .blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
@@ -575,7 +575,7 @@ struct SavedProfilesView: View {
                 .foregroundColor(.white)
                 .background(
                     LinearGradient(
-                        colors: [.purple, .pink],
+                        colors: [.teal, .blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
@@ -612,7 +612,7 @@ struct SavedProfilesView: View {
                             Circle()
                                 .fill(
                                     LinearGradient(
-                                        colors: [.purple, .pink],
+                                        colors: [.teal, .blue],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
                                     )
@@ -846,7 +846,7 @@ struct SavedProfileCard: View {
                                 .frame(height: imageHeight)
                         } else {
                             LinearGradient(
-                                colors: [.purple.opacity(0.7), .pink.opacity(0.6)],
+                                colors: [.teal.opacity(0.7), .blue.opacity(0.6)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -906,7 +906,7 @@ struct SavedProfileCard: View {
                     HStack(spacing: 4) {
                         Image(systemName: "mappin.circle.fill")
                             .font(.system(size: 12))
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                         Text(savedProfile.user.location)
                             .font(.system(size: 13))
                             .foregroundColor(.secondary)
@@ -1043,7 +1043,7 @@ struct EnhancedSavedProfileCard: View {
                                 .frame(height: imageHeight)
                         } else {
                             LinearGradient(
-                                colors: [.purple.opacity(0.7), .pink.opacity(0.6)],
+                                colors: [.teal.opacity(0.7), .blue.opacity(0.6)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -1105,7 +1105,7 @@ struct EnhancedSavedProfileCard: View {
                     HStack(spacing: 4) {
                         Image(systemName: "mappin.circle.fill")
                             .font(.system(size: 11))
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                         Text(savedProfile.user.location)
                             .font(.system(size: 12))
                             .foregroundColor(.secondary)
@@ -1272,7 +1272,7 @@ struct SavedYouCard: View {
                             .frame(height: imageHeight)
                     } else {
                         LinearGradient(
-                            colors: [.purple.opacity(0.7), .pink.opacity(0.6)],
+                            colors: [.teal.opacity(0.7), .blue.opacity(0.6)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -1312,7 +1312,7 @@ struct SavedYouCard: View {
                     HStack(spacing: 4) {
                         Image(systemName: "mappin.circle.fill")
                             .font(.system(size: 12))
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                         Text(profile.user.location)
                             .font(.system(size: 13))
                             .foregroundColor(.secondary)
@@ -1350,7 +1350,7 @@ struct ViewedProfileCard: View {
                             .frame(height: imageHeight)
                     } else {
                         LinearGradient(
-                            colors: [.purple.opacity(0.7), .pink.opacity(0.6)],
+                            colors: [.teal.opacity(0.7), .blue.opacity(0.6)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -1390,7 +1390,7 @@ struct ViewedProfileCard: View {
                     HStack(spacing: 4) {
                         Image(systemName: "eye.fill")
                             .font(.system(size: 12))
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                         Text(profile.viewedAt.timeAgoDisplay())
                             .font(.system(size: 13))
                             .foregroundColor(.secondary)

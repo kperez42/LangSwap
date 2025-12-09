@@ -157,9 +157,9 @@ struct ImprovedUserCard: View {
     private var placeholderGradient: some View {
         LinearGradient(
             colors: [
-                Color.purple.opacity(0.7),
-                Color.pink.opacity(0.6),
-                Color.blue.opacity(0.5)
+                Color.teal.opacity(0.7),
+                Color.blue.opacity(0.6),
+                Color.cyan.opacity(0.5)
             ],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
