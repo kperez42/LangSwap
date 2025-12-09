@@ -27,7 +27,7 @@ struct ChatView: View {
 
     @State private var messageText = ""
     @FocusState private var isInputFocused: Bool
-    @State private var showingUnmatchConfirmation = false
+    @State private var showingDisconnectConfirmation = false
     @State private var showingBlockConfirmation = false
     @State private var showingUserProfile = false
     @State private var showingReportSheet = false
@@ -71,6 +71,10 @@ struct ChatView: View {
     @State private var editingMessage: Message?
     @State private var showEditSheet = false
     @State private var editText = ""
+
+    // Language practice tools state
+    @State private var showingPracticeStarters = false
+    @State private var showingCorrectionInput = false
 
     // Reusable date formatter for performance
     private static let dateFormatter: DateFormatter = {
@@ -167,8 +171,8 @@ struct ChatView: View {
                 }
             }
         }
-        .confirmationDialog("Unmatch with \(otherUser.fullName)?", isPresented: $showingUnmatchConfirmation, titleVisibility: .visible) {
-            Button("Unmatch", role: .destructive) {
+        .confirmationDialog("Disconnect from \(otherUser.fullName)?", isPresented: $showingDisconnectConfirmation, titleVisibility: .visible) {
+            Button("Disconnect", role: .destructive) {
                 HapticManager.shared.notification(.warning)
                 Task {
                     do {
@@ -178,7 +182,7 @@ struct ChatView: View {
                             dismiss()
                         }
                     } catch {
-                        Logger.shared.error("Error unmatching", category: .matching, error: error)
+                        Logger.shared.error("Error disconnecting from partner", category: .matching, error: error)
                     }
                 }
             }
@@ -186,7 +190,7 @@ struct ChatView: View {
                 HapticManager.shared.impact(.light)
             }
         } message: {
-            Text("You won't be able to message each other anymore, and this match will be removed from your list.")
+            Text("You won't be able to practice together anymore. This will remove them from your language partners.")
         }
         .alert("Block \(otherUser.fullName)?", isPresented: $showingBlockConfirmation) {
             Button("Cancel", role: .cancel) {
@@ -217,6 +221,28 @@ struct ChatView: View {
         }
         .sheet(isPresented: $showEditSheet) {
             editMessageSheet
+        }
+        .sheet(isPresented: $showingPracticeStarters) {
+            NavigationStack {
+                ConversationStartersView(
+                    targetLanguage: getTargetLanguage(),
+                    onSelectStarter: { starter in
+                        messageText = starter.text
+                        showingPracticeStarters = false
+                        HapticManager.shared.impact(.medium)
+                    }
+                )
+                .navigationTitle("Practice Starters")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            showingPracticeStarters = false
+                        }
+                    }
+                }
+            }
+            .presentationDetents([.large])
         }
         .onChange(of: messageService.messages.count) { oldCount, newCount in
             // BUGFIX: Only mark as loaded when messages are populated AND for THIS match
@@ -392,9 +418,9 @@ struct ChatView: View {
                 }
 
                 Button(role: .destructive) {
-                    showingUnmatchConfirmation = true
+                    showingDisconnectConfirmation = true
                 } label: {
-                    Label("Unmatch", systemImage: "xmark.circle")
+                    Label("Disconnect", systemImage: "xmark.circle")
                 }
             } label: {
                 Image(systemName: "ellipsis.circle")
@@ -951,6 +977,18 @@ struct ChatView: View {
             }
 
             HStack(spacing: 12) {
+                // Practice starters button
+                Button {
+                    showingPracticeStarters = true
+                    HapticManager.shared.impact(.light)
+                } label: {
+                    Image(systemName: "lightbulb.fill")
+                        .font(.title3)
+                        .foregroundColor(.orange)
+                }
+                .accessibilityLabel("Practice starters")
+                .accessibilityHint("Get conversation starters for language practice")
+
                 // Photo picker button
                 PhotosPicker(selection: $selectedImageItem, matching: .images) {
                     Image(systemName: "photo.fill")
@@ -1098,6 +1136,29 @@ struct ChatView: View {
     private func cleanupUserListener() {
         userListener?.remove()
         typingService.stopListening()
+    }
+
+    /// Get the target language for practice starters
+    /// Prioritizes languages the other user speaks natively that the current user is learning
+    private func getTargetLanguage() -> String? {
+        guard let currentUser = authService.currentUser else { return nil }
+
+        // Find a language the other user speaks natively that we're learning
+        for native in otherUserData.nativeLanguages {
+            for learning in currentUser.learningLanguages {
+                if native.language.lowercased() == learning.language.lowercased() {
+                    return native.language
+                }
+            }
+        }
+
+        // Fallback to first native language of other user
+        if let firstNative = otherUserData.nativeLanguages.first {
+            return firstNative.language
+        }
+
+        // Final fallback to legacy languages
+        return otherUserData.languages.first
     }
 
     private func sendMessage() {
