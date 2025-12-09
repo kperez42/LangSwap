@@ -175,7 +175,7 @@ struct ProfileInsightsView: View {
                                 .font(.subheadline)
                                 .fontWeight(selectedTab == index ? .bold : .medium)
                         }
-                        .foregroundColor(selectedTab == index ? .purple : .gray)
+                        .foregroundColor(selectedTab == index ? .teal : .gray)
 
                         // Indicator line
                         Rectangle()
@@ -276,7 +276,7 @@ struct ProfileInsightsView: View {
                     title: "Heartthrob",
                     subtitle: "50+ likes",
                     isUnlocked: insights.likesReceived >= 50,
-                    color: .pink
+                    color: .blue
                 )
 
                 achievementBadge(
@@ -392,7 +392,7 @@ struct ProfileInsightsView: View {
                 .padding()
                 .background(
                     LinearGradient(
-                        colors: [.purple.opacity(0.1), .pink.opacity(0.05)],
+                        colors: [.teal.opacity(0.1), .blue.opacity(0.05)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
@@ -402,7 +402,7 @@ struct ProfileInsightsView: View {
                 // Quick stats
                 VStack(alignment: .leading, spacing: 12) {
                     rankingStat(icon: "eye.fill", label: "Views today", value: "\(Int.random(in: 5...20))", color: .blue)
-                    rankingStat(icon: "heart.fill", label: "Likes today", value: "\(Int.random(in: 2...10))", color: .pink)
+                    rankingStat(icon: "heart.fill", label: "Likes today", value: "\(Int.random(in: 2...10))", color: .blue)
                     rankingStat(icon: "message.fill", label: "Messages", value: "\(Int.random(in: 1...5))", color: .green)
                 }
                 .frame(maxWidth: .infinity)
@@ -541,7 +541,7 @@ struct ProfileInsightsView: View {
                 statBox(
                     title: "Likes",
                     value: "\(insights.likesReceived)",
-                    color: .pink,
+                    color: .blue,
                     icon: "heart.fill"
                 )
 
@@ -563,7 +563,7 @@ struct ProfileInsightsView: View {
                     Text("\(Int(insights.likeRate * 100))%")
                         .font(.subheadline)
                         .fontWeight(.bold)
-                        .foregroundColor(.pink)
+                        .foregroundColor(.blue)
                 }
 
                 GeometryReader { geometry in
@@ -934,7 +934,7 @@ struct ProfileInsightsView: View {
                         .foregroundColor(.secondary)
                     Text("\(photo.likes)")
                         .font(.headline)
-                        .foregroundColor(.pink)
+                        .foregroundColor(.blue)
                 }
 
                 VStack(alignment: .leading, spacing: 4) {

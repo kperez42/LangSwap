@@ -34,7 +34,7 @@ enum LegalDocumentType: String, CaseIterable {
     var iconColor: Color {
         switch self {
         case .privacyPolicy: return .blue
-        case .termsOfService: return .purple
+        case .termsOfService: return .teal
         case .communityGuidelines: return .green
         case .safetyTips: return .orange
         case .cookiePolicy: return .gray
@@ -315,7 +315,7 @@ extension LegalDocumentView {
 
                     HStack {
                         Image(systemName: "envelope")
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                         Text("support@langswap.app")
                     }
                     .font(.subheadline)
@@ -726,7 +726,7 @@ extension LegalDocumentView {
                         .font(.subheadline)
                     HStack {
                         Image(systemName: "envelope")
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                         Text("support@langswap.app")
                     }
                     .font(.subheadline)
@@ -1101,7 +1101,7 @@ extension LegalDocumentView {
 
                     HStack {
                         Image(systemName: "envelope")
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                         Text("privacy@langswap.app")
                     }
                     .font(.subheadline)
@@ -1159,7 +1159,7 @@ struct SimpleBulletPoint: View {
     var body: some View {
         HStack(alignment: .top, spacing: 8) {
             Text("•")
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
             Text(text)
         }
         .font(.subheadline)

@@ -187,8 +187,8 @@ struct PendingUserCard: View {
                     .font(.caption)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 5)
-                    .background(Color.purple.opacity(0.1))
-                    .foregroundColor(.purple)
+                    .background(Color.teal.opacity(0.1))
+                    .foregroundColor(.teal)
                     .cornerRadius(8)
             }
             .contentShape(Rectangle())
@@ -665,7 +665,7 @@ struct AdminPendingUserDetailView: View {
 
             HStack(spacing: 6) {
                 Image(systemName: "mappin.circle.fill")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                 Text("\(user.location), \(user.country)")
                     .foregroundColor(.secondary)
             }
@@ -693,7 +693,7 @@ struct AdminPendingUserDetailView: View {
         VStack(alignment: .leading, spacing: 8) {
             Label("About", systemImage: "text.quote")
                 .font(.headline)
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
 
             Text(user.bio)
                 .font(.body)
@@ -737,7 +737,7 @@ struct AdminPendingUserDetailView: View {
         VStack(alignment: .leading, spacing: 8) {
             Label("Interests", systemImage: "heart.fill")
                 .font(.headline)
-                .foregroundColor(.pink)
+                .foregroundColor(.blue)
 
             FlowLayout(spacing: 8) {
                 ForEach(user.interests, id: \.self) { interest in
@@ -745,8 +745,8 @@ struct AdminPendingUserDetailView: View {
                         .font(.caption)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
-                        .background(Color.pink.opacity(0.1))
-                        .foregroundColor(.pink)
+                        .background(Color.blue.opacity(0.1))
+                        .foregroundColor(.blue)
                         .cornerRadius(16)
                 }
             }
