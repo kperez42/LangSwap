@@ -58,9 +58,9 @@ class EditProfileViewModel: ObservableObject {
     // MARK: - Constants
 
     let genderOptions = ["Male", "Female", "Non-binary", "Other"]
-    let lookingForOptions = ["Men", "Women", "Everyone"]
+    let lookingForOptions = ["Anyone", "Similar skill level", "Native speakers only", "Beginners welcome"]
     let religionOptions = ["Prefer not to say", "Agnostic", "Atheist", "Buddhist", "Catholic", "Christian", "Hindu", "Jewish", "Muslim", "Spiritual", "Other"]
-    let relationshipGoalOptions = ["Prefer not to say", "Casual dating", "Relationship", "Long-term partner", "Marriage", "Open to anything"]
+    let relationshipGoalOptions = ["Prefer not to say", "Casual conversation", "Travel preparation", "Business proficiency", "Academic study", "Fluency", "Native-level mastery"]
     let smokingOptions = ["Prefer not to say", "Non-smoker", "Social smoker", "Regular smoker", "Trying to quit"]
     let drinkingOptions = ["Prefer not to say", "Non-drinker", "Social drinker", "Regular drinker"]
     let petsOptions = ["Prefer not to say", "No pets", "Dog", "Cat", "Dog & Cat", "Other pets"]
