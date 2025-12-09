@@ -28,7 +28,7 @@ struct EmailVerificationView: View {
                 .font(.system(size: 80))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.purple, .pink],
+                        colors: [.teal, .blue],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
@@ -62,7 +62,7 @@ struct EmailVerificationView: View {
                     .font(.system(size: 24))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -83,12 +83,12 @@ struct EmailVerificationView: View {
             .padding(16)
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(Color.purple.opacity(0.08))
+                    .fill(Color.teal.opacity(0.08))
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
                             .stroke(
                                 LinearGradient(
-                                    colors: [.purple.opacity(0.3), .pink.opacity(0.3)],
+                                    colors: [.teal.opacity(0.3), .pink.opacity(0.3)],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 ),
@@ -141,7 +141,7 @@ struct EmailVerificationView: View {
                     .frame(height: 50)
                     .background(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -163,10 +163,10 @@ struct EmailVerificationView: View {
                         }
                     }
                     .fontWeight(.semibold)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .frame(maxWidth: .infinity)
                     .frame(height: 50)
-                    .background(Color.purple.opacity(0.1))
+                    .background(Color.teal.opacity(0.1))
                     .cornerRadius(12)
                 }
                 .disabled(isSending)
