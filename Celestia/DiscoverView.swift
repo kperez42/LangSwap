@@ -163,7 +163,7 @@ struct DiscoverView: View {
                         if viewModel.hasActiveFilters {
                             Image(systemName: "line.3.horizontal.decrease.circle.fill")
                                 .font(.caption)
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                         }
                     }
                 }
@@ -179,7 +179,7 @@ struct DiscoverView: View {
             } label: {
                 Image(systemName: "shuffle")
                     .font(.title3)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .frame(width: 44, height: 44)
             }
             .accessibilityElement(
@@ -198,7 +198,7 @@ struct DiscoverView: View {
                 ZStack(alignment: .topTrailing) {
                     Image(systemName: viewModel.hasActiveFilters ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
                         .font(.title2)
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
 
                     if viewModel.hasActiveFilters {
                         Circle()
@@ -373,7 +373,7 @@ struct DiscoverView: View {
                 .foregroundColor(.white)
                 .background(
                     LinearGradient(
-                        colors: [.purple, .pink],
+                        colors: [.teal, .blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
@@ -398,7 +398,7 @@ struct DiscoverView: View {
                 .font(.system(size: 80))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.purple.opacity(0.6), .pink.opacity(0.4)],
+                        colors: [.teal.opacity(0.6), .blue.opacity(0.4)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
@@ -439,7 +439,7 @@ struct DiscoverView: View {
                         .foregroundColor(.white)
                         .background(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
@@ -465,7 +465,7 @@ struct DiscoverView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .background(Color(.systemGray6))
                     .cornerRadius(16)
                     .contentShape(RoundedRectangle(cornerRadius: 16))
@@ -518,7 +518,7 @@ struct DiscoverView: View {
                     viewModel.dismissMatchAnimation()
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.purple)
+                .tint(.teal)
                 .controlSize(.large)
 
                 Button("Keep Swiping") {

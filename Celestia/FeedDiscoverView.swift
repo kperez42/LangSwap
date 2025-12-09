@@ -54,7 +54,7 @@ struct FeedDiscoverView: View {
     // Helper gradient for buttons
     private var buttonGradient: LinearGradient {
         LinearGradient(
-            colors: [.purple, .pink],
+            colors: [.teal, .blue],
             startPoint: .leading,
             endPoint: .trailing
         )
@@ -73,7 +73,7 @@ struct FeedDiscoverView: View {
                             ZStack(alignment: .topTrailing) {
                                 Image(systemName: "slider.horizontal.3")
                                     .font(.title3)
-                                    .foregroundColor(.purple)
+                                    .foregroundColor(.teal)
 
                                 if filters.hasActiveFilters {
                                     Circle()
@@ -261,7 +261,7 @@ struct FeedDiscoverView: View {
                 if isLoading {
                     HStack(spacing: 12) {
                         ProgressView()
-                            .tint(.purple)
+                            .tint(.teal)
 
                         Text("Finding more people...")
                             .font(.subheadline)
@@ -550,7 +550,7 @@ struct FeedDiscoverView: View {
                     .padding(.vertical, 14)
                     .background(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -569,10 +569,10 @@ struct FeedDiscoverView: View {
                         Text("Submit for Review")
                     }
                     .fontWeight(.semibold)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
-                    .background(Color.purple.opacity(0.1))
+                    .background(Color.teal.opacity(0.1))
                     .cornerRadius(12)
                 }
             }
@@ -615,13 +615,13 @@ struct FeedDiscoverView: View {
                     .font(.system(size: 60))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
 
-                Text("Welcome to Celestia!")
+                Text("Welcome to LangSwap!")
                     .font(.title2)
                     .fontWeight(.bold)
 
@@ -715,14 +715,14 @@ struct FeedDiscoverView: View {
                     .font(.system(size: 70))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
 
                 VStack(spacing: 12) {
-                    Text("Welcome to Celestia!")
+                    Text("Welcome to LangSwap!")
                         .font(.title2)
                         .fontWeight(.bold)
 
@@ -808,10 +808,10 @@ struct FeedDiscoverView: View {
                     Image(systemName: "arrow.clockwise")
                     Text("Refresh")
                 }
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
                 .padding(.horizontal, 20)
                 .padding(.vertical, 10)
-                .background(Color.purple.opacity(0.1))
+                .background(Color.teal.opacity(0.1))
                 .cornerRadius(10)
             }
         }
@@ -864,7 +864,7 @@ struct FeedDiscoverView: View {
                     }
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.purple)
+                .tint(.teal)
                 .controlSize(.large)
 
                 Button("Keep Browsing") {
