@@ -1125,7 +1125,7 @@ struct FeedDiscoverView: View {
                         showToast(
                             message: "You like \(truncatedName)!",
                             icon: "heart.fill",
-                            color: .pink
+                            color: .blue
                         )
                     }
                 }

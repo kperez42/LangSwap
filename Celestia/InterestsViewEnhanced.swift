@@ -592,7 +592,7 @@ struct InterestFilterChip: View {
                 Text(title)
                     .font(.subheadline.weight(.medium))
             }
-            .foregroundColor(isSelected ? .white : .purple)
+            .foregroundColor(isSelected ? .white : .teal)
             .padding(.horizontal, 16)
             .padding(.vertical, 8)
             .background(
@@ -676,7 +676,7 @@ struct InterestCard: View {
                     if isSelectionMode {
                         Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
                             .font(.title2)
-                            .foregroundColor(isSelected ? .purple : .white)
+                            .foregroundColor(isSelected ? .teal : .white)
                             .padding(8)
                             .background(Circle().fill(Color.white.opacity(isSelected ? 0 : 0.3)))
                     }

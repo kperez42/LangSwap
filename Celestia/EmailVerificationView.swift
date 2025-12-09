@@ -88,7 +88,7 @@ struct EmailVerificationView: View {
                         RoundedRectangle(cornerRadius: 12)
                             .stroke(
                                 LinearGradient(
-                                    colors: [.teal.opacity(0.3), .pink.opacity(0.3)],
+                                    colors: [.teal.opacity(0.3), .blue.opacity(0.3)],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 ),

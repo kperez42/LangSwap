@@ -18,7 +18,7 @@ struct IDVerificationView: View {
         VStack(spacing: 20) {
             Image(systemName: "person.text.rectangle")
                 .font(.system(size: 60))
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
 
             Text("ID Verification")
                 .font(.title.bold())
@@ -41,7 +41,7 @@ struct SocialMediaVerificationView: View {
         VStack(spacing: 20) {
             Image(systemName: "at")
                 .font(.system(size: 60))
-                .foregroundColor(.pink)
+                .foregroundColor(.blue)
 
             Text("Social Media Verification")
                 .font(.title.bold())

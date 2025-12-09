@@ -676,7 +676,7 @@ struct FullScreenImageView: View {
                                 .foregroundColor(.white)
                                 .padding(.horizontal, 16)
                                 .padding(.vertical, 8)
-                                .background(currentIndex == 0 ? Color.blue : Color.purple)
+                                .background(currentIndex == 0 ? Color.blue : Color.teal)
                                 .cornerRadius(12)
                         }
 

@@ -327,7 +327,7 @@ struct OptimizedProfileCardImage: View {
             Rectangle()
                 .fill(
                     LinearGradient(
-                        colors: [Color.purple.opacity(0.2), Color.pink.opacity(0.1)],
+                        colors: [Color.teal.opacity(0.2), Color.blue.opacity(0.1)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
@@ -365,7 +365,7 @@ struct OptimizedThumbnailImage: View {
             Circle()
                 .fill(
                     LinearGradient(
-                        colors: [Color.purple.opacity(0.3), Color.pink.opacity(0.2)],
+                        colors: [Color.teal.opacity(0.3), Color.blue.opacity(0.2)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )

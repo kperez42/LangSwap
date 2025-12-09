@@ -193,7 +193,7 @@ struct MessageBubbleGradient: View {
                                 .background {
                                     if isFromCurrentUser {
                                         LinearGradient(
-                                            colors: [Color.teal.opacity(0.9), Color.pink.opacity(0.9)],
+                                            colors: [Color.teal.opacity(0.9), Color.blue.opacity(0.9)],
                                             startPoint: .leading,
                                             endPoint: .trailing
                                         )
@@ -298,7 +298,7 @@ struct MessageBubbleGradient: View {
                     Text(replyTo.senderName)
                         .font(.caption)
                         .fontWeight(.semibold)
-                        .foregroundColor(isFromCurrentUser ? .white.opacity(0.9) : .purple)
+                        .foregroundColor(isFromCurrentUser ? .white.opacity(0.9) : .teal)
 
                     if let imageURL = replyTo.imageURL, !imageURL.isEmpty {
                         HStack(spacing: 4) {

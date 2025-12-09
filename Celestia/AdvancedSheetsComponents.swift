@@ -348,7 +348,7 @@ struct FilterOptionButton: View {
             Text(title)
                 .font(.subheadline)
                 .fontWeight(.medium)
-                .foregroundColor(isSelected ? .white : .purple)
+                .foregroundColor(isSelected ? .white : .teal)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 14)
                 .background(
@@ -378,7 +378,7 @@ struct FilterToggle: View {
         Toggle(isOn: $isOn) {
             HStack(spacing: 10) {
                 Image(systemName: icon)
-                    .foregroundColor(isOn ? .purple : .gray)
+                    .foregroundColor(isOn ? .teal : .gray)
                 Text(title)
             }
         }

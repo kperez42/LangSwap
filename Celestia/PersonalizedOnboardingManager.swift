@@ -68,7 +68,7 @@ class PersonalizedOnboardingManager: ObservableObject {
         var color: Color {
             switch self {
             case .conversationFluency: return .blue
-            case .examPreparation: return .purple
+            case .examPreparation: return .teal
             case .businessProfessional: return .indigo
             case .travelCultural: return .teal
             case .academicStudy: return .green

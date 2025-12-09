@@ -151,7 +151,7 @@ class ActivationMetrics: ObservableObject {
             case .exploring: return .blue
             case .engaged: return .green
             case .active: return .orange
-            case .powerUser: return .purple
+            case .powerUser: return .teal
             }
         }
 
@@ -594,7 +594,7 @@ struct ActivationDashboardView: View {
                             StatCard(title: "Matches", value: "\(metrics.totalMatches)", icon: "heart.fill", color: .red)
                             StatCard(title: "Messages", value: "\(metrics.totalMessages)", icon: "message.fill", color: .blue)
                             StatCard(title: "Sessions", value: "\(metrics.sessionCount)", icon: "clock.fill", color: .green)
-                            StatCard(title: "Profile", value: "\(Int(metrics.profileCompletionPercentage))%", icon: "person.fill", color: .purple)
+                            StatCard(title: "Profile", value: "\(Int(metrics.profileCompletionPercentage))%", icon: "person.fill", color: .teal)
                         }
                     }
 

@@ -200,7 +200,7 @@ struct ImprovedUserDetailSheet: View {
             LinearGradient(
                 colors: [
                     Color.teal.opacity(0.7),
-                    Color.pink.opacity(0.6),
+                    Color.blue.opacity(0.6),
                     Color.blue.opacity(0.5)
                 ],
                 startPoint: .topLeading,

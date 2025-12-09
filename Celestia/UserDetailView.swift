@@ -311,7 +311,7 @@ struct UserDetailView: View {
             ProfileSectionCard(
                 icon: "person.text.rectangle",
                 title: "Details",
-                iconColors: [.indigo, .purple],
+                iconColors: [.indigo, .teal],
                 borderColor: .indigo
             ) {
                 VStack(spacing: 12) {

@@ -148,12 +148,12 @@ struct CurrentUserDetailView: View {
                         ProfileSectionCard(
                             icon: "sparkles",
                             title: "Interests",
-                            iconColors: [.orange, .pink],
+                            iconColors: [.orange, .blue],
                             borderColor: .orange
                         ) {
                             FlowLayout2(spacing: 10) {
                                 ForEach(user.interests, id: \.self) { interest in
-                                    ProfileTagView(text: interest, colors: [.orange, .pink], textColor: .orange)
+                                    ProfileTagView(text: interest, colors: [.orange, .blue], textColor: .orange)
                                 }
                             }
                         }

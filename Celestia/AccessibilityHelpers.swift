@@ -276,8 +276,8 @@ extension Color {
     }
 
     /// Common accessible color pairs for the app
-    static let accessiblePrimary = Color.purple
-    static let accessibleSecondary = Color.pink
+    static let accessiblePrimary = Color.teal
+    static let accessibleSecondary = Color.blue
     static let accessibleAccent = Color.blue
     static let accessibleSuccess = Color.green
     static let accessibleWarning = Color.orange

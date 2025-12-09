@@ -152,7 +152,7 @@ struct FlaggedAccountView: View {
                             )
                             BulletPoint(
                                 icon: "bell.fill",
-                                color: .purple,
+                                color: .teal,
                                 text: "You'll be notified when the review is complete"
                             )
                             BulletPoint(
@@ -235,7 +235,7 @@ struct FlaggedAccountView: View {
                             .padding(.vertical, 16)
                             .background(
                                 LinearGradient(
-                                    colors: [.blue, .purple],
+                                    colors: [.blue, .teal],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )

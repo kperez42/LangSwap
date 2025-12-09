@@ -237,7 +237,7 @@ struct LikeCardView: View {
                         // Placeholder when no image
                         ZStack {
                             LinearGradient(
-                                colors: [Color.pink.opacity(0.7), Color.purple.opacity(0.5)],
+                                colors: [Color.blue.opacity(0.7), Color.teal.opacity(0.5)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )

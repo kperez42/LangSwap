@@ -225,7 +225,7 @@ struct ReferralDashboardView: View {
                         Text("Copy Code")
                             .fontWeight(.semibold)
                     }
-                    .foregroundColor(referralCode.isEmpty ? .gray : .purple)
+                    .foregroundColor(referralCode.isEmpty ? .gray : .teal)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
                     .background(referralCode.isEmpty ? Color.gray.opacity(0.1) : Color.teal.opacity(0.1))

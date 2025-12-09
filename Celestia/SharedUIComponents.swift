@@ -82,7 +82,7 @@ struct BenefitRow: View {
     let text: String
     let color: Color
 
-    init(icon: String, text: String, color: Color = .purple) {
+    init(icon: String, text: String, color: Color = .teal) {
         self.icon = icon
         self.text = text
         self.color = color
