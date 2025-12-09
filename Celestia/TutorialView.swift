@@ -564,15 +564,15 @@ struct SwipeGestureDemo: View {
                     )
                     .shadow(color: .black.opacity(0.1), radius: 10)
 
-                // Like/Nope indicators
+                // Connect/Pass indicators
                 if offset.width > 20 {
-                    Text("LIKE")
+                    Text("CONNECT")
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.green)
                         .opacity(Double(offset.width / 100))
                 } else if offset.width < -20 {
-                    Text("NOPE")
+                    Text("PASS")
                         .font(.title)
                         .fontWeight(.bold)
                         .foregroundColor(.red)
