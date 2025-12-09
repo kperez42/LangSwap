@@ -164,10 +164,10 @@ struct VerificationRowView: View {
                     Text(verification.idType)
                         .font(.caption)
                 }
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .background(Color.purple.opacity(0.1))
+                .background(Color.teal.opacity(0.1))
                 .cornerRadius(6)
 
                 if let date = verification.submittedAt {
@@ -356,7 +356,7 @@ struct VerificationDetailView: View {
             .padding(.horizontal, 12)
             .padding(.vertical, 6)
             .background(
-                LinearGradient(colors: [.purple, .pink], startPoint: .leading, endPoint: .trailing)
+                LinearGradient(colors: [.teal, .blue], startPoint: .leading, endPoint: .trailing)
             )
             .cornerRadius(8)
 
@@ -433,7 +433,7 @@ struct VerificationDetailView: View {
                         .cornerRadius(12)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.purple.opacity(0.3), lineWidth: 2)
+                                .stroke(Color.teal.opacity(0.3), lineWidth: 2)
                         )
                         .onTapGesture {
                             selectedImageURL = verification.selfiePhotoURL
@@ -452,7 +452,7 @@ struct VerificationDetailView: View {
 
                 Text("Tap to view full size • Swipe to compare")
                     .font(.caption2)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
             }
 
             // Comparison hint
@@ -1192,10 +1192,10 @@ struct VerificationCardView: View {
                     Text(verification.idType)
                         .font(.caption)
                 }
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
                 .padding(.horizontal, 8)
                 .padding(.vertical, 4)
-                .background(Color.purple.opacity(0.1))
+                .background(Color.teal.opacity(0.1))
                 .cornerRadius(6)
 
                 if let date = verification.submittedAt {
@@ -1279,7 +1279,7 @@ struct VerificationCardView: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 6)
-                            .background(Color.purple)
+                            .background(Color.teal)
                     }
                 }
             }
