@@ -199,7 +199,7 @@ struct ImprovedUserDetailSheet: View {
         ZStack {
             LinearGradient(
                 colors: [
-                    Color.purple.opacity(0.7),
+                    Color.teal.opacity(0.7),
                     Color.pink.opacity(0.6),
                     Color.blue.opacity(0.5)
                 ],
@@ -242,7 +242,7 @@ struct ImprovedUserDetailSheet: View {
             
             HStack(spacing: 6) {
                 Image(systemName: "mappin.circle.fill")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                 Text("\(user.location), \(user.country)")
                     .foregroundColor(.gray)
             }
@@ -257,7 +257,7 @@ struct ImprovedUserDetailSheet: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "text.alignleft")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                 Text("About")
                     .font(.headline)
             }
@@ -331,7 +331,7 @@ struct ImprovedUserDetailSheet: View {
         HStack {
             HStack(spacing: 10) {
                 Image(systemName: icon)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .frame(width: 24)
                 
                 Text(label)
@@ -353,14 +353,14 @@ struct ImprovedUserDetailSheet: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "globe")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                 Text("Languages")
                     .font(.headline)
             }
             
             FlowLayout(spacing: 8) {
                 ForEach(user.languages, id: \.self) { language in
-                    TagView(text: language, color: .purple)
+                    TagView(text: language, color: .teal)
                 }
             }
         }
@@ -377,7 +377,7 @@ struct ImprovedUserDetailSheet: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "star.fill")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                 Text("Interests")
                     .font(.headline)
             }
@@ -434,13 +434,13 @@ struct ImprovedUserDetailSheet: View {
                 .frame(height: 56)
                 .background(
                     LinearGradient(
-                        colors: [Color.pink, Color.purple],
+                        colors: [Color.teal, Color.blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
                 )
                 .cornerRadius(16)
-                .shadow(color: .purple.opacity(0.4), radius: 10, y: 5)
+                .shadow(color: .teal.opacity(0.4), radius: 10, y: 5)
             }
         }
         .padding(.horizontal, 24)
