@@ -166,11 +166,11 @@ enum CelestiaError: LocalizedError, Identifiable {
 
         // Match
         case .alreadyMatched:
-            return "You're already matched with this user."
+            return "You're already connected with this user."
         case .matchNotFound:
-            return "Match not found."
+            return "Connection not found."
         case .cannotMatchWithSelf:
-            return "You cannot match with yourself."
+            return "You cannot connect with yourself."
         case .userBlocked:
             return "This user has blocked you or you've blocked them."
 

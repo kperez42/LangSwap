@@ -37,7 +37,7 @@ struct MatchesView: View {
         case recent = "Most Recent"
         case unread = "Unread First"
         case alphabetical = "A-Z"
-        case newMatches = "New Matches"
+        case newMatches = "New Partners"
     }
 
     // PERFORMANCE: Use cached value, update only when dependencies change

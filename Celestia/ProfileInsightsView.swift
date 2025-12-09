@@ -1197,7 +1197,7 @@ struct ProfileInsightsView: View {
             suggestions.append(ProfileSuggestion(
                 id: UUID().uuidString,
                 title: "Add More Interests",
-                description: "Add at least 5 interests to help find better matches with shared passions.",
+                description: "Add at least 5 interests to find partners with shared conversation topics.",
                 priority: .medium,
                 category: .interests,
                 actionType: .addInterests
@@ -1208,7 +1208,7 @@ struct ProfileInsightsView: View {
             suggestions.append(ProfileSuggestion(
                 id: UUID().uuidString,
                 title: "Get Verified",
-                description: "Verified profiles are trusted and get 3x more matches!",
+                description: "Verified profiles are trusted and get 3x more connection requests!",
                 priority: .high,
                 category: .verification,
                 actionType: .getVerified
