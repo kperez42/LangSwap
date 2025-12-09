@@ -2,7 +2,7 @@
 //  SafetyCenter.swift
 //  Celestia
 //
-//  Safety features: reporting and blocking
+//  Comprehensive Safety Center with verification, reporting, and protection tools
 //
 
 import SwiftUI
@@ -13,16 +13,34 @@ import FirebaseFirestore
 struct SafetyCenterView: View {
     @EnvironmentObject var authService: AuthService
     @StateObject private var viewModel = SafetyCenterViewModel()
+    @StateObject private var safetyManager = SafetyManager.shared
+    @StateObject private var emergencyManager = EmergencyContactManager.shared
+    @StateObject private var verificationService = VerificationService.shared
 
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(spacing: 20) {
-                    // Header
-                    headerSection
+                    // Safety Score Header
+                    safetyScoreHeader
+
+                    // Quick Actions
+                    quickActionsSection
+
+                    // Verification Status
+                    verificationSection
+
+                    // Emergency Contacts
+                    emergencyContactsSection
+
+                    // Date Safety
+                    dateSafetySection
 
                     // Safety Tools
                     safetyToolsSection
+
+                    // Resources
+                    resourcesSection
                 }
                 .padding()
             }
@@ -31,30 +49,286 @@ struct SafetyCenterView: View {
             .navigationBarTitleDisplayMode(.large)
             .task {
                 await viewModel.loadSafetyData()
+                safetyManager.calculateSafetyScore()
             }
         }
     }
 
-    // MARK: - Header Section
+    // MARK: - Safety Score Header
 
-    private var headerSection: some View {
-        VStack(spacing: 12) {
-            Image(systemName: "shield.checkered")
-                .font(.system(size: 60))
-                .foregroundColor(.green)
+    private var safetyScoreHeader: some View {
+        VStack(spacing: 16) {
+            // Score Circle
+            ZStack {
+                Circle()
+                    .stroke(Color.gray.opacity(0.2), lineWidth: 12)
+                    .frame(width: 120, height: 120)
 
-            Text("Your Safety Matters")
-                .font(.title2.bold())
+                Circle()
+                    .trim(from: 0, to: CGFloat(safetyManager.safetyScore) / 100)
+                    .stroke(
+                        LinearGradient(
+                            colors: scoreColors,
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        style: StrokeStyle(lineWidth: 12, lineCap: .round)
+                    )
+                    .frame(width: 120, height: 120)
+                    .rotationEffect(.degrees(-90))
 
-            Text("Use these tools to protect yourself and report issues.")
+                VStack(spacing: 2) {
+                    Text("\(safetyManager.safetyScore)")
+                        .font(.system(size: 36, weight: .bold, design: .rounded))
+                        .foregroundStyle(
+                            LinearGradient(
+                                colors: scoreColors,
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            )
+                        )
+
+                    Text("Safety Score")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+            }
+
+            Text(scoreMessage)
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
+
+            // Improvement Tips
+            if safetyManager.safetyScore < 80 {
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Improve your score:")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.secondary)
+
+                    ForEach(improvementTips.prefix(2), id: \.self) { tip in
+                        HStack(spacing: 8) {
+                            Image(systemName: "lightbulb.fill")
+                                .font(.caption)
+                                .foregroundColor(.yellow)
+
+                            Text(tip)
+                                .font(.caption)
+                                .foregroundColor(.secondary)
+                        }
+                    }
+                }
+                .padding(.horizontal)
+            }
         }
         .padding()
         .frame(maxWidth: .infinity)
-        .background(Color.white)
+        .background(Color(.systemBackground))
         .cornerRadius(16)
+    }
+
+    private var scoreColors: [Color] {
+        if safetyManager.safetyScore >= 80 {
+            return [.green, .teal]
+        } else if safetyManager.safetyScore >= 50 {
+            return [.yellow, .orange]
+        } else {
+            return [.orange, .red]
+        }
+    }
+
+    private var scoreMessage: String {
+        if safetyManager.safetyScore >= 80 {
+            return "Great job! Your account is well protected."
+        } else if safetyManager.safetyScore >= 50 {
+            return "Good start! Complete more steps to improve your safety."
+        } else {
+            return "Let's make your account safer. Complete the steps below."
+        }
+    }
+
+    private var improvementTips: [String] {
+        var tips: [String] = []
+        if !verificationService.idVerified {
+            tips.append("Verify your identity for a verified badge")
+        }
+        if !emergencyManager.hasContacts() {
+            tips.append("Add emergency contacts for date safety")
+        }
+        if !verificationService.photoVerified {
+            tips.append("Complete photo verification")
+        }
+        return tips
+    }
+
+    // MARK: - Quick Actions
+
+    private var quickActionsSection: some View {
+        HStack(spacing: 12) {
+            QuickActionButton(
+                icon: "phone.fill",
+                title: "Emergency",
+                color: .red
+            ) {
+                if let url = URL(string: "tel://911") {
+                    UIApplication.shared.open(url)
+                }
+            }
+
+            NavigationLink {
+                DateCheckInView()
+            } label: {
+                QuickActionCard(
+                    icon: "bell.badge.fill",
+                    title: "Check-In",
+                    color: .orange
+                )
+            }
+
+            NavigationLink {
+                EmergencyContactsView()
+            } label: {
+                QuickActionCard(
+                    icon: "person.2.fill",
+                    title: "Contacts",
+                    color: .blue
+                )
+            }
+        }
+    }
+
+    // MARK: - Verification Section
+
+    private var verificationSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            SafetySectionHeader(title: "Verification", icon: "checkmark.shield.fill")
+
+            VStack(spacing: 12) {
+                NavigationLink {
+                    IDVerificationView()
+                } label: {
+                    SafetyOptionRow(
+                        icon: "person.text.rectangle.fill",
+                        title: "ID Verification",
+                        subtitle: verificationService.idVerified ? "Verified" : "Verify your identity",
+                        color: .teal,
+                        isCompleted: verificationService.idVerified
+                    )
+                }
+
+                NavigationLink {
+                    PhoneVerificationView()
+                } label: {
+                    SafetyOptionRow(
+                        icon: "phone.fill",
+                        title: "Phone Verification",
+                        subtitle: verificationService.phoneVerified ? "Verified" : "Verify your phone number",
+                        color: .green,
+                        isCompleted: verificationService.phoneVerified
+                    )
+                }
+
+                NavigationLink {
+                    SocialMediaVerificationView()
+                } label: {
+                    SafetyOptionRow(
+                        icon: "link.circle.fill",
+                        title: "Social Media",
+                        subtitle: "Link your social accounts",
+                        color: .blue,
+                        isCompleted: false
+                    )
+                }
+            }
+        }
+    }
+
+    // MARK: - Emergency Contacts Section
+
+    private var emergencyContactsSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            SafetySectionHeader(title: "Emergency Contacts", icon: "person.2.fill")
+
+            NavigationLink {
+                EmergencyContactsView()
+            } label: {
+                HStack(spacing: 16) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.blue.opacity(0.1))
+                            .frame(width: 50, height: 50)
+
+                        Image(systemName: emergencyManager.hasContacts() ? "person.2.fill" : "person.badge.plus")
+                            .font(.title3)
+                            .foregroundColor(.blue)
+                    }
+
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(emergencyManager.hasContacts() ? "Manage Contacts" : "Add Emergency Contacts")
+                            .font(.headline)
+                            .foregroundColor(.primary)
+
+                        Text(emergencyManager.hasContacts()
+                             ? "\(emergencyManager.contacts.count) contact(s) added"
+                             : "Set up trusted contacts for safety")
+                            .font(.caption)
+                            .foregroundColor(.secondary)
+                    }
+
+                    Spacer()
+
+                    if emergencyManager.hasContacts() {
+                        Text("\(emergencyManager.contacts.count)")
+                            .font(.caption.bold())
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 6)
+                            .background(Color.blue)
+                            .clipShape(Capsule())
+                    } else {
+                        Image(systemName: "chevron.right")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                }
+                .padding()
+                .background(Color(.systemBackground))
+                .cornerRadius(12)
+            }
+        }
+    }
+
+    // MARK: - Date Safety Section
+
+    private var dateSafetySection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            SafetySectionHeader(title: "Date Safety", icon: "heart.circle.fill")
+
+            VStack(spacing: 12) {
+                NavigationLink {
+                    DateCheckInView()
+                } label: {
+                    SafetyOptionRow(
+                        icon: "bell.badge.fill",
+                        title: "Date Check-In",
+                        subtitle: "Schedule safety reminders",
+                        color: .orange
+                    )
+                }
+
+                NavigationLink {
+                    SafeDateLocationsView()
+                } label: {
+                    SafetyOptionRow(
+                        icon: "mappin.circle.fill",
+                        title: "Safe Meeting Spots",
+                        subtitle: "Recommended public places",
+                        color: .green
+                    )
+                }
+            }
+        }
     }
 
     // MARK: - Safety Tools Section
@@ -86,8 +360,191 @@ struct SafetyCenterView: View {
                         color: .orange
                     )
                 }
+
+                NavigationLink {
+                    PrivacySettingsView()
+                } label: {
+                    SafetyOptionRow(
+                        icon: "lock.shield.fill",
+                        title: "Privacy Settings",
+                        subtitle: "Control your visibility",
+                        color: .purple
+                    )
+                }
             }
         }
+    }
+
+    // MARK: - Resources Section
+
+    private var resourcesSection: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            SafetySectionHeader(title: "Resources", icon: "book.fill")
+
+            VStack(spacing: 12) {
+                NavigationLink {
+                    CommunityGuidelinesView()
+                } label: {
+                    SafetyOptionRow(
+                        icon: "doc.text.fill",
+                        title: "Community Guidelines",
+                        subtitle: "Our rules and standards",
+                        color: .blue
+                    )
+                }
+
+                NavigationLink {
+                    SafetyTipsView()
+                } label: {
+                    SafetyOptionRow(
+                        icon: "lightbulb.fill",
+                        title: "Safety Tips",
+                        subtitle: "Best practices for online dating",
+                        color: .yellow
+                    )
+                }
+            }
+        }
+        .padding(.bottom, 40)
+    }
+}
+
+// MARK: - Quick Action Components
+
+struct QuickActionButton: View {
+    let icon: String
+    let title: String
+    let color: Color
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            QuickActionCard(icon: icon, title: title, color: color)
+        }
+    }
+}
+
+struct QuickActionCard: View {
+    let icon: String
+    let title: String
+    let color: Color
+
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: icon)
+                .font(.title2)
+                .foregroundColor(color)
+
+            Text(title)
+                .font(.caption)
+                .fontWeight(.medium)
+                .foregroundColor(.primary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 16)
+        .background(Color(.systemBackground))
+        .cornerRadius(12)
+    }
+}
+
+// MARK: - Safety Tips View
+
+struct SafetyTipsView: View {
+    @StateObject private var safetyManager = SafetyManager.shared
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 24) {
+                // Header
+                VStack(spacing: 16) {
+                    ZStack {
+                        Circle()
+                            .fill(Color.yellow.opacity(0.1))
+                            .frame(width: 100, height: 100)
+
+                        Image(systemName: "lightbulb.fill")
+                            .font(.system(size: 50))
+                            .foregroundColor(.yellow)
+                    }
+
+                    Text("Safety Tips")
+                        .font(.title.bold())
+
+                    Text("Best practices for staying safe while connecting")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                        .multilineTextAlignment(.center)
+                }
+                .padding(.top, 20)
+
+                // Tips by Category
+                ForEach(TipCategory.allCases, id: \.self) { category in
+                    SafetyTipCategoryView(category: category)
+                }
+            }
+            .padding()
+            .padding(.bottom, 40)
+        }
+        .background(Color(.systemGroupedBackground))
+        .navigationTitle("Safety Tips")
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+struct SafetyTipCategoryView: View {
+    let category: TipCategory
+    @State private var isExpanded = true
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Button {
+                withAnimation(.spring(response: 0.3)) {
+                    isExpanded.toggle()
+                }
+            } label: {
+                HStack {
+                    Image(systemName: category.icon)
+                        .font(.title3)
+                        .foregroundColor(category.color)
+
+                    Text(category.title)
+                        .font(.headline)
+                        .foregroundColor(.primary)
+
+                    Spacer()
+
+                    Image(systemName: isExpanded ? "chevron.up" : "chevron.down")
+                        .foregroundColor(.secondary)
+                }
+            }
+
+            if isExpanded {
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(SafetyTip.tips(for: category)) { tip in
+                        HStack(alignment: .top, spacing: 12) {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundColor(.green)
+                                .font(.caption)
+                                .padding(.top, 2)
+
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(tip.title)
+                                    .font(.subheadline)
+                                    .fontWeight(.medium)
+
+                                Text(tip.description)
+                                    .font(.caption)
+                                    .foregroundColor(.secondary)
+                            }
+                        }
+                    }
+                }
+                .padding(.leading, 32)
+            }
+        }
+        .padding()
+        .background(Color(.systemBackground))
+        .cornerRadius(12)
     }
 }
 
