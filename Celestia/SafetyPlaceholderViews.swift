@@ -1,9 +1,9 @@
 //
 //  SafetyPlaceholderViews.swift
-//  Celestia
+//  LangSwap
 //
-//  Safety feature views - fully implemented
-//  These views provide essential safety tools for users
+//  Safety feature views for language exchange platform
+//  These views provide essential safety tools for language learners
 //
 
 import SwiftUI
@@ -44,7 +44,7 @@ struct IDVerificationView: View {
                     Text("Verify Your Identity")
                         .font(.title.bold())
 
-                    Text("Get a verified badge to build trust with others")
+                    Text("Get a verified badge to build trust with language partners")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -61,22 +61,22 @@ struct IDVerificationView: View {
                     VerificationBenefitRow(
                         icon: "checkmark.shield.fill",
                         title: "Verified Badge",
-                        description: "Show others you're a real person",
+                        description: "Show language partners you're a real person",
                         color: .green
                     )
 
                     VerificationBenefitRow(
                         icon: "star.fill",
-                        title: "More Matches",
-                        description: "Verified profiles get up to 3x more matches",
+                        title: "More Partners",
+                        description: "Verified profiles get up to 3x more language partner requests",
                         color: .yellow
                     )
 
                     VerificationBenefitRow(
-                        icon: "heart.fill",
+                        icon: "person.2.fill",
                         title: "Build Trust",
-                        description: "Partners feel safer connecting with you",
-                        color: .pink
+                        description: "Language partners feel safer practicing with you",
+                        color: .blue
                     )
                 }
                 .padding()
@@ -153,8 +153,8 @@ struct SocialMediaVerificationView: View {
     @State private var linkedAccounts: Set<String> = []
 
     let socialPlatforms = [
-        ("Instagram", "camera.fill", Color.purple),
         ("LinkedIn", "briefcase.fill", Color.blue),
+        ("Instagram", "camera.fill", Color.purple),
         ("Twitter/X", "at", Color.cyan)
     ]
 
@@ -277,6 +277,7 @@ struct ReportingCenterView: View {
         case safety = "Safety Concerns"
         case harassment = "Harassment"
         case scam = "Scams & Fraud"
+        case fakeProfile = "Fake Profile"
         case bug = "Bug Report"
         case feedback = "Feedback"
 
@@ -285,6 +286,7 @@ struct ReportingCenterView: View {
             case .safety: return "shield.fill"
             case .harassment: return "hand.raised.fill"
             case .scam: return "exclamationmark.triangle.fill"
+            case .fakeProfile: return "person.crop.circle.badge.exclamationmark"
             case .bug: return "ladybug.fill"
             case .feedback: return "text.bubble.fill"
             }
@@ -295,7 +297,8 @@ struct ReportingCenterView: View {
             case .safety: return .red
             case .harassment: return .orange
             case .scam: return .yellow
-            case .bug: return .purple
+            case .fakeProfile: return .purple
+            case .bug: return .gray
             case .feedback: return .blue
             }
         }
@@ -319,7 +322,7 @@ struct ReportingCenterView: View {
                     Text("Report & Support")
                         .font(.title.bold())
 
-                    Text("We're here to help keep you safe")
+                    Text("We're here to help keep the LangSwap community safe")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                 }
@@ -471,17 +474,17 @@ struct SafetySettingsView: View {
     }
 }
 
-// MARK: - Date Safety Views
+// MARK: - Practice Session Safety Views
 
-struct SafeDateLocationsView: View {
+struct SafeStudyLocationsView: View {
     @Environment(\.dismiss) var dismiss
 
     let safeLocations = [
-        SafeLocation(name: "Coffee Shops", icon: "cup.and.saucer.fill", color: .brown, tips: ["Well-lit and busy", "Easy to leave if uncomfortable", "Familiar environment"]),
-        SafeLocation(name: "Restaurants", icon: "fork.knife", color: .orange, tips: ["Public and visible", "Staff available", "Natural time limit"]),
-        SafeLocation(name: "Parks & Gardens", icon: "leaf.fill", color: .green, tips: ["Open public spaces", "Easy to walk away", "Meet during daylight"]),
-        SafeLocation(name: "Museums & Galleries", icon: "building.columns.fill", color: .purple, tips: ["Security present", "Public setting", "Easy conversation starters"]),
-        SafeLocation(name: "Shopping Centers", icon: "bag.fill", color: .blue, tips: ["Well-staffed", "Security cameras", "Multiple exits"])
+        SafeLocation(name: "Coffee Shops", icon: "cup.and.saucer.fill", color: .brown, tips: ["Well-lit and busy", "WiFi usually available", "Natural conversation environment"]),
+        SafeLocation(name: "Libraries", icon: "books.vertical.fill", color: .blue, tips: ["Quiet study areas", "Free WiFi", "Staff available"]),
+        SafeLocation(name: "Language Schools", icon: "building.2.fill", color: .teal, tips: ["Educational setting", "Other learners around", "Professional environment"]),
+        SafeLocation(name: "University Cafes", icon: "graduationcap.fill", color: .purple, tips: ["Academic atmosphere", "Diverse community", "Study-friendly"]),
+        SafeLocation(name: "Co-working Spaces", icon: "desktopcomputer", color: .orange, tips: ["Professional setting", "Good WiFi", "Meeting rooms available"])
     ]
 
     var body: some View {
@@ -499,10 +502,10 @@ struct SafeDateLocationsView: View {
                             .foregroundColor(.green)
                     }
 
-                    Text("Safe Meeting Spots")
+                    Text("Safe Study Locations")
                         .font(.title.bold())
 
-                    Text("Recommended public places for first meetings")
+                    Text("Recommended places for in-person language practice")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -514,7 +517,7 @@ struct SafeDateLocationsView: View {
                     Image(systemName: "lightbulb.fill")
                         .foregroundColor(.yellow)
 
-                    Text("Always meet in public for first dates and tell a friend where you'll be!")
+                    Text("Always meet in public for first sessions and let someone know where you'll be!")
                         .font(.subheadline)
                 }
                 .padding()
@@ -533,8 +536,15 @@ struct SafeDateLocationsView: View {
             }
         }
         .background(Color(.systemGroupedBackground))
-        .navigationTitle("Safe Meeting Spots")
+        .navigationTitle("Safe Study Locations")
         .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+// Keep original name for backward compatibility
+struct SafeDateLocationsView: View {
+    var body: some View {
+        SafeStudyLocationsView()
     }
 }
 
@@ -597,7 +607,7 @@ struct SafeLocationCard: View {
     }
 }
 
-struct DateCheckInView: View {
+struct PracticeSessionCheckInView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var checkInManager = DateCheckInManager.shared
     @StateObject private var emergencyManager = EmergencyContactManager.shared
@@ -610,18 +620,18 @@ struct DateCheckInView: View {
                 VStack(spacing: 16) {
                     ZStack {
                         Circle()
-                            .fill(Color.orange.opacity(0.1))
+                            .fill(Color.teal.opacity(0.1))
                             .frame(width: 100, height: 100)
 
                         Image(systemName: "bell.badge.fill")
                             .font(.system(size: 50))
-                            .foregroundColor(.orange)
+                            .foregroundColor(.teal)
                     }
 
-                    Text("Date Check-In")
+                    Text("Session Check-In")
                         .font(.title.bold())
 
-                    Text("Set safety check-ins for when you meet someone")
+                    Text("Set safety check-ins for in-person practice sessions")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -636,20 +646,20 @@ struct DateCheckInView: View {
 
                     CheckInStepRow(
                         step: 1,
-                        title: "Schedule Your Date",
-                        description: "Tell us when and where you're meeting"
+                        title: "Schedule Your Session",
+                        description: "Tell us when and where you're meeting your language partner"
                     )
 
                     CheckInStepRow(
                         step: 2,
                         title: "Get Reminders",
-                        description: "We'll check in during your date"
+                        description: "We'll check in during your practice session"
                     )
 
                     CheckInStepRow(
                         step: 3,
                         title: "Stay Safe",
-                        description: "Emergency contacts are notified if needed"
+                        description: "Trusted contacts are notified if needed"
                     )
                 }
                 .padding()
@@ -676,12 +686,12 @@ struct DateCheckInView: View {
                     VStack(spacing: 12) {
                         Image(systemName: "person.2.fill")
                             .font(.title)
-                            .foregroundColor(.orange)
+                            .foregroundColor(.teal)
 
-                        Text("Add Emergency Contacts First")
+                        Text("Add Trusted Contacts First")
                             .font(.headline)
 
-                        Text("You need at least one emergency contact to use Date Check-In")
+                        Text("You need at least one trusted contact to use Session Check-In")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .multilineTextAlignment(.center)
@@ -689,17 +699,17 @@ struct DateCheckInView: View {
                         NavigationLink {
                             EmergencyContactsView()
                         } label: {
-                            Text("Add Emergency Contacts")
+                            Text("Add Trusted Contacts")
                                 .font(.headline)
                                 .foregroundColor(.white)
                                 .padding()
                                 .frame(maxWidth: .infinity)
-                                .background(Color.orange)
+                                .background(Color.teal)
                                 .cornerRadius(12)
                         }
                     }
                     .padding()
-                    .background(Color.orange.opacity(0.1))
+                    .background(Color.teal.opacity(0.1))
                     .cornerRadius(16)
                     .padding(.horizontal)
                 } else {
@@ -717,7 +727,7 @@ struct DateCheckInView: View {
                         .frame(maxWidth: .infinity)
                         .background(
                             LinearGradient(
-                                colors: [.orange, .red],
+                                colors: [.teal, .blue],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
@@ -730,11 +740,18 @@ struct DateCheckInView: View {
             .padding(.bottom, 40)
         }
         .background(Color(.systemGroupedBackground))
-        .navigationTitle("Date Check-In")
+        .navigationTitle("Session Check-In")
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $showScheduleSheet) {
             ScheduleCheckInView()
         }
+    }
+}
+
+// Keep original name for backward compatibility
+struct DateCheckInView: View {
+    var body: some View {
+        PracticeSessionCheckInView()
     }
 }
 
@@ -747,7 +764,7 @@ struct CheckInStepRow: View {
         HStack(spacing: 16) {
             ZStack {
                 Circle()
-                    .fill(Color.orange)
+                    .fill(Color.teal)
                     .frame(width: 30, height: 30)
 
                 Text("\(step)")
@@ -777,7 +794,7 @@ struct ActiveCheckInCard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Meeting with \(checkIn.matchName)")
+                    Text("Practicing with \(checkIn.matchName)")
                         .font(.headline)
 
                     Text(checkIn.location)
@@ -818,7 +835,7 @@ struct ActiveCheckInCard: View {
                         try? await checkInManager.triggerEmergency(checkInId: checkIn.id)
                     }
                 } label: {
-                    Text("Emergency")
+                    Text("Need Help")
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundColor(.white)
@@ -850,7 +867,7 @@ struct ScheduleCheckInView: View {
     @StateObject private var checkInManager = DateCheckInManager.shared
     @StateObject private var emergencyManager = EmergencyContactManager.shared
 
-    @State private var matchName = ""
+    @State private var partnerName = ""
     @State private var location = ""
     @State private var scheduledTime = Date().addingTimeInterval(3600)
     @State private var checkInInterval: Double = 60
@@ -859,8 +876,8 @@ struct ScheduleCheckInView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Date Details") {
-                    TextField("Who are you meeting?", text: $matchName)
+                Section("Session Details") {
+                    TextField("Language partner's name", text: $partnerName)
                     TextField("Where are you meeting?", text: $location)
                     DatePicker("When?", selection: $scheduledTime, in: Date()...)
                 }
@@ -874,7 +891,7 @@ struct ScheduleCheckInView: View {
                     }
                 }
 
-                Section("Emergency Contacts") {
+                Section("Trusted Contacts") {
                     ForEach(emergencyManager.contacts) { contact in
                         HStack {
                             Image(systemName: contact.relationship.icon)
@@ -904,7 +921,7 @@ struct ScheduleCheckInView: View {
                                 .fontWeight(.semibold)
                         }
                     }
-                    .disabled(matchName.isEmpty || location.isEmpty || isSubmitting)
+                    .disabled(partnerName.isEmpty || location.isEmpty || isSubmitting)
                 }
             }
             .navigationTitle("Schedule Check-In")
@@ -925,7 +942,7 @@ struct ScheduleCheckInView: View {
                 let checkInTime = scheduledTime.addingTimeInterval(checkInInterval * 60)
                 _ = try await checkInManager.scheduleCheckIn(
                     matchId: UUID().uuidString,
-                    matchName: matchName,
+                    matchName: partnerName,
                     location: location,
                     scheduledTime: scheduledTime,
                     checkInTime: checkInTime,
@@ -953,42 +970,42 @@ struct CommunityGuidelinesView: View {
     let guidelines = [
         GuidelineSection(
             title: "Be Respectful",
-            icon: "heart.fill",
-            color: .pink,
+            icon: "hand.wave.fill",
+            color: .blue,
             rules: [
-                "Treat everyone with dignity and respect",
-                "No harassment, bullying, or hate speech",
-                "Respect others' boundaries and preferences"
+                "Treat all language learners with dignity and respect",
+                "Be patient with learners of all levels",
+                "No harassment, bullying, or discriminatory language"
             ]
         ),
         GuidelineSection(
             title: "Be Authentic",
             icon: "person.fill.checkmark",
-            color: .blue,
-            rules: [
-                "Use real, recent photos of yourself",
-                "Be honest about your intentions",
-                "Don't impersonate others or use fake profiles"
-            ]
-        ),
-        GuidelineSection(
-            title: "Stay Safe",
-            icon: "shield.fill",
             color: .green,
             rules: [
-                "Never share financial information",
-                "Meet in public places for first dates",
-                "Report suspicious behavior immediately"
+                "Accurately represent your language abilities",
+                "Use real photos of yourself",
+                "Be honest about your learning goals"
             ]
         ),
         GuidelineSection(
-            title: "Keep It Legal",
-            icon: "checkmark.seal.fill",
+            title: "Stay Educational",
+            icon: "book.fill",
+            color: .purple,
+            rules: [
+                "Keep conversations focused on language learning",
+                "Share helpful resources and feedback",
+                "Respect the educational purpose of the platform"
+            ]
+        ),
+        GuidelineSection(
+            title: "Protect Privacy",
+            icon: "lock.shield.fill",
             color: .orange,
             rules: [
-                "You must be 18+ to use LangSwap",
-                "No illegal activities or solicitation",
-                "Respect copyright and intellectual property"
+                "Never share others' personal information",
+                "Respect boundaries in conversations",
+                "Report suspicious behavior immediately"
             ]
         )
     ]
@@ -1023,7 +1040,7 @@ struct CommunityGuidelinesView: View {
                     Text("Community Guidelines")
                         .font(.title.bold())
 
-                    Text("Our rules for a safe and respectful community")
+                    Text("Rules for a safe and productive learning community")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -1044,7 +1061,7 @@ struct CommunityGuidelinesView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         BulletPoint(text: "Warning or temporary suspension")
                         BulletPoint(text: "Permanent account ban")
-                        BulletPoint(text: "Reporting to law enforcement if applicable")
+                        BulletPoint(text: "Reporting to authorities if applicable")
                     }
                 }
                 .padding()
@@ -1136,5 +1153,11 @@ struct BulletPoint: View {
 #Preview("Social Media Verification") {
     NavigationStack {
         SocialMediaVerificationView()
+    }
+}
+
+#Preview("Community Guidelines") {
+    NavigationStack {
+        CommunityGuidelinesView()
     }
 }

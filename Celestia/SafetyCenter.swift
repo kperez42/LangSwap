@@ -1,8 +1,8 @@
 //
 //  SafetyCenter.swift
-//  Celestia
+//  LangSwap
 //
-//  Comprehensive Safety Center with verification, reporting, and protection tools
+//  Safety Center for language exchange platform - verification, reporting, and protection
 //
 
 import SwiftUI
@@ -151,10 +151,10 @@ struct SafetyCenterView: View {
     private var improvementTips: [String] {
         var tips: [String] = []
         if !verificationService.idVerified {
-            tips.append("Verify your identity for a verified badge")
+            tips.append("Verify your identity to build trust with language partners")
         }
         if !emergencyManager.hasContacts() {
-            tips.append("Add emergency contacts for date safety")
+            tips.append("Add trusted contacts for in-person practice sessions")
         }
         if !verificationService.photoVerified {
             tips.append("Complete photo verification")
@@ -244,11 +244,11 @@ struct SafetyCenterView: View {
         }
     }
 
-    // MARK: - Emergency Contacts Section
+    // MARK: - Trusted Contacts Section
 
     private var emergencyContactsSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            SafetySectionHeader(title: "Emergency Contacts", icon: "person.2.fill")
+            SafetySectionHeader(title: "Trusted Contacts", icon: "person.2.fill")
 
             NavigationLink {
                 EmergencyContactsView()
@@ -265,13 +265,13 @@ struct SafetyCenterView: View {
                     }
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text(emergencyManager.hasContacts() ? "Manage Contacts" : "Add Emergency Contacts")
+                        Text(emergencyManager.hasContacts() ? "Manage Contacts" : "Add Trusted Contacts")
                             .font(.headline)
                             .foregroundColor(.primary)
 
                         Text(emergencyManager.hasContacts()
                              ? "\(emergencyManager.contacts.count) contact(s) added"
-                             : "Set up trusted contacts for safety")
+                             : "Set up contacts for in-person meetups")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -299,31 +299,31 @@ struct SafetyCenterView: View {
         }
     }
 
-    // MARK: - Date Safety Section
+    // MARK: - Practice Safety Section
 
     private var dateSafetySection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            SafetySectionHeader(title: "Date Safety", icon: "heart.circle.fill")
+            SafetySectionHeader(title: "Practice Safety", icon: "person.2.circle.fill")
 
             VStack(spacing: 12) {
                 NavigationLink {
-                    DateCheckInView()
+                    PracticeSessionCheckInView()
                 } label: {
                     SafetyOptionRow(
                         icon: "bell.badge.fill",
-                        title: "Date Check-In",
-                        subtitle: "Schedule safety reminders",
-                        color: .orange
+                        title: "Session Check-In",
+                        subtitle: "Safety reminders for meetups",
+                        color: .teal
                     )
                 }
 
                 NavigationLink {
-                    SafeDateLocationsView()
+                    SafeStudyLocationsView()
                 } label: {
                     SafetyOptionRow(
                         icon: "mappin.circle.fill",
-                        title: "Safe Meeting Spots",
-                        subtitle: "Recommended public places",
+                        title: "Safe Study Locations",
+                        subtitle: "Recommended places for practice",
                         color: .green
                     )
                 }
@@ -399,7 +399,7 @@ struct SafetyCenterView: View {
                     SafetyOptionRow(
                         icon: "lightbulb.fill",
                         title: "Safety Tips",
-                        subtitle: "Best practices for online dating",
+                        subtitle: "Best practices for language exchange",
                         color: .yellow
                     )
                 }
@@ -470,7 +470,7 @@ struct SafetyTipsView: View {
                     Text("Safety Tips")
                         .font(.title.bold())
 
-                    Text("Best practices for staying safe while connecting")
+                    Text("Best practices for safe language exchange")
                         .font(.subheadline)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
