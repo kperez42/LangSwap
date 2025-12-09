@@ -556,7 +556,7 @@ enum NotificationPayload {
         let bodies = [
             "Keep the conversation going!",
             "They're probably checking their phone right now...",
-            "A quick reply keeps the spark alive",
+            "A quick reply keeps the practice going",
             "Don't leave them on read!",
             "Good things happen when you show up"
         ]

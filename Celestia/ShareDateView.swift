@@ -1,8 +1,8 @@
 //
 //  ShareDateView.swift
-//  Celestia
+//  LangSwap
 //
-//  Share date details with trusted contacts for safety
+//  Share practice session details with trusted contacts for safety
 //
 
 import SwiftUI
@@ -38,7 +38,7 @@ struct ShareDateView: View {
             .padding()
         }
         .background(Color(.systemGroupedBackground))
-        .navigationTitle("Share Your Date")
+        .navigationTitle("Share Practice Session")
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await viewModel.loadEmergencyContacts()
@@ -59,10 +59,10 @@ struct ShareDateView: View {
                 .font(.system(size: 50))
                 .foregroundColor(.blue)
 
-            Text("Stay Safe on Your Date")
+            Text("Stay Safe During Practice")
                 .font(.title2.bold())
 
-            Text("Share your date plans with trusted contacts. They'll receive your details and can check in on you.")
+            Text("Share your practice session plans with trusted contacts. They'll receive your details and can check in on you.")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .multilineTextAlignment(.center)
@@ -77,11 +77,11 @@ struct ShareDateView: View {
 
     private var dateDetailsSection: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Date Details")
+            Text("Session Details")
                 .font(.headline)
 
             VStack(spacing: 16) {
-                // Match Selection
+                // Partner Selection
                 Button {
                     showMatchPicker = true
                 } label: {
@@ -91,11 +91,11 @@ struct ShareDateView: View {
                             .foregroundColor(.teal)
 
                         VStack(alignment: .leading) {
-                            Text("Who are you meeting?")
+                            Text("Who are you practicing with?")
                                 .font(.caption)
                                 .foregroundColor(.secondary)
 
-                            Text(selectedMatch?.fullName ?? "Select match")
+                            Text(selectedMatch?.fullName ?? "Select partner")
                                 .font(.body)
                                 .foregroundColor(.primary)
                         }
@@ -130,7 +130,7 @@ struct ShareDateView: View {
                         .font(.caption)
                         .foregroundColor(.secondary)
 
-                    TextField("Restaurant name or address", text: $location)
+                    TextField("Café, library, or meeting address", text: $location)
                         .textFieldStyle(.plain)
                         .padding()
                         .background(Color.white)
@@ -187,7 +187,7 @@ struct ShareDateView: View {
                         .font(.headline)
                         .foregroundColor(.secondary)
 
-                    Text("Add trusted contacts who can check on you during your date.")
+                    Text("Add trusted contacts who can check on you during practice sessions.")
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
@@ -244,7 +244,7 @@ struct ShareDateView: View {
         } label: {
             HStack {
                 Image(systemName: "paperplane.fill")
-                Text("Share Date Details")
+                Text("Share Session Details")
             }
             .font(.headline)
             .foregroundColor(.white)
@@ -343,7 +343,7 @@ struct DateSharedConfirmationView: View {
 
                 // Message
                 VStack(spacing: 12) {
-                    Text("Date Details Shared!")
+                    Text("Session Details Shared!")
                         .font(.title.bold())
 
                     Text("Your trusted contacts have been notified and will receive updates.")

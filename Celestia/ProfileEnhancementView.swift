@@ -180,7 +180,7 @@ struct ProfileEnhancementView: View {
 
                 infoCard(
                     icon: "lightbulb.fill",
-                    text: "Sharing your background helps find compatible matches",
+                    text: "Sharing your background helps find ideal language partners",
                     color: .yellow
                 )
             }
