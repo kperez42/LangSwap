@@ -491,15 +491,15 @@ struct ProfilePromptsOnboardingView: View {
     @State private var errorMessage = ""
 
     let availablePrompts = [
-        "A perfect first date would be...",
-        "I'm looking for someone who...",
+        "My perfect practice session would be...",
+        "I'm looking for partners who...",
         "My ideal weekend looks like...",
         "Two truths and a lie...",
-        "The way to my heart is...",
+        "The best way to learn with me is...",
         "I geek out on...",
         "My most spontaneous moment...",
         "I'm convinced that...",
-        "The key to my heart is...",
+        "What motivates my language learning is...",
         "My simple pleasures are..."
     ]
 

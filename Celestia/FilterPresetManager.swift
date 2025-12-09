@@ -134,11 +134,11 @@ class FilterPresetManager: ObservableObject {
         activeThisWeek.withPhotosOnly = true
         _ = try? savePreset(name: "Active This Week", filter: activeThisWeek)
 
-        // Preset 3: Long-term Relationship
-        var longTerm = SearchFilter()
-        longTerm.relationshipGoals = [.longTerm, .marriage]
-        longTerm.verifiedOnly = true
-        _ = try? savePreset(name: "Looking for Love", filter: longTerm)
+        // Preset 3: Serious Learners
+        var seriousLearners = SearchFilter()
+        seriousLearners.relationshipGoals = [.longTerm, .marriage]
+        seriousLearners.verifiedOnly = true
+        _ = try? savePreset(name: "Serious Learners", filter: seriousLearners)
 
         Logger.shared.info("Default presets created", category: .general)
     }
