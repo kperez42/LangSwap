@@ -267,7 +267,7 @@ struct InterestsViewEnhanced: View {
         VStack(spacing: 20) {
             Image(systemName: "heart.slash")
                 .font(.system(size: 60))
-                .foregroundColor(.purple.opacity(0.5))
+                .foregroundColor(.teal.opacity(0.5))
 
             Text(interestService.receivedInterests.isEmpty ? "No Interests Yet" : "No Results")
                 .font(.title3)
@@ -320,7 +320,7 @@ struct InterestsViewEnhanced: View {
                     showMatchAnimation = false
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.purple)
+                .tint(.teal)
 
                 Button("Keep Browsing") {
                     showMatchAnimation = false
@@ -356,7 +356,7 @@ struct InterestsViewEnhanced: View {
                 } label: {
                     Text("UNDO")
                         .font(.subheadline.weight(.bold))
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
                 }
             }
             .padding()
@@ -598,12 +598,12 @@ struct InterestFilterChip: View {
             .background(
                 isSelected ?
                 LinearGradient(
-                    colors: [.purple, .pink],
+                    colors: [.teal, .blue],
                     startPoint: .leading,
                     endPoint: .trailing
                 ) :
                 LinearGradient(
-                    colors: [Color.purple.opacity(0.1), Color.purple.opacity(0.1)],
+                    colors: [Color.teal.opacity(0.1), Color.teal.opacity(0.1)],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -644,7 +644,7 @@ struct InterestCard: View {
                         },
                         placeholder: {
                             LinearGradient(
-                                colors: [Color.purple.opacity(0.6), Color.pink.opacity(0.5)],
+                                colors: [Color.teal.opacity(0.6), Color.blue.opacity(0.5)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -709,7 +709,7 @@ struct InterestCard: View {
                         if let message = interest.message {
                             Text("💬 \(message)")
                                 .font(.caption)
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                                 .lineLimit(2)
                         }
                     }
@@ -747,7 +747,7 @@ struct InterestCard: View {
             .overlay {
                 if isSelected {
                     RoundedRectangle(cornerRadius: 16)
-                        .stroke(Color.purple, lineWidth: 3)
+                        .stroke(Color.teal, lineWidth: 3)
                 }
             }
         }
