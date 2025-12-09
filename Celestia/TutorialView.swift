@@ -26,7 +26,7 @@ struct TutorialView: View {
         ZStack {
             // Background gradient
             LinearGradient(
-                colors: [Color.purple.opacity(0.1), Color.pink.opacity(0.05)],
+                colors: [Color.teal.opacity(0.1), Color.blue.opacity(0.05)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -43,7 +43,7 @@ struct TutorialView: View {
                         Text("Skip")
                             .font(.subheadline)
                             .fontWeight(.medium)
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                     }
                     .padding()
                 }
@@ -70,14 +70,14 @@ struct TutorialView: View {
                                 Text("Back")
                             }
                             .fontWeight(.semibold)
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
                             .background(Color.white)
                             .cornerRadius(16)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.purple, lineWidth: 2)
+                                    .stroke(Color.teal, lineWidth: 2)
                             )
                         }
                     }
@@ -102,13 +102,13 @@ struct TutorialView: View {
                         .padding(.vertical, 16)
                         .background(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
                         )
                         .cornerRadius(16)
-                        .shadow(color: .purple.opacity(0.3), radius: 10, y: 5)
+                        .shadow(color: .teal.opacity(0.3), radius: 10, y: 5)
                     }
                 }
                 .padding(.horizontal, 24)
@@ -229,7 +229,7 @@ struct Tutorial: Identifiable {
         title: String,
         description: String,
         icon: String,
-        accentColor: Color = .purple,
+        accentColor: Color = .teal,
         tips: [String] = [],
         animation: AnyView? = nil,
         interactiveDemo: AnyView? = nil
@@ -470,9 +470,9 @@ struct ScrollBrowseDemo: View {
                                     isLiked[index].toggle()
                                 }
                             } label: {
-                                Image(systemName: isLiked[index] ? "heart.fill" : "heart")
+                                Image(systemName: isLiked[index] ? "person.2.fill" : "person.2")
                                     .font(.title3)
-                                    .foregroundColor(isLiked[index] ? .pink : .gray)
+                                    .foregroundColor(isLiked[index] ? .teal : .gray)
                                     .scaleEffect(isLiked[index] ? 1.2 : 1.0)
                             }
                         }

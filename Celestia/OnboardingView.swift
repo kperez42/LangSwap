@@ -114,9 +114,9 @@ struct OnboardingView: View {
                 // Animated background gradient
                 LinearGradient(
                     colors: [
-                        Color.purple.opacity(0.1),
-                        Color.pink.opacity(0.05),
-                        Color.blue.opacity(0.08)
+                        Color.teal.opacity(0.1),
+                        Color.blue.opacity(0.05),
+                        Color.cyan.opacity(0.08)
                     ],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
@@ -158,7 +158,7 @@ struct OnboardingView: View {
                             dismiss()
                         } label: {
                             Image(systemName: "xmark")
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                         }
                         .accessibilityLabel("Close")
                         .accessibilityHint("Cancel onboarding and return to previous screen")
@@ -266,7 +266,7 @@ struct OnboardingView: View {
                         .fill(
                             currentStep >= step ?
                             LinearGradient(
-                                colors: [Color.purple, Color.pink],
+                                colors: [Color.teal, Color.blue],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ) :
@@ -304,7 +304,7 @@ struct OnboardingView: View {
                     .fontWeight(.bold)
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -352,14 +352,14 @@ struct OnboardingView: View {
                 // Icon
                 ZStack {
                     Circle()
-                        .fill(Color.purple.opacity(0.15))
+                        .fill(Color.teal.opacity(0.15))
                         .frame(width: 100, height: 100)
-                    
+
                     Image(systemName: "person.fill")
                         .font(.system(size: 50))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -419,7 +419,7 @@ struct OnboardingView: View {
                         .cornerRadius(12)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.purple.opacity(0.2), lineWidth: 1)
+                                .stroke(Color.teal.opacity(0.2), lineWidth: 1)
                         )
                         .accessibilityLabel("Birthday")
                         .accessibilityHint("Select your date of birth. Must be 18 or older")
@@ -448,7 +448,7 @@ struct OnboardingView: View {
                                     
                                     if gender == option {
                                         Image(systemName: "checkmark.circle.fill")
-                                            .foregroundColor(.purple)
+                                            .foregroundColor(.teal)
                                     } else {
                                         Image(systemName: "circle")
                                             .foregroundColor(.gray.opacity(0.3))
@@ -458,7 +458,7 @@ struct OnboardingView: View {
                                 .background(
                                     gender == option ?
                                     LinearGradient(
-                                        colors: [Color.purple.opacity(0.1), Color.pink.opacity(0.05)],
+                                        colors: [Color.teal.opacity(0.1), Color.blue.opacity(0.05)],
                                         startPoint: .leading,
                                         endPoint: .trailing
                                     ) :
@@ -468,7 +468,7 @@ struct OnboardingView: View {
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 12)
                                         .stroke(
-                                            gender == option ? Color.purple.opacity(0.5) : Color.gray.opacity(0.2),
+                                            gender == option ? Color.teal.opacity(0.5) : Color.gray.opacity(0.2),
                                             lineWidth: 1
                                         )
                                 )
@@ -496,14 +496,14 @@ struct OnboardingView: View {
                 // Icon
                 ZStack {
                     Circle()
-                        .fill(Color.purple.opacity(0.15))
+                        .fill(Color.teal.opacity(0.15))
                         .frame(width: 100, height: 100)
 
                     Image(systemName: "text.bubble.fill")
                         .font(.system(size: 50))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -671,14 +671,14 @@ struct OnboardingView: View {
                 // Icon
                 ZStack {
                     Circle()
-                        .fill(Color.orange.opacity(0.15))
+                        .fill(Color.teal.opacity(0.15))
                         .frame(width: 100, height: 100)
 
                     Image(systemName: "camera.fill")
                         .font(.system(size: 50))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.orange, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -724,7 +724,7 @@ struct OnboardingView: View {
                                 .trim(from: 0, to: CGFloat(photoImages.count) / 6.0)
                                 .stroke(
                                     LinearGradient(
-                                        colors: [.orange, .pink],
+                                        colors: [.teal, .blue],
                                         startPoint: .topLeading,
                                         endPoint: .bottomTrailing
                                     ),
@@ -736,7 +736,7 @@ struct OnboardingView: View {
                             Text("\(photoImages.count)")
                                 .font(.headline)
                                 .fontWeight(.bold)
-                                .foregroundColor(.orange)
+                                .foregroundColor(.teal)
                         }
 
                         VStack(alignment: .leading, spacing: 4) {
@@ -776,7 +776,7 @@ struct OnboardingView: View {
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(
                             LinearGradient(
-                                colors: [.orange.opacity(0.3), .pink.opacity(0.2)],
+                                colors: [.teal.opacity(0.3), .blue.opacity(0.2)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
@@ -881,7 +881,7 @@ struct OnboardingView: View {
                         RoundedRectangle(cornerRadius: 20)
                             .fill(
                                 LinearGradient(
-                                    colors: [Color.purple.opacity(0.1), Color.pink.opacity(0.05)],
+                                    colors: [Color.teal.opacity(0.1), Color.blue.opacity(0.05)],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
@@ -891,14 +891,14 @@ struct OnboardingView: View {
                                 VStack(spacing: 12) {
                                     ZStack {
                                         Circle()
-                                            .fill(Color.purple.opacity(0.15))
+                                            .fill(Color.teal.opacity(0.15))
                                             .frame(width: 70, height: 70)
 
                                         Image(systemName: "person.crop.circle.badge.plus")
                                             .font(.system(size: 36))
                                             .foregroundStyle(
                                                 LinearGradient(
-                                                    colors: [.purple, .pink],
+                                                    colors: [.teal, .blue],
                                                     startPoint: .topLeading,
                                                     endPoint: .bottomTrailing
                                                 )
@@ -920,7 +920,7 @@ struct OnboardingView: View {
                                 RoundedRectangle(cornerRadius: 20)
                                     .stroke(
                                         LinearGradient(
-                                            colors: [.purple.opacity(0.5), .pink.opacity(0.3)],
+                                            colors: [.teal.opacity(0.5), .blue.opacity(0.3)],
                                             startPoint: .topLeading,
                                             endPoint: .bottomTrailing
                                         ),
@@ -962,7 +962,7 @@ struct OnboardingView: View {
                                         VStack(spacing: 6) {
                                             Image(systemName: "plus")
                                                 .font(.title2)
-                                                .foregroundColor(.purple.opacity(0.4))
+                                                .foregroundColor(.teal.opacity(0.4))
 
                                             Text("Photo \(index + 1)")
                                                 .font(.caption2)
@@ -1018,13 +1018,13 @@ struct OnboardingView: View {
                     .padding(.vertical, 16)
                     .background(
                         LinearGradient(
-                            colors: photoImages.count >= 6 ? [Color.gray, Color.gray.opacity(0.8)] : [Color.orange, Color.pink],
+                            colors: photoImages.count >= 6 ? [Color.gray, Color.gray.opacity(0.8)] : [Color.teal, Color.blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
                     )
                     .cornerRadius(16)
-                    .shadow(color: photoImages.count >= 6 ? .clear : .orange.opacity(0.3), radius: 10, y: 5)
+                    .shadow(color: photoImages.count >= 6 ? .clear : .teal.opacity(0.3), radius: 10, y: 5)
                 }
                 .disabled(photoImages.count >= 6 || isUploadingPhotos)
                 .onChange(of: selectedPhotos) { _, newValue in
@@ -1041,7 +1041,7 @@ struct OnboardingView: View {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(
                                 index < photoImages.count ?
-                                LinearGradient(colors: [.orange, .pink], startPoint: .leading, endPoint: .trailing) :
+                                LinearGradient(colors: [.teal, .blue], startPoint: .leading, endPoint: .trailing) :
                                 LinearGradient(colors: [Color.gray.opacity(0.3)], startPoint: .leading, endPoint: .trailing)
                             )
                             .frame(width: index < photoImages.count ? 24 : 16, height: 6)
@@ -1052,11 +1052,11 @@ struct OnboardingView: View {
 
                 // Motivation card
                 HStack(spacing: 12) {
-                    Image(systemName: "heart.circle.fill")
+                    Image(systemName: "globe.americas.fill")
                         .font(.title2)
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.pink, .red],
+                                colors: [.teal, .blue],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -1066,7 +1066,7 @@ struct OnboardingView: View {
                         Text("First impressions matter")
                             .font(.subheadline)
                             .fontWeight(.semibold)
-                        Text("Profiles with 3+ photos get 5x more likes")
+                        Text("Profiles with 3+ photos get 5x more connections")
                             .font(.caption)
                             .foregroundColor(.secondary)
                     }
@@ -1076,10 +1076,10 @@ struct OnboardingView: View {
                 .padding(14)
                 .background(
                     RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.pink.opacity(0.08))
+                        .fill(Color.teal.opacity(0.08))
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.pink.opacity(0.2), lineWidth: 1)
+                                .stroke(Color.teal.opacity(0.2), lineWidth: 1)
                         )
                 )
             }
@@ -1120,20 +1120,20 @@ struct OnboardingView: View {
                 // Icon
                 ZStack {
                     Circle()
-                        .fill(Color.purple.opacity(0.15))
+                        .fill(Color.teal.opacity(0.15))
                         .frame(width: 100, height: 100)
-                    
-                    Image(systemName: "heart.fill")
+
+                    Image(systemName: "globe")
                         .font(.system(size: 50))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
                         )
                 }
-                
+
                 VStack(spacing: 8) {
                     Text("Practice Preferences")
                         .font(.title)
@@ -1165,7 +1165,7 @@ struct OnboardingView: View {
                                 
                                 if lookingFor == option {
                                     Image(systemName: "checkmark.circle.fill")
-                                        .foregroundColor(.purple)
+                                        .foregroundColor(.teal)
                                 } else {
                                     Image(systemName: "circle")
                                         .foregroundColor(.gray.opacity(0.3))
@@ -1175,7 +1175,7 @@ struct OnboardingView: View {
                             .background(
                                 lookingFor == option ?
                                 LinearGradient(
-                                    colors: [Color.purple.opacity(0.1), Color.pink.opacity(0.05)],
+                                    colors: [Color.teal.opacity(0.1), Color.blue.opacity(0.05)],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 ) :
@@ -1185,7 +1185,7 @@ struct OnboardingView: View {
                             .overlay(
                                 RoundedRectangle(cornerRadius: 12)
                                     .stroke(
-                                        lookingFor == option ? Color.purple.opacity(0.5) : Color.gray.opacity(0.2),
+                                        lookingFor == option ? Color.teal.opacity(0.5) : Color.gray.opacity(0.2),
                                         lineWidth: 1
                                     )
                             )
@@ -1207,20 +1207,20 @@ struct OnboardingView: View {
                 // Icon
                 ZStack {
                     Circle()
-                        .fill(Color.purple.opacity(0.15))
+                        .fill(Color.teal.opacity(0.15))
                         .frame(width: 100, height: 100)
-                    
+
                     Image(systemName: "star.fill")
                         .font(.system(size: 50))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
                         )
                 }
-                
+
                 VStack(spacing: 8) {
                     Text("Almost Done!")
                         .font(.title)
@@ -1252,17 +1252,17 @@ struct OnboardingView: View {
                                 Text(interest)
                                     .font(.subheadline)
                                     .fontWeight(.medium)
-                                    .foregroundColor(selectedInterests.contains(interest) ? .white : .purple)
+                                    .foregroundColor(selectedInterests.contains(interest) ? .white : .teal)
                                     .padding(.horizontal, 14)
                                     .padding(.vertical, 8)
                                     .background(
                                         selectedInterests.contains(interest) ?
                                         LinearGradient(
-                                            colors: [Color.purple, Color.pink],
+                                            colors: [Color.teal, Color.blue],
                                             startPoint: .leading,
                                             endPoint: .trailing
                                         ) :
-                                        LinearGradient(colors: [Color.purple.opacity(0.1)], startPoint: .leading, endPoint: .trailing)
+                                        LinearGradient(colors: [Color.teal.opacity(0.1)], startPoint: .leading, endPoint: .trailing)
                                     )
                                     .cornerRadius(20)
                             }
@@ -1521,7 +1521,7 @@ struct OnboardingView: View {
                         .cornerRadius(12)
                         .overlay(
                             RoundedRectangle(cornerRadius: 12)
-                                .stroke(Color.purple.opacity(0.2), lineWidth: 1)
+                                .stroke(Color.teal.opacity(0.2), lineWidth: 1)
                         )
                     }
 
@@ -1896,14 +1896,14 @@ struct OnboardingView: View {
                         Text("Back")
                             .fontWeight(.semibold)
                     }
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
                     .background(Color.white)
                     .cornerRadius(16)
                     .overlay(
                         RoundedRectangle(cornerRadius: 16)
-                            .stroke(Color.purple, lineWidth: 2)
+                            .stroke(Color.teal, lineWidth: 2)
                     )
                 }
                 .accessibilityLabel("Back")
@@ -1942,14 +1942,14 @@ struct OnboardingView: View {
                 .background(
                     canProceed ?
                     LinearGradient(
-                        colors: [Color.purple, Color.pink],
+                        colors: [Color.teal, Color.blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     ) :
                     LinearGradient(colors: [Color.gray.opacity(0.5)], startPoint: .leading, endPoint: .trailing)
                 )
                 .cornerRadius(16)
-                .shadow(color: canProceed ? .purple.opacity(0.3) : .clear, radius: 10, y: 5)
+                .shadow(color: canProceed ? .teal.opacity(0.3) : .clear, radius: 10, y: 5)
             }
             .disabled(!canProceed || isLoading)
             .accessibilityLabel(currentStep < totalSteps - 1 ? "Continue" : "Complete onboarding")
@@ -2273,7 +2273,7 @@ struct CompletionCelebrationView: View {
                     Circle()
                         .fill(
                             LinearGradient(
-                                colors: [.purple.opacity(0.2), .pink.opacity(0.1)],
+                                colors: [.teal.opacity(0.2), .blue.opacity(0.1)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -2308,7 +2308,7 @@ struct CompletionCelebrationView: View {
                                 .trim(from: 0, to: CGFloat(profileScore) / 100)
                                 .stroke(
                                     LinearGradient(
-                                        colors: [.purple, .pink],
+                                        colors: [.teal, .blue],
                                         startPoint: .leading,
                                         endPoint: .trailing
                                     ),
@@ -2375,7 +2375,7 @@ struct CompletionCelebrationView: View {
                         .padding()
                         .background(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
