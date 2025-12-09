@@ -120,7 +120,7 @@ struct SettingsView: View {
                     } label: {
                         HStack {
                             Image(systemName: "gift.fill")
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                             VStack(alignment: .leading, spacing: 2) {
                                 Text("Invite Friends")
                                     .foregroundColor(.primary)
@@ -136,7 +136,7 @@ struct SettingsView: View {
                                     .foregroundColor(.white)
                                     .padding(.horizontal, 8)
                                     .padding(.vertical, 4)
-                                    .background(Color.purple)
+                                    .background(Color.teal)
                                     .cornerRadius(10)
                             }
                             Image(systemName: "chevron.right")
@@ -260,7 +260,7 @@ struct SettingsView: View {
                     } label: {
                         HStack {
                             Image(systemName: "doc.text")
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                             Text("Terms of Service")
                                 .foregroundColor(.primary)
                             Spacer()

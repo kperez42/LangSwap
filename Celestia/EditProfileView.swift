@@ -719,7 +719,7 @@ struct EditProfileView: View {
 
     private var practiceMethodsSection: some View {
         VStack(spacing: 16) {
-            SectionHeader(icon: "bubble.left.and.bubble.right.fill", title: "Practice Methods", color: .purple)
+            SectionHeader(icon: "bubble.left.and.bubble.right.fill", title: "Practice Methods", color: .teal)
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("How do you prefer to practice?")
@@ -789,7 +789,7 @@ struct EditProfileView: View {
 
     private var conversationTopicsSection: some View {
         VStack(spacing: 16) {
-            SectionHeader(icon: "text.bubble.fill", title: "Conversation Topics", color: .pink)
+            SectionHeader(icon: "text.bubble.fill", title: "Conversation Topics", color: .blue)
 
             VStack(alignment: .leading, spacing: 8) {
                 Text("What do you like to talk about?")
