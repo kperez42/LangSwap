@@ -1119,12 +1119,12 @@ struct FeedDiscoverView: View {
                         user2Id: userId
                     )
                 } else {
-                    // Show toast for regular like (no match)
+                    // Show toast for connection request (no mutual yet)
                     await MainActor.run {
                         let truncatedName = user.fullName.count > 20 ? String(user.fullName.prefix(20)) + "..." : user.fullName
                         showToast(
-                            message: "You like \(truncatedName)!",
-                            icon: "heart.fill",
+                            message: "Connection sent to \(truncatedName)!",
+                            icon: "person.badge.plus.fill",
                             color: .blue
                         )
                     }

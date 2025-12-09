@@ -31,7 +31,7 @@ struct LikeActivityViewModelTests {
         let activity = LikeActivity(
             id: "activity1",
             userId: "user123",
-            type: .received(isSuperLike: false),
+            type: .received(isSuperConnect: false),
             timestamp: Date()
         )
 
@@ -44,12 +44,12 @@ struct LikeActivityViewModelTests {
         let activity = LikeActivity(
             id: "activity1",
             userId: "user123",
-            type: .received(isSuperLike: true),
+            type: .received(isSuperConnect: true),
             timestamp: Date()
         )
 
-        if case .received(let isSuperLike) = activity.type {
-            #expect(isSuperLike == true)
+        if case .received(let isSuperConnect) = activity.type {
+            #expect(isSuperConnect == true)
         } else {
             Issue.record("Expected received type")
         }
@@ -60,12 +60,12 @@ struct LikeActivityViewModelTests {
         let activity = LikeActivity(
             id: "activity1",
             userId: "user123",
-            type: .received(isSuperLike: false),
+            type: .received(isSuperConnect: false),
             timestamp: Date()
         )
 
-        if case .received(let isSuperLike) = activity.type {
-            #expect(isSuperLike == false)
+        if case .received(let isSuperConnect) = activity.type {
+            #expect(isSuperConnect == false)
         } else {
             Issue.record("Expected received type")
         }
@@ -76,12 +76,12 @@ struct LikeActivityViewModelTests {
         let activity = LikeActivity(
             id: "activity1",
             userId: "user123",
-            type: .sent(isSuperLike: true),
+            type: .sent(isSuperConnect: true),
             timestamp: Date()
         )
 
-        if case .sent(let isSuperLike) = activity.type {
-            #expect(isSuperLike == true)
+        if case .sent(let isSuperConnect) = activity.type {
+            #expect(isSuperConnect == true)
         } else {
             Issue.record("Expected sent type")
         }
@@ -92,12 +92,12 @@ struct LikeActivityViewModelTests {
         let activity = LikeActivity(
             id: "activity1",
             userId: "user123",
-            type: .sent(isSuperLike: false),
+            type: .sent(isSuperConnect: false),
             timestamp: Date()
         )
 
-        if case .sent(let isSuperLike) = activity.type {
-            #expect(isSuperLike == false)
+        if case .sent(let isSuperConnect) = activity.type {
+            #expect(isSuperConnect == false)
         } else {
             Issue.record("Expected sent type")
         }
@@ -139,20 +139,20 @@ struct LikeActivityViewModelTests {
 
     @Test("Activity type icons are correct")
     func testActivityTypeIcons() async throws {
-        #expect(LikeActivity.ActivityType.received(isSuperLike: false).icon == "heart.fill")
-        #expect(LikeActivity.ActivityType.sent(isSuperLike: false).icon == "paperplane.fill")
-        #expect(LikeActivity.ActivityType.mutual.icon == "heart.circle.fill")
+        #expect(LikeActivity.ActivityType.received(isSuperConnect: false).icon == "person.badge.plus")
+        #expect(LikeActivity.ActivityType.sent(isSuperConnect: false).icon == "paperplane.fill")
+        #expect(LikeActivity.ActivityType.mutual.icon == "person.2.circle.fill")
         #expect(LikeActivity.ActivityType.matched.icon == "sparkles")
     }
 
     @Test("Activity type descriptions are correct")
     func testActivityTypeDescriptions() async throws {
-        #expect(LikeActivity.ActivityType.received(isSuperLike: false).description == "Liked you")
-        #expect(LikeActivity.ActivityType.received(isSuperLike: true).description == "Super liked you")
-        #expect(LikeActivity.ActivityType.sent(isSuperLike: false).description == "You liked")
-        #expect(LikeActivity.ActivityType.sent(isSuperLike: true).description == "You super liked")
-        #expect(LikeActivity.ActivityType.mutual.description == "Mutual like!")
-        #expect(LikeActivity.ActivityType.matched.description == "It's a match!")
+        #expect(LikeActivity.ActivityType.received(isSuperConnect: false).description == "Wants to practice with you")
+        #expect(LikeActivity.ActivityType.received(isSuperConnect: true).description == "Super connected with you")
+        #expect(LikeActivity.ActivityType.sent(isSuperConnect: false).description == "You sent a connection")
+        #expect(LikeActivity.ActivityType.sent(isSuperConnect: true).description == "You super connected")
+        #expect(LikeActivity.ActivityType.mutual.description == "Mutual connection!")
+        #expect(LikeActivity.ActivityType.matched.description == "Language partner found!")
     }
 
     // MARK: - Loading State Tests
@@ -177,8 +177,8 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         let activities = [
-            LikeActivity(id: "1", userId: "user1", type: .received(isSuperLike: false), timestamp: Date()),
-            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperLike: false), timestamp: Date())
+            LikeActivity(id: "1", userId: "user1", type: .received(isSuperConnect: false), timestamp: Date()),
+            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperConnect: false), timestamp: Date())
         ]
 
         viewModel.todayActivity = activities
@@ -191,8 +191,8 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         let activities = [
-            LikeActivity(id: "1", userId: "user1", type: .received(isSuperLike: false), timestamp: Date.daysAgo(3)),
-            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperLike: false), timestamp: Date.daysAgo(5))
+            LikeActivity(id: "1", userId: "user1", type: .received(isSuperConnect: false), timestamp: Date.daysAgo(3)),
+            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperConnect: false), timestamp: Date.daysAgo(5))
         ]
 
         viewModel.weekActivity = activities
@@ -205,8 +205,8 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         let activities = [
-            LikeActivity(id: "1", userId: "user1", type: .received(isSuperLike: false), timestamp: Date.daysAgo(10)),
-            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperLike: false), timestamp: Date.daysAgo(15))
+            LikeActivity(id: "1", userId: "user1", type: .received(isSuperConnect: false), timestamp: Date.daysAgo(10)),
+            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperConnect: false), timestamp: Date.daysAgo(15))
         ]
 
         viewModel.olderActivity = activities
@@ -219,11 +219,11 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         viewModel.todayActivity = [
-            LikeActivity(id: "1", userId: "user1", type: .received(isSuperLike: false), timestamp: Date())
+            LikeActivity(id: "1", userId: "user1", type: .received(isSuperConnect: false), timestamp: Date())
         ]
 
         viewModel.weekActivity = [
-            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperLike: false), timestamp: Date.daysAgo(3))
+            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperConnect: false), timestamp: Date.daysAgo(3))
         ]
 
         viewModel.olderActivity = [
@@ -242,8 +242,8 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         let activities = [
-            LikeActivity(id: "1", userId: "user1", type: .received(isSuperLike: false), timestamp: Date.hoursAgo(1)),
-            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperLike: false), timestamp: Date.hoursAgo(2)),
+            LikeActivity(id: "1", userId: "user1", type: .received(isSuperConnect: false), timestamp: Date.hoursAgo(1)),
+            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperConnect: false), timestamp: Date.hoursAgo(2)),
             LikeActivity(id: "3", userId: "user3", type: .matched, timestamp: Date.hoursAgo(3))
         ]
 
@@ -263,7 +263,7 @@ struct LikeActivityViewModelTests {
             LikeActivity(
                 id: "activity_\(index)",
                 userId: "user_\(index)",
-                type: index % 2 == 0 ? .received(isSuperLike: false) : .sent(isSuperLike: false),
+                type: index % 2 == 0 ? .received(isSuperConnect: false) : .sent(isSuperConnect: false),
                 timestamp: Date.minutesAgo(index * 10)
             )
         }
@@ -281,7 +281,7 @@ struct LikeActivityViewModelTests {
             LikeActivity(
                 id: "activity_\(index)",
                 userId: "user_\(index)",
-                type: .received(isSuperLike: false),
+                type: .received(isSuperConnect: false),
                 timestamp: Date.daysAgo(index % 7 + 1)
             )
         }
@@ -298,8 +298,8 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         let activities = [
-            LikeActivity(id: "1", userId: "user1", type: .received(isSuperLike: false), timestamp: Date()),
-            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperLike: true), timestamp: Date()),
+            LikeActivity(id: "1", userId: "user1", type: .received(isSuperConnect: false), timestamp: Date()),
+            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperConnect: true), timestamp: Date()),
             LikeActivity(id: "3", userId: "user3", type: .mutual, timestamp: Date()),
             LikeActivity(id: "4", userId: "user4", type: .matched, timestamp: Date())
         ]
@@ -317,7 +317,7 @@ struct LikeActivityViewModelTests {
             LikeActivity(
                 id: "activity_\(index)",
                 userId: "user_\(index)",
-                type: .received(isSuperLike: index % 3 == 0),
+                type: .received(isSuperConnect: index % 3 == 0),
                 timestamp: Date.minutesAgo(index * 5)
             )
         }
@@ -343,7 +343,7 @@ struct LikeActivityViewModelTests {
             LikeActivity(
                 id: "activity_\(index)",
                 userId: "user_\(index)",
-                type: .sent(isSuperLike: index % 2 == 0),
+                type: .sent(isSuperConnect: index % 2 == 0),
                 timestamp: Date.minutesAgo(index * 5)
             )
         }
@@ -396,7 +396,7 @@ struct LikeActivityViewModelTests {
 
         // Populate
         viewModel.todayActivity = [
-            LikeActivity(id: "1", userId: "user1", type: .received(isSuperLike: false), timestamp: Date())
+            LikeActivity(id: "1", userId: "user1", type: .received(isSuperConnect: false), timestamp: Date())
         ]
 
         #expect(!viewModel.todayActivity.isEmpty)
@@ -414,8 +414,8 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         let activities = [
-            LikeActivity(id: "1", userId: "user1", type: .received(isSuperLike: false), timestamp: Date.hoursAgo(1)),
-            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperLike: false), timestamp: Date.hoursAgo(5)),
+            LikeActivity(id: "1", userId: "user1", type: .received(isSuperConnect: false), timestamp: Date.hoursAgo(1)),
+            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperConnect: false), timestamp: Date.hoursAgo(5)),
             LikeActivity(id: "3", userId: "user3", type: .matched, timestamp: Date.hoursAgo(10))
         ]
 
@@ -429,8 +429,8 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         let activities = [
-            LikeActivity(id: "1", userId: "user1", type: .received(isSuperLike: false), timestamp: Date.daysAgo(1)),
-            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperLike: false), timestamp: Date.daysAgo(2))
+            LikeActivity(id: "1", userId: "user1", type: .received(isSuperConnect: false), timestamp: Date.daysAgo(1)),
+            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperConnect: false), timestamp: Date.daysAgo(2))
         ]
 
         viewModel.weekActivity = activities
@@ -443,8 +443,8 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         let activities = [
-            LikeActivity(id: "1", userId: "user1", type: .received(isSuperLike: false), timestamp: Date.daysAgo(6)),
-            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperLike: false), timestamp: Date.daysAgo(7))
+            LikeActivity(id: "1", userId: "user1", type: .received(isSuperConnect: false), timestamp: Date.daysAgo(6)),
+            LikeActivity(id: "2", userId: "user2", type: .sent(isSuperConnect: false), timestamp: Date.daysAgo(7))
         ]
 
         viewModel.weekActivity = activities
@@ -459,8 +459,8 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         let activities = [
-            LikeActivity(id: "1", userId: "user_alpha", type: .received(isSuperLike: false), timestamp: Date()),
-            LikeActivity(id: "2", userId: "user_beta", type: .sent(isSuperLike: false), timestamp: Date()),
+            LikeActivity(id: "1", userId: "user_alpha", type: .received(isSuperConnect: false), timestamp: Date()),
+            LikeActivity(id: "2", userId: "user_beta", type: .sent(isSuperConnect: false), timestamp: Date()),
             LikeActivity(id: "3", userId: "user_gamma", type: .matched, timestamp: Date())
         ]
 
@@ -476,8 +476,8 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         let activities = [
-            LikeActivity(id: "1", userId: "user123", type: .received(isSuperLike: false), timestamp: Date()),
-            LikeActivity(id: "2", userId: "user123", type: .sent(isSuperLike: true), timestamp: Date()),
+            LikeActivity(id: "1", userId: "user123", type: .received(isSuperConnect: false), timestamp: Date()),
+            LikeActivity(id: "2", userId: "user123", type: .sent(isSuperConnect: true), timestamp: Date()),
             LikeActivity(id: "3", userId: "user123", type: .matched, timestamp: Date())
         ]
 
@@ -494,8 +494,8 @@ struct LikeActivityViewModelTests {
         let viewModel = LikeActivityViewModel()
 
         let activities = [
-            LikeActivity(id: "activity_1", userId: "user1", type: .received(isSuperLike: false), timestamp: Date()),
-            LikeActivity(id: "activity_2", userId: "user2", type: .sent(isSuperLike: false), timestamp: Date()),
+            LikeActivity(id: "activity_1", userId: "user1", type: .received(isSuperConnect: false), timestamp: Date()),
+            LikeActivity(id: "activity_2", userId: "user2", type: .sent(isSuperConnect: false), timestamp: Date()),
             LikeActivity(id: "activity_3", userId: "user3", type: .matched, timestamp: Date())
         ]
 
