@@ -97,7 +97,7 @@ struct ProfileInsightsView: View {
                     .trim(from: 0, to: CGFloat(insights.profileScore) / 100)
                     .stroke(
                         LinearGradient(
-                            colors: [.purple, .pink, .orange],
+                            colors: [.teal, .blue, .cyan],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         ),
@@ -111,7 +111,7 @@ struct ProfileInsightsView: View {
                         .font(.system(size: 56, weight: .bold))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -182,7 +182,7 @@ struct ProfileInsightsView: View {
                             .fill(
                                 selectedTab == index ?
                                 LinearGradient(
-                                    colors: [.purple, .pink],
+                                    colors: [.teal, .blue],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 ) :
@@ -268,7 +268,7 @@ struct ProfileInsightsView: View {
                     title: "Shutterbug",
                     subtitle: "6 photos",
                     isUnlocked: (authService.currentUser?.photos.count ?? 0) >= 6,
-                    color: .purple
+                    color: .teal
                 )
 
                 achievementBadge(
@@ -353,7 +353,7 @@ struct ProfileInsightsView: View {
                     .font(.title3)
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -374,14 +374,14 @@ struct ProfileInsightsView: View {
                             .font(.system(size: 36, weight: .bold))
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.purple, .pink],
+                                    colors: [.teal, .blue],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
                             )
                         Text("%")
                             .font(.headline)
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                     }
 
                     Text("of profiles")
@@ -528,7 +528,7 @@ struct ProfileInsightsView: View {
                     .font(.title3)
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -576,7 +576,7 @@ struct ProfileInsightsView: View {
                         Rectangle()
                             .fill(
                                 LinearGradient(
-                                    colors: [.pink, .purple],
+                                    colors: [.teal, .blue],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
@@ -775,14 +775,14 @@ struct ProfileInsightsView: View {
                         .scaledToFill()
                 },
                 placeholder: {
-                    Color.purple.opacity(0.3)
+                    Color.teal.opacity(0.3)
                 }
             )
             .frame(width: 60, height: 60)
             .clipShape(Circle())
             .overlay(
                 Circle()
-                    .stroke(Color.purple.opacity(0.3), lineWidth: 2)
+                    .stroke(Color.teal.opacity(0.3), lineWidth: 2)
             )
 
             VStack(alignment: .leading, spacing: 6) {
@@ -841,7 +841,7 @@ struct ProfileInsightsView: View {
                 .font(.system(size: 64))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.purple, .pink],
+                        colors: [.teal, .blue],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
@@ -983,7 +983,7 @@ struct ProfileInsightsView: View {
                 HStack(spacing: 8) {
                     Image(systemName: categoryIcon(suggestion.category))
                         .font(.subheadline)
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
 
                     Text(suggestion.title)
                         .font(.headline)

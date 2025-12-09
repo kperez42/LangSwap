@@ -161,7 +161,7 @@ struct ReferralDashboardView: View {
                     .font(.system(size: 40))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -195,7 +195,7 @@ struct ReferralDashboardView: View {
                         .font(.system(size: 22, weight: .bold, design: .rounded))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
@@ -228,7 +228,7 @@ struct ReferralDashboardView: View {
                     .foregroundColor(referralCode.isEmpty ? .gray : .purple)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
-                    .background(referralCode.isEmpty ? Color.gray.opacity(0.1) : Color.purple.opacity(0.1))
+                    .background(referralCode.isEmpty ? Color.gray.opacity(0.1) : Color.teal.opacity(0.1))
                     .cornerRadius(12)
                 }
                 .buttonStyle(.springy)
@@ -259,7 +259,7 @@ struct ReferralDashboardView: View {
                     .padding(.vertical, 14)
                     .background(
                         LinearGradient(
-                            colors: referralCode.isEmpty ? [.gray, .gray] : [.purple, .pink],
+                            colors: referralCode.isEmpty ? [.gray, .gray] : [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -303,7 +303,7 @@ struct ReferralDashboardView: View {
                                 .background(
                                     Circle()
                                         .fill(LinearGradient(
-                                            colors: [.purple, .pink],
+                                            colors: [.teal, .blue],
                                             startPoint: .topLeading,
                                             endPoint: .bottomTrailing
                                         ))
@@ -317,7 +317,7 @@ struct ReferralDashboardView: View {
                 VStack(spacing: 8) {
                     HStack {
                         Image(systemName: next.icon)
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
 
                         Text(next.name)
                             .font(.subheadline)
@@ -339,7 +339,7 @@ struct ReferralDashboardView: View {
                             RoundedRectangle(cornerRadius: 6)
                                 .fill(
                                     LinearGradient(
-                                        colors: [.purple, .pink],
+                                        colors: [.teal, .blue],
                                         startPoint: .leading,
                                         endPoint: .trailing
                                     )
@@ -410,7 +410,7 @@ struct ReferralDashboardView: View {
                 number: "\(referralStats?.totalReferrals ?? 0)",
                 label: "Referrals",
                 icon: "person.3.fill",
-                color: .purple
+                color: .teal
             )
 
             statCard(
@@ -479,7 +479,7 @@ struct ReferralDashboardView: View {
                     .background(
                         selectedTab == 0 ?
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         ) :
@@ -503,7 +503,7 @@ struct ReferralDashboardView: View {
                     .background(
                         selectedTab == 1 ?
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         ) :
@@ -537,7 +537,7 @@ struct ReferralDashboardView: View {
         VStack(spacing: 20) {
             ZStack {
                 Circle()
-                    .fill(Color.purple.opacity(0.1))
+                    .fill(Color.teal.opacity(0.1))
                     .frame(width: 100, height: 100)
                     .blur(radius: 20)
 
@@ -545,7 +545,7 @@ struct ReferralDashboardView: View {
                     .font(.system(size: 60))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -589,7 +589,7 @@ struct ReferralDashboardView: View {
                 .padding(.vertical, 12)
                 .background(
                     LinearGradient(
-                        colors: referralCode.isEmpty ? [.gray, .gray] : [.purple, .pink],
+                        colors: referralCode.isEmpty ? [.gray, .gray] : [.teal, .blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
@@ -623,7 +623,7 @@ struct ReferralDashboardView: View {
                         default:
                             Image(systemName: "person.fill")
                                 .font(.title3)
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                         }
                     }
                     .frame(width: 50, height: 50)
@@ -661,7 +661,7 @@ struct ReferralDashboardView: View {
                     if isNew {
                         Image(systemName: "sparkles")
                             .font(.caption)
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                     }
                 }
 
@@ -693,7 +693,7 @@ struct ReferralDashboardView: View {
         .padding(16)
         .background(
             LinearGradient(
-                colors: isNew ? [Color.purple.opacity(0.05), Color.pink.opacity(0.05)] : [Color.white, Color.white],
+                colors: isNew ? [Color.teal.opacity(0.05), Color.blue.opacity(0.05)] : [Color.white, Color.white],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -809,7 +809,7 @@ struct ReferralDashboardView: View {
         case 1: return .yellow
         case 2: return .gray
         case 3: return .orange
-        default: return .purple
+        default: return .teal
         }
     }
 
@@ -853,7 +853,7 @@ struct ReferralDashboardView: View {
                 Circle()
                     .fill(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
