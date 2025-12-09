@@ -644,7 +644,7 @@ struct LikesView: View {
                 HStack(spacing: 8) {
                     Image(systemName: "plus.circle.fill")
                         .foregroundColor(.teal)
-                    Text("And \(viewModel.usersWhoLikedMe.count - 4) more people liked you!")
+                    Text("And \(viewModel.usersWhoLikedMe.count - 4) more want to practice with you!")
                         .font(.subheadline)
                         .fontWeight(.medium)
                         .foregroundColor(.secondary)
@@ -681,7 +681,7 @@ struct LikesView: View {
             }
 
             VStack(spacing: 8) {
-                Text("\(viewModel.usersWhoLikedMe.count) people liked you!")
+                Text("\(viewModel.usersWhoLikedMe.count) people want to practice with you!")
                     .font(.title2)
                     .fontWeight(.bold)
 
@@ -733,8 +733,8 @@ struct LikesView: View {
                 .foregroundColor(.primary)
 
             VStack(spacing: 12) {
-                premiumFeatureRow(icon: "eye.fill", title: "See Who Likes You", description: "Match instantly with people interested in you", color: .teal)
-                premiumFeatureRow(icon: "infinity", title: "Unlimited Likes", description: "No daily limits, like as many as you want", color: .blue)
+                premiumFeatureRow(icon: "eye.fill", title: "See Who Wants to Practice", description: "Connect instantly with interested partners", color: .teal)
+                premiumFeatureRow(icon: "infinity", title: "Unlimited Connections", description: "No daily limits, connect as much as you want", color: .blue)
                 premiumFeatureRow(icon: "bolt.fill", title: "Profile Boost", description: "Get 10x more views with monthly boosts", color: .orange)
             }
         }
