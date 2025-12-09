@@ -650,7 +650,7 @@ struct CachedAsyncImage<Content: View, Placeholder: View>: View {
                             Text("Retry")
                         }
                         .font(.caption)
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -887,7 +887,7 @@ struct CachedProfileImage: View {
                         } label: {
                             Text("Retry")
                                 .font(.caption)
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                         }
                     }
                 }
@@ -896,7 +896,7 @@ struct CachedProfileImage: View {
                 Circle()
                     .fill(
                         LinearGradient(
-                            colors: [Color.purple.opacity(0.3), Color.pink.opacity(0.2)],
+                            colors: [Color.teal.opacity(0.3), Color.blue.opacity(0.2)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -1133,7 +1133,7 @@ struct CachedCardImage: View {
                             .padding(.vertical, 8)
                             .background(
                                 LinearGradient(
-                                    colors: [.purple, .pink],
+                                    colors: [.teal, .blue],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
@@ -1144,7 +1144,7 @@ struct CachedCardImage: View {
                     .frame(width: displayWidth, height: displayHeight)
                     .background(
                         LinearGradient(
-                            colors: [Color.purple.opacity(0.1), Color.pink.opacity(0.05)],
+                            colors: [Color.teal.opacity(0.1), Color.blue.opacity(0.05)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -1154,7 +1154,7 @@ struct CachedCardImage: View {
                 if image == nil && loadError == nil {
                     // Static placeholder - no loading animation for cleaner look
                     LinearGradient(
-                        colors: [Color.purple.opacity(0.2), Color.pink.opacity(0.1)],
+                        colors: [Color.teal.opacity(0.2), Color.blue.opacity(0.1)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
@@ -1341,7 +1341,7 @@ struct HighQualityCardImage: View {
                         } label: {
                             Text("Tap to retry")
                                 .font(.caption)
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                         }
                     }
                 } else {
@@ -1349,9 +1349,9 @@ struct HighQualityCardImage: View {
                     ZStack {
                         LinearGradient(
                             colors: [
-                                Color.purple.opacity(0.15),
-                                Color.pink.opacity(0.1),
-                                Color.purple.opacity(0.08)
+                                Color.teal.opacity(0.15),
+                                Color.blue.opacity(0.1),
+                                Color.teal.opacity(0.08)
                             ],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing

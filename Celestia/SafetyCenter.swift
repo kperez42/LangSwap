@@ -101,7 +101,7 @@ struct SafetySectionHeader: View {
         HStack(spacing: 8) {
             Image(systemName: icon)
                 .font(.title3)
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
 
             Text(title)
                 .font(.title3.bold())

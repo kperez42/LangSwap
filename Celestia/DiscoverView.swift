@@ -1,7 +1,8 @@
 //
 //  DiscoverView.swift
-//  Celestia
+//  LangSwap
 //
+//  Find language exchange partners
 //  ACCESSIBILITY: Full VoiceOver support, Dynamic Type, Reduce Motion, and WCAG 2.1 AA compliant
 //
 
@@ -25,7 +26,7 @@ struct DiscoverView: View {
             ZStack {
                 // Background
                 LinearGradient(
-                    colors: [Color.purple.opacity(0.1), Color.pink.opacity(0.05)],
+                    colors: [Color.teal.opacity(0.1), Color.blue.opacity(0.05)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -70,7 +71,7 @@ struct DiscoverView: View {
             .accessibilityIdentifier(AccessibilityIdentifier.discoverView)
             .task {
                 await viewModel.loadUsers()
-                VoiceOverAnnouncement.screenChanged(to: "Discover view. \(viewModel.users.count) potential matches available.")
+                VoiceOverAnnouncement.screenChanged(to: "Find Partners view. \(viewModel.users.count) language exchange partners available.")
             }
             .refreshable {
                 HapticManager.shared.impact(.light)
@@ -147,14 +148,14 @@ struct DiscoverView: View {
     private var headerView: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("Discover")
+                Text("Find Partners")
                     .font(.system(size: 36, weight: .bold))
                     .dynamicTypeSize(min: .large, max: .accessibility2)
                     .accessibilityAddTraits(.isHeader)
 
                 if !viewModel.users.isEmpty {
                     HStack(spacing: 4) {
-                        Text("\(viewModel.remainingCount) people")
+                        Text("\(viewModel.remainingCount) language learners")
                             .font(.subheadline)
                             .foregroundColor(.secondary)
                             .dynamicTypeSize(min: .xSmall, max: .accessibility1)
@@ -162,7 +163,7 @@ struct DiscoverView: View {
                         if viewModel.hasActiveFilters {
                             Image(systemName: "line.3.horizontal.decrease.circle.fill")
                                 .font(.caption)
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                         }
                     }
                 }
@@ -178,12 +179,12 @@ struct DiscoverView: View {
             } label: {
                 Image(systemName: "shuffle")
                     .font(.title3)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .frame(width: 44, height: 44)
             }
             .accessibilityElement(
                 label: "Shuffle users",
-                hint: "Randomly reorder the list of potential matches",
+                hint: "Randomly reorder the list of language partners",
                 traits: .isButton,
                 identifier: AccessibilityIdentifier.shuffleButton
             )
@@ -197,7 +198,7 @@ struct DiscoverView: View {
                 ZStack(alignment: .topTrailing) {
                     Image(systemName: viewModel.hasActiveFilters ? "line.3.horizontal.decrease.circle.fill" : "line.3.horizontal.decrease.circle")
                         .font(.title2)
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
 
                     if viewModel.hasActiveFilters {
                         Circle()
@@ -211,7 +212,7 @@ struct DiscoverView: View {
             }
             .accessibilityElement(
                 label: viewModel.hasActiveFilters ? "Filters active" : "Filters",
-                hint: "Show discovery filters to refine your matches",
+                hint: "Show discovery filters to refine language partner search",
                 traits: .isButton,
                 identifier: AccessibilityIdentifier.filterButton,
                 value: viewModel.hasActiveFilters ? "Active" : "Inactive"
@@ -268,7 +269,7 @@ struct DiscoverView: View {
                     )
                     .disabled(viewModel.isProcessingAction)
 
-                    // Super Like button
+                    // Super Connect button
                     SwipeActionButton(
                         icon: "star.fill",
                         iconSize: .title2,
@@ -280,20 +281,20 @@ struct DiscoverView: View {
                     ) {
                         Task {
                             await viewModel.handleSuperLike()
-                            VoiceOverAnnouncement.announce("Super like sent!")
+                            VoiceOverAnnouncement.announce("Super connect sent!")
                         }
                     }
                     .accessibilityElement(
-                        label: "Super Like",
-                        hint: "Send a super like to stand out and increase your chances of matching",
+                        label: "Super Connect",
+                        hint: "Send a super connect to stand out and increase your chances of partnering",
                         traits: .isButton,
                         identifier: AccessibilityIdentifier.superLikeButton
                     )
                     .disabled(viewModel.isProcessingAction)
 
-                    // Like button
+                    // Connect button
                     SwipeActionButton(
-                        icon: "heart.fill",
+                        icon: "person.badge.plus",
                         iconSize: .title,
                         iconWeight: .bold,
                         size: 68,
@@ -303,12 +304,12 @@ struct DiscoverView: View {
                     ) {
                         Task {
                             await viewModel.handleLike()
-                            VoiceOverAnnouncement.announce("Liked! Next profile.")
+                            VoiceOverAnnouncement.announce("Connection sent! Next profile.")
                         }
                     }
                     .accessibilityElement(
-                        label: "Like",
-                        hint: "Like this profile to potentially match",
+                        label: "Connect",
+                        hint: "Connect with this language learner to become partners",
                         traits: .isButton,
                         identifier: AccessibilityIdentifier.likeButton
                     )
@@ -372,7 +373,7 @@ struct DiscoverView: View {
                 .foregroundColor(.white)
                 .background(
                     LinearGradient(
-                        colors: [.purple, .pink],
+                        colors: [.teal, .blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
@@ -397,22 +398,22 @@ struct DiscoverView: View {
                 .font(.system(size: 80))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.purple.opacity(0.6), .pink.opacity(0.4)],
+                        colors: [.teal.opacity(0.6), .blue.opacity(0.4)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
                 )
 
             VStack(spacing: 12) {
-                Text(viewModel.hasActiveFilters ? "No Matches Found" : "No More Profiles")
+                Text(viewModel.hasActiveFilters ? "No Partners Found" : "No More Profiles")
                     .font(.title2)
                     .fontWeight(.bold)
                     .dynamicTypeSize(min: .large, max: .accessibility2)
                     .accessibilityAddTraits(.isHeader)
 
                 Text(viewModel.hasActiveFilters ?
-                     "Try adjusting your filters to see more people" :
-                     "Check back later for new people nearby")
+                     "Try adjusting your filters to see more language learners" :
+                     "Check back later for new language exchange partners")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -438,7 +439,7 @@ struct DiscoverView: View {
                         .foregroundColor(.white)
                         .background(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
@@ -464,7 +465,7 @@ struct DiscoverView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                     .background(Color(.systemGray6))
                     .cornerRadius(16)
                     .contentShape(RoundedRectangle(cornerRadius: 16))
@@ -490,7 +491,7 @@ struct DiscoverView: View {
                     .font(.system(size: 80))
                     .foregroundColor(.yellow)
 
-                Text("It's a Match! 🎉")
+                Text("Language Partner Found!")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -498,7 +499,7 @@ struct DiscoverView: View {
                     .accessibilityAddTraits(.isHeader)
 
                 if let user = viewModel.matchedUser {
-                    Text("You and \(user.fullName) liked each other!")
+                    Text("You and \(user.fullName) want to practice together!")
                         .font(.title3)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -517,7 +518,7 @@ struct DiscoverView: View {
                     viewModel.dismissMatchAnimation()
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.purple)
+                .tint(.teal)
                 .controlSize(.large)
 
                 Button("Keep Swiping") {
@@ -527,7 +528,7 @@ struct DiscoverView: View {
             }
             .task {
                 if let user = viewModel.matchedUser {
-                    VoiceOverAnnouncement.announce("It's a match! You and \(user.fullName) liked each other!")
+                    VoiceOverAnnouncement.announce("Language partner found! You and \(user.fullName) want to practice together!")
                 }
             }
             .padding(40)
@@ -566,7 +567,7 @@ struct DiscoverView: View {
             .contentShape(Rectangle()) // Define tappable area
             .accessibilityElement(
                 label: cardIndex == 0 ? "\(user.fullName), \(user.age) years old, from \(user.location)" : "",
-                hint: cardIndex == 0 ? "Swipe right to like, left to pass, or tap for full profile. Use the action buttons below for more options" : "",
+                hint: cardIndex == 0 ? "Swipe right to connect, left to pass, or tap for full profile. Use the action buttons below for more options" : "",
                 traits: cardIndex == 0 ? .isButton : [],
                 identifier: cardIndex == 0 ? AccessibilityIdentifier.userCard : nil,
                 isHidden: cardIndex != 0

@@ -68,7 +68,7 @@ struct PhoneVerificationView: View {
                     .font(.system(size: 50))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: service.verificationState == .verified ? [.green, .blue] : [.blue, .purple],
+                            colors: service.verificationState == .verified ? [.green, .blue] : [.blue, .teal],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -138,7 +138,7 @@ struct PhoneVerificationView: View {
                 .padding()
                 .background(
                     LinearGradient(
-                        colors: phoneInput.isEmpty ? [.gray, .gray] : [.blue, .purple],
+                        colors: phoneInput.isEmpty ? [.gray, .gray] : [.blue, .teal],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
@@ -334,7 +334,7 @@ struct PhoneVerificationView: View {
                 .padding()
                 .background(
                     LinearGradient(
-                        colors: [.blue, .purple],
+                        colors: [.blue, .teal],
                         startPoint: .leading,
                         endPoint: .trailing
                     )

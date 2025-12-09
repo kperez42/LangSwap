@@ -88,7 +88,7 @@ struct ShareDateView: View {
                     HStack {
                         Image(systemName: "person.crop.circle")
                             .font(.title2)
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
 
                         VStack(alignment: .leading) {
                             Text("Who are you meeting?")
@@ -252,7 +252,7 @@ struct ShareDateView: View {
             .padding()
             .background(
                 LinearGradient(
-                    colors: [.blue, .purple],
+                    colors: [.blue, .teal],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -721,7 +721,7 @@ struct MatchPickerRow: View {
                     Circle()
                         .fill(
                             LinearGradient(
-                                colors: [.blue, .purple],
+                                colors: [.blue, .teal],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )

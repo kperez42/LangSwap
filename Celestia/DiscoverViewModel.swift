@@ -27,17 +27,17 @@ class DiscoverViewModel: ObservableObject {
 
     enum UpgradeReason {
         case general
-        case likeLimitReached
-        case superLikesExhausted
+        case connectLimitReached
+        case superConnectsExhausted
 
         var message: String {
             switch self {
             case .general:
                 return ""
-            case .likeLimitReached:
-                return "You've reached your daily like limit. Subscribe to continue liking!"
-            case .superLikesExhausted:
-                return "You're out of Super Likes. Subscribe to get more!"
+            case .connectLimitReached:
+                return "You've reached your daily connection limit. Subscribe to continue connecting!"
+            case .superConnectsExhausted:
+                return "You're out of Super Connects. Subscribe to get more!"
             }
         }
     }
@@ -126,11 +126,11 @@ class DiscoverViewModel: ObservableObject {
             do {
                 // Use UserService instead of direct Firestore access
                 let ageRange = currentUser.ageRangeMin...currentUser.ageRangeMax
-                let lookingFor = currentUser.lookingFor != "Everyone" ? currentUser.lookingFor : nil
+                let practiceWith = currentUser.lookingFor != "Everyone" ? currentUser.lookingFor : nil
 
                 try await userService.fetchUsers(
                     excludingUserId: userId,
-                    lookingFor: lookingFor,
+                    lookingFor: practiceWith,
                     ageRange: ageRange,
                     country: nil,
                     limit: limit,
@@ -231,7 +231,7 @@ class DiscoverViewModel: ObservableObject {
                 guard !Task.isCancelled else { return }
                 completion(isMatch)
             } catch {
-                Logger.shared.error("Error sending like via deprecated sendInterest", category: .matching, error: error)
+                Logger.shared.error("Error sending connection via deprecated sendInterest", category: .matching, error: error)
                 guard !Task.isCancelled else { return }
                 completion(false)
             }
@@ -251,10 +251,10 @@ class DiscoverViewModel: ObservableObject {
         let threshold: CGFloat = 100
 
         if value.translation.width > threshold {
-            // Swiped right - like
+            // Swiped right - connect
             Task { await handleLike() }
         } else if value.translation.width < -threshold {
-            // Swiped left - pass
+            // Swiped left - skip
             Task { await handlePass() }
         }
 
@@ -278,21 +278,21 @@ class DiscoverViewModel: ObservableObject {
             return
         }
 
-        // Prevent liking yourself (should never happen, but safety check)
+        // Prevent connecting with yourself (should never happen, but safety check)
         guard currentUserId != likedUserId else {
             isProcessingAction = false
-            Logger.shared.warning("Attempted to like own profile", category: .matching)
+            Logger.shared.warning("Attempted to connect with own profile", category: .matching)
             return
         }
 
-        // Check daily like limit for non-premium users
+        // Check daily connection limit for non-premium users
         if !currentUser.isPremium {
-            let canLike = await checkDailyLikeLimit()
-            if !canLike {
+            let canConnect = await checkDailyLikeLimit()
+            if !canConnect {
                 isProcessingAction = false
-                upgradeReason = .likeLimitReached
+                upgradeReason = .connectLimitReached
                 showingUpgradeSheet = true
-                Logger.shared.warning("Daily like limit reached. User needs to upgrade to Premium", category: .matching)
+                Logger.shared.warning("Daily connection limit reached. User needs to upgrade to Premium", category: .matching)
                 return
             }
         }
@@ -319,31 +319,31 @@ class DiscoverViewModel: ObservableObject {
                 isSuperLike: false
             )
 
-            // Decrement daily like counter if not premium
+            // Decrement daily connection counter if not premium
             if !currentUser.isPremium {
                 await decrementDailyLikes()
             }
 
-            // INSTANT SYNC: Update LikesViewModel immediately so Likes page reflects changes
+            // INSTANT SYNC: Update LikesViewModel immediately so Connections page reflects changes
             await MainActor.run {
                 LikesViewModel.shared.addLikedUser(likedUser, isMatch: isMatch)
             }
 
             if isMatch {
-                // Show match animation
+                // Show partner found animation
                 await MainActor.run {
                     self.matchedUser = likedUser
                     self.showingMatchAnimation = true
                     HapticManager.shared.notification(.success)
                 }
-                Logger.shared.info("Match created with \(likedUser.fullName)", category: .matching)
+                Logger.shared.info("Language partner found with \(likedUser.fullName)", category: .matching)
             } else {
-                Logger.shared.info("Like sent to \(likedUser.fullName)", category: .matching)
+                Logger.shared.info("Connection request sent to \(likedUser.fullName)", category: .matching)
             }
         } catch {
-            Logger.shared.error("Error sending like", category: .matching, error: error)
+            Logger.shared.error("Error sending connection request", category: .matching, error: error)
             // Show error feedback to user
-            actionErrorMessage = "Failed to send like. Please try again."
+            actionErrorMessage = "Failed to send connection request. Please try again."
             showActionError = true
             HapticManager.shared.notification(.error)
             // Auto-hide after 3 seconds
@@ -354,7 +354,7 @@ class DiscoverViewModel: ObservableObject {
         }
     }
 
-    /// Check if user has daily likes remaining (delegates to UserService)
+    /// Check if user has daily connections remaining (delegates to UserService)
     private func checkDailyLikeLimit() async -> Bool {
         // BUGFIX: Use effectiveId for reliable user identification
         guard let userId = authService.currentUser?.effectiveId else { return false }
@@ -369,7 +369,7 @@ class DiscoverViewModel: ObservableObject {
         return hasLikes
     }
 
-    /// Decrement daily like count (delegates to UserService)
+    /// Decrement daily connection count (delegates to UserService)
     private func decrementDailyLikes() async {
         // BUGFIX: Use effectiveId for reliable user identification
         guard let userId = authService.currentUser?.effectiveId else { return }
@@ -425,26 +425,26 @@ class DiscoverViewModel: ObservableObject {
         }
     }
 
-    /// Handle super like action
+    /// Handle super connect action
     func handleSuperLike() async {
         guard currentIndex < users.count, !isProcessingAction else { return }
         isProcessingAction = true
 
-        let superLikedUser = users[currentIndex]
+        let superConnectedUser = users[currentIndex]
         // BUGFIX: Use effectiveId for reliable user identification
         guard let currentUser = authService.currentUser,
               let currentUserId = currentUser.effectiveId,
-              let superLikedUserId = superLikedUser.effectiveId else {
+              let superConnectedUserId = superConnectedUser.effectiveId else {
             isProcessingAction = false
             return
         }
 
-        // Check if user has super likes remaining
+        // Check if user has super connects remaining
         if currentUser.superLikesRemaining <= 0 {
             isProcessingAction = false
-            upgradeReason = .superLikesExhausted
+            upgradeReason = .superConnectsExhausted
             showingUpgradeSheet = true
-            Logger.shared.warning("No Super Likes remaining. User needs to purchase more", category: .payment)
+            Logger.shared.warning("No Super Connects remaining. User needs to purchase more", category: .payment)
             return
         }
 
@@ -460,38 +460,38 @@ class DiscoverViewModel: ObservableObject {
         // Preload images for next users
         await preloadUpcomingImages()
 
-        // Send super like to backend (in background, card already moved)
+        // Send super connect to backend (in background, card already moved)
         do {
             // ARCHITECTURE FIX: Use injected swipeService
             let isMatch = try await swipeService.likeUser(
                 fromUserId: currentUserId,
-                toUserId: superLikedUserId,
+                toUserId: superConnectedUserId,
                 isSuperLike: true
             )
 
-            // Deduct super like from balance
+            // Deduct super connect from balance
             await decrementSuperLikes()
 
-            // INSTANT SYNC: Update LikesViewModel immediately so Likes page reflects changes
+            // INSTANT SYNC: Update LikesViewModel immediately so Connections page reflects changes
             await MainActor.run {
-                LikesViewModel.shared.addLikedUser(superLikedUser, isMatch: isMatch)
+                LikesViewModel.shared.addLikedUser(superConnectedUser, isMatch: isMatch)
             }
 
             if isMatch {
-                // Show match animation
+                // Show partner found animation
                 await MainActor.run {
-                    self.matchedUser = superLikedUser
+                    self.matchedUser = superConnectedUser
                     self.showingMatchAnimation = true
                     HapticManager.shared.notification(.success)
                 }
-                Logger.shared.info("Super Like resulted in a match with \(superLikedUser.fullName)", category: .matching)
+                Logger.shared.info("Super Connect resulted in a language partner with \(superConnectedUser.fullName)", category: .matching)
             } else {
-                Logger.shared.info("Super Like sent to \(superLikedUser.fullName)", category: .matching)
+                Logger.shared.info("Super Connect sent to \(superConnectedUser.fullName)", category: .matching)
             }
         } catch {
-            Logger.shared.error("Error sending super like", category: .matching, error: error)
+            Logger.shared.error("Error sending super connect", category: .matching, error: error)
             // Show error feedback to user
-            actionErrorMessage = "Failed to send super like. Please try again."
+            actionErrorMessage = "Failed to send super connect. Please try again."
             showActionError = true
             HapticManager.shared.notification(.error)
             // Auto-hide after 3 seconds
@@ -502,14 +502,14 @@ class DiscoverViewModel: ObservableObject {
         }
     }
 
-    /// Decrement super like count (delegates to UserService)
+    /// Decrement super connect count (delegates to UserService)
     private func decrementSuperLikes() async {
         // BUGFIX: Use effectiveId for reliable user identification
         guard let userId = authService.currentUser?.effectiveId else { return }
 
         await userService.decrementSuperLikes(userId: userId)
         await authService.fetchUser()
-        Logger.shared.info("Super Like used. Remaining: \(authService.currentUser?.superLikesRemaining ?? 0)", category: .matching)
+        Logger.shared.info("Super Connect used. Remaining: \(authService.currentUser?.superLikesRemaining ?? 0)", category: .matching)
     }
 
     /// Apply filters

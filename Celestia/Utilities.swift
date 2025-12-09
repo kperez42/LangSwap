@@ -229,7 +229,7 @@ struct AppInfo {
     }
 
     static var appName: String {
-        Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "Celestia"
+        Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "LangSwap"
     }
 }
 

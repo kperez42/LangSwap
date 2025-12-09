@@ -505,7 +505,7 @@ struct ErrorView: View {
                     .padding(.vertical, 12)
                     .background(
                         LinearGradient(
-                            colors: [Color.purple, Color.pink],
+                            colors: [Color.teal, Color.blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )

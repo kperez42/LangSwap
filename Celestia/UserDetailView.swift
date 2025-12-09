@@ -67,12 +67,12 @@ struct UserDetailView: View {
             // BUGFIX: Use effectiveId for reliable user identification (handles @DocumentID edge cases)
             isSaved = savedProfilesVM.savedProfiles.contains(where: { $0.user.effectiveId == user.effectiveId })
         }
-        .alert("Like Sent! 💫", isPresented: $showingInterestSent) {
+        .alert("Connection Request Sent! 🌍", isPresented: $showingInterestSent) {
             Button("OK") { dismiss() }
         } message: {
-            Text("If \(user.fullName) likes you back, you'll be matched!")
+            Text("If \(user.fullName) wants to practice with you too, you'll be connected!")
         }
-        .alert("It's a Match! 🎉", isPresented: $showingMatched) {
+        .alert("Language Partner Found! 🎉", isPresented: $showingMatched) {
             Button("Send Message") {
                 NotificationCenter.default.post(
                     name: .navigateToMessages,
@@ -83,17 +83,17 @@ struct UserDetailView: View {
             }
             Button("Keep Browsing") { dismiss() }
         } message: {
-            Text("You and \(user.fullName) liked each other!")
+            Text("You and \(user.fullName) want to practice together!")
         }
         .alert("Error", isPresented: $showingError) {
             Button("OK", role: .cancel) { }
         } message: {
             Text(errorMessage.isEmpty ? "Failed to send like. Please try again." : errorMessage)
         }
-        .alert("Unliked", isPresented: $showingUnliked) {
+        .alert("Disconnected", isPresented: $showingUnliked) {
             Button("OK", role: .cancel) { }
         } message: {
-            Text("You unliked \(user.fullName)")
+            Text("You disconnected from \(user.fullName)")
         }
         .sheet(isPresented: $showingChat) {
             if let match = chatMatch {
@@ -172,7 +172,7 @@ struct UserDetailView: View {
                     .font(.system(size: 32, weight: .bold))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -191,7 +191,7 @@ struct UserDetailView: View {
 
             HStack(spacing: 6) {
                 Image(systemName: "mappin.circle.fill")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                 Text("\(user.location), \(user.country)")
                     .foregroundColor(.secondary)
             }
@@ -232,8 +232,8 @@ struct UserDetailView: View {
             ProfileSectionCard(
                 icon: "quote.bubble.fill",
                 title: "About",
-                iconColors: [.purple, .pink],
-                borderColor: .purple
+                iconColors: [.teal, .blue],
+                borderColor: .teal
             ) {
                 Text(user.bio)
                     .font(.body)
@@ -271,12 +271,12 @@ struct UserDetailView: View {
             ProfileSectionCard(
                 icon: "sparkles",
                 title: "Interests",
-                iconColors: [.orange, .pink],
+                iconColors: [.orange, .teal],
                 borderColor: .orange
             ) {
                 FlowLayout2(spacing: 10) {
                     ForEach(user.interests, id: \.self) { interest in
-                        ProfileTagView(text: interest, colors: [.orange, .pink], textColor: .orange)
+                        ProfileTagView(text: interest, colors: [.orange, .teal], textColor: .orange)
                     }
                 }
             }
@@ -291,8 +291,8 @@ struct UserDetailView: View {
             ProfileSectionCard(
                 icon: "quote.bubble.fill",
                 title: "Get to Know Me",
-                iconColors: [.purple, .pink],
-                borderColor: .purple
+                iconColors: [.teal, .blue],
+                borderColor: .teal
             ) {
                 VStack(spacing: 12) {
                     ForEach(user.prompts) { prompt in
@@ -311,7 +311,7 @@ struct UserDetailView: View {
             ProfileSectionCard(
                 icon: "person.text.rectangle",
                 title: "Details",
-                iconColors: [.indigo, .purple],
+                iconColors: [.indigo, .teal],
                 borderColor: .indigo
             ) {
                 VStack(spacing: 12) {
@@ -322,7 +322,7 @@ struct UserDetailView: View {
                         DetailRow(icon: "graduationcap.fill", label: "Education", value: education)
                     }
                     if let goal = user.relationshipGoal, goal != "Prefer not to say" {
-                        DetailRow(icon: "heart.circle", label: "Looking for", value: goal)
+                        DetailRow(icon: "target", label: "Learning Goal", value: goal)
                     }
                     if let religion = user.religion, religion != "Prefer not to say" {
                         DetailRow(icon: "sparkles", label: "Religion", value: religion)
@@ -364,14 +364,14 @@ struct UserDetailView: View {
         }
     }
 
-    // MARK: - Looking For Section
+    // MARK: - Practice Preferences Section
 
     private var lookingForSection: some View {
         ProfileSectionCard(
-            icon: "heart.fill",
-            title: "Looking for",
-            iconColors: [.purple, .pink],
-            borderColor: .purple
+            icon: "person.2.fill",
+            title: "Practice Preferences",
+            iconColors: [.blue, .teal],
+            borderColor: .blue
         ) {
             Text(user.lookingFor)
                 .font(.body)
@@ -485,12 +485,12 @@ struct UserDetailView: View {
             ZStack {
                 if isProcessing {
                     ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle(tint: isLiked ? .pink : .white))
+                        .progressViewStyle(CircularProgressViewStyle(tint: isLiked ? .teal : .white))
                         .scaleEffect(1.0)
                 } else {
-                    Image(systemName: isLiked ? "heart.fill" : "heart")
+                    Image(systemName: isLiked ? "person.badge.minus" : "person.badge.plus")
                         .font(.title2)
-                        .foregroundColor(isLiked ? .pink : .white)
+                        .foregroundColor(isLiked ? .teal : .white)
                 }
             }
             .frame(width: 60, height: 60)
@@ -500,7 +500,7 @@ struct UserDetailView: View {
                         Color.white
                     } else {
                         LinearGradient(
-                            colors: [Color.purple, Color.pink],
+                            colors: [Color.blue, Color.teal],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -511,8 +511,8 @@ struct UserDetailView: View {
             .shadow(color: Color.black.opacity(0.1), radius: 5)
         }
         .disabled(isProcessing)
-        .accessibilityLabel(isLiked ? "Unlike" : "Like")
-        .accessibilityHint(isLiked ? "Remove like from \(user.fullName)" : "Send interest to \(user.fullName)")
+        .accessibilityLabel(isLiked ? "Disconnect" : "Connect")
+        .accessibilityHint(isLiked ? "Remove connection request from \(user.fullName)" : "Send connection request to \(user.fullName)")
     }
 
     // MARK: - Helper Properties
@@ -602,7 +602,7 @@ struct UserDetailView: View {
               !isProcessing else { return }
 
         guard currentUserID != targetUserID else {
-            errorMessage = "You can't like your own profile!"
+            errorMessage = "You can't connect with your own profile!"
             showingError = true
             return
         }
@@ -623,11 +623,11 @@ struct UserDetailView: View {
                     if isMatch {
                         showingMatched = true
                         HapticManager.shared.notification(.success)
-                        Logger.shared.info("Match created with \(user.fullName) from detail view", category: .matching)
+                        Logger.shared.info("Partnership created with \(user.fullName) from detail view", category: .matching)
                     } else {
                         showingInterestSent = true
                         HapticManager.shared.impact(.medium)
-                        Logger.shared.info("Like sent to \(user.fullName) from detail view", category: .matching)
+                        Logger.shared.info("Connection request sent to \(user.fullName) from detail view", category: .matching)
                     }
                 }
             } catch {
@@ -636,7 +636,7 @@ struct UserDetailView: View {
                     errorMessage = error.localizedDescription
                     showingError = true
                 }
-                Logger.shared.error("Error sending like from detail view", category: .matching, error: error)
+                Logger.shared.error("Error sending connection request from detail view", category: .matching, error: error)
             }
         }
     }
@@ -648,20 +648,20 @@ struct UserDetailView: View {
               !isProcessing else { return }
 
         guard currentUserID != targetUserID else {
-            errorMessage = "You can't like your own profile!"
+            errorMessage = "You can't connect with your own profile!"
             showingError = true
             return
         }
 
         HapticManager.shared.impact(.medium)
 
-        // Check daily like limit for free users when liking (not unliking)
+        // Check daily connection limit for free users when connecting (not disconnecting)
         if !isLiked {
             let isPremium = authService.currentUser?.isPremium ?? false
             if !isPremium {
                 guard RateLimiter.shared.canSendLike() else {
                     // Show upgrade sheet with context message
-                    upgradeContextMessage = "You've reached your daily like limit. Subscribe to continue liking!"
+                    upgradeContextMessage = "You've reached your daily connection limit. Subscribe to continue connecting!"
                     showPremiumUpgrade = true
                     return
                 }
@@ -684,7 +684,7 @@ struct UserDetailView: View {
                     await MainActor.run {
                         isProcessing = false
                         showingUnliked = true
-                        Logger.shared.info("Unliked \(user.fullName) from detail view", category: .matching)
+                        Logger.shared.info("Disconnected from \(user.fullName) from detail view", category: .matching)
                     }
                 } catch {
                     await MainActor.run {
@@ -694,11 +694,11 @@ struct UserDetailView: View {
                         errorMessage = error.localizedDescription
                         showingError = true
                     }
-                    Logger.shared.error("Error unliking from detail view", category: .matching, error: error)
+                    Logger.shared.error("Error disconnecting from detail view", category: .matching, error: error)
                 }
             }
         } else {
-            // Like the user
+            // Connect with the user
             isProcessing = true
             isLiked = true // Optimistic update
             onLikeChanged?(true) // Sync with parent
@@ -717,10 +717,10 @@ struct UserDetailView: View {
                         if isMatch {
                             showingMatched = true
                             HapticManager.shared.notification(.success)
-                            Logger.shared.info("Match created with \(user.fullName) from detail view", category: .matching)
+                            Logger.shared.info("Partnership created with \(user.fullName) from detail view", category: .matching)
                         } else {
                             showingInterestSent = true
-                            Logger.shared.info("Like sent to \(user.fullName) from detail view", category: .matching)
+                            Logger.shared.info("Connection request sent to \(user.fullName) from detail view", category: .matching)
                         }
                     }
                 } catch {
@@ -731,7 +731,7 @@ struct UserDetailView: View {
                         errorMessage = error.localizedDescription
                         showingError = true
                     }
-                    Logger.shared.error("Error sending like from detail view", category: .matching, error: error)
+                    Logger.shared.error("Error sending connection request from detail view", category: .matching, error: error)
                 }
             }
         }
@@ -872,7 +872,7 @@ struct PromptCard: View {
             Text(prompt.question)
                 .font(.subheadline)
                 .fontWeight(.semibold)
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
 
             Text(prompt.answer)
                 .font(.body)
@@ -883,7 +883,7 @@ struct PromptCard: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(
             LinearGradient(
-                colors: [Color.purple.opacity(0.05), Color.pink.opacity(0.03)],
+                colors: [Color.teal.opacity(0.05), Color.blue.opacity(0.03)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -1194,7 +1194,7 @@ struct ZoomablePhotoView: View {
         age: 25,
         gender: "Female",
         lookingFor: "Men",
-        bio: "Love to travel and learn new languages. Looking for someone to explore the world with!",
+        bio: "Love to travel and learn new languages. Looking for language partners to practice Spanish and French!",
         location: "Barcelona",
         country: "Spain",
         languages: ["Spanish", "English", "French"],

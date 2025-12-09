@@ -110,7 +110,7 @@ struct ReferralAdminDashboardView: View {
                             .padding(.vertical, 8)
                             .background(
                                 selectedPeriod == period ?
-                                Color.purple : Color.gray.opacity(0.1)
+                                Color.teal : Color.gray.opacity(0.1)
                             )
                             .cornerRadius(20)
                     }
@@ -159,7 +159,7 @@ struct ReferralAdminDashboardView: View {
             .padding(.vertical, 10)
             .background(
                 selectedTab == index ?
-                LinearGradient(colors: [.purple, .pink], startPoint: .leading, endPoint: .trailing) :
+                LinearGradient(colors: [.teal, .blue], startPoint: .leading, endPoint: .trailing) :
                     LinearGradient(colors: [Color.gray.opacity(0.1)], startPoint: .leading, endPoint: .trailing)
             )
             .cornerRadius(12)
@@ -193,7 +193,7 @@ struct ReferralAdminDashboardView: View {
                 title: "Monthly Referrals",
                 value: "\(metrics.monthlyReferrals)",
                 icon: "person.3.fill",
-                color: .purple
+                color: .teal
             )
 
             metricCard(
@@ -394,7 +394,7 @@ struct ReferralAdminDashboardView: View {
 
                 Text("\(String(format: "%.1f%%", funnel.overallConversionRate * 100)) overall")
                     .font(.subheadline)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
             }
 
             ForEach(Array(funnel.stages.enumerated()), id: \.offset) { index, stage in
@@ -415,7 +415,7 @@ struct ReferralAdminDashboardView: View {
                         RoundedRectangle(cornerRadius: 4)
                             .fill(
                                 LinearGradient(
-                                    colors: [.purple.opacity(1 - Double(index) * 0.15), .pink.opacity(1 - Double(index) * 0.15)],
+                                    colors: [.teal.opacity(1 - Double(index) * 0.15), .blue.opacity(1 - Double(index) * 0.15)],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )

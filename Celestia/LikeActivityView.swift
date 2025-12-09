@@ -1,8 +1,8 @@
 //
 //  LikeActivityView.swift
-//  Celestia
+//  LangSwap
 //
-//  Timeline of like activity (received and sent)
+//  Timeline of connection activity (received and sent)
 //
 
 import SwiftUI
@@ -27,7 +27,7 @@ struct LikeActivityView: View {
                     activityList
                 }
             }
-            .navigationTitle("Like Activity")
+            .navigationTitle("Connection Activity")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -94,7 +94,7 @@ struct LikeActivityView: View {
 
     private var emptyStateView: some View {
         VStack(spacing: 24) {
-            Image(systemName: "heart.text.square")
+            Image(systemName: "person.2.circle")
                 .font(.system(size: 80))
                 .foregroundColor(.gray.opacity(0.5))
 
@@ -103,7 +103,7 @@ struct LikeActivityView: View {
                     .font(.title2)
                     .fontWeight(.bold)
 
-                Text("Your like activity will appear here")
+                Text("Your connection activity will appear here")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -175,7 +175,7 @@ struct ActivityRow: View {
     }
 }
 
-// MARK: - Like Activity Model
+// MARK: - Connection Activity Model
 
 struct LikeActivity: Identifiable {
     let id: String
@@ -184,24 +184,24 @@ struct LikeActivity: Identifiable {
     let timestamp: Date
 
     enum ActivityType {
-        case received(isSuperLike: Bool)
-        case sent(isSuperLike: Bool)
+        case received(isSuperConnect: Bool)
+        case sent(isSuperConnect: Bool)
         case mutual
         case matched
 
         var icon: String {
             switch self {
-            case .received: return "heart.fill"
+            case .received: return "person.badge.plus"
             case .sent: return "paperplane.fill"
-            case .mutual: return "heart.circle.fill"
+            case .mutual: return "person.2.circle.fill"
             case .matched: return "sparkles"
             }
         }
 
         var color: Color {
             switch self {
-            case .received: return .pink
-            case .sent: return .purple
+            case .received: return .teal
+            case .sent: return .blue
             case .mutual: return .orange
             case .matched: return .green
             }
@@ -209,14 +209,14 @@ struct LikeActivity: Identifiable {
 
         var description: String {
             switch self {
-            case .received(let isSuperLike):
-                return isSuperLike ? "Super liked you" : "Liked you"
-            case .sent(let isSuperLike):
-                return isSuperLike ? "You super liked" : "You liked"
+            case .received(let isSuperConnect):
+                return isSuperConnect ? "Super connected with you" : "Wants to practice with you"
+            case .sent(let isSuperConnect):
+                return isSuperConnect ? "You super connected" : "You sent a connection"
             case .mutual:
-                return "Mutual like!"
+                return "Mutual connection!"
             case .matched:
-                return "It's a match!"
+                return "Language partner found!"
             }
         }
     }
@@ -243,7 +243,7 @@ class LikeActivityViewModel: ObservableObject {
         do {
             var allActivity: [LikeActivity] = []
 
-            // Get received likes (likes where current user is the target)
+            // Get received connections (connections where current user is the target)
             let receivedSnapshot = try await db.collection("likes")
                 .whereField("toUserId", isEqualTo: currentUserId)
                 .order(by: "timestamp", descending: true)
@@ -254,18 +254,18 @@ class LikeActivityViewModel: ObservableObject {
                 let data = doc.data()
                 if let fromUserId = data["fromUserId"] as? String,
                    let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() {
-                    let isSuperLike = data["isSuperLike"] as? Bool ?? false
+                    let isSuperConnect = data["isSuperLike"] as? Bool ?? false
 
                     allActivity.append(LikeActivity(
                         id: doc.documentID,
                         userId: fromUserId,
-                        type: .received(isSuperLike: isSuperLike),
+                        type: .received(isSuperConnect: isSuperConnect),
                         timestamp: timestamp
                     ))
                 }
             }
 
-            // Get sent likes (likes sent by current user)
+            // Get sent connections (connections sent by current user)
             let sentSnapshot = try await db.collection("likes")
                 .whereField("fromUserId", isEqualTo: currentUserId)
                 .order(by: "timestamp", descending: true)
@@ -276,12 +276,12 @@ class LikeActivityViewModel: ObservableObject {
                 let data = doc.data()
                 if let toUserId = data["toUserId"] as? String,
                    let timestamp = (data["timestamp"] as? Timestamp)?.dateValue() {
-                    let isSuperLike = data["isSuperLike"] as? Bool ?? false
+                    let isSuperConnect = data["isSuperLike"] as? Bool ?? false
 
                     allActivity.append(LikeActivity(
                         id: doc.documentID + "_sent",
                         userId: toUserId,
-                        type: .sent(isSuperLike: isSuperLike),
+                        type: .sent(isSuperConnect: isSuperConnect),
                         timestamp: timestamp
                     ))
                 }
@@ -331,7 +331,7 @@ class LikeActivityViewModel: ObservableObject {
             // New approach: Batch fetch all unique users = ~13 queries (10 users per batch)
             await fetchUsersForActivities(allActivity)
 
-            Logger.shared.info("Loaded like activity - today: \(todayActivity.count), week: \(weekActivity.count)", category: .matching)
+            Logger.shared.info("Loaded connection activity - today: \(todayActivity.count), week: \(weekActivity.count)", category: .matching)
         } catch {
             Logger.shared.error("Error loading like activity", category: .matching, error: error)
         }

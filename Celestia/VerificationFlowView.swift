@@ -134,7 +134,7 @@ struct VerificationFlowView: View {
         isRecommended: Bool = false,
         action: @escaping () -> Void
     ) -> some View {
-        let accentColor: Color = isRecommended ? .purple : .blue
+        let accentColor: Color = isRecommended ? .teal : .blue
 
         return Button(action: action) {
             VStack(spacing: 0) {
@@ -148,7 +148,7 @@ struct VerificationFlowView: View {
                             .foregroundColor(.white)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
-                            .background(Color.purple)
+                            .background(Color.teal)
                             .cornerRadius(4)
                     }
                     .padding(.bottom, 8)
@@ -173,7 +173,7 @@ struct VerificationFlowView: View {
                             if isRecommended && !isCompleted {
                                 Image(systemName: "bolt.fill")
                                     .font(.caption)
-                                    .foregroundColor(.purple)
+                                    .foregroundColor(.teal)
                             }
                         }
 
@@ -207,7 +207,7 @@ struct VerificationFlowView: View {
             .background(Color(.secondarySystemBackground))
             .overlay(
                 RoundedRectangle(cornerRadius: 12)
-                    .stroke(isRecommended && !isCompleted ? Color.purple.opacity(0.5) : Color.clear, lineWidth: 2)
+                    .stroke(isRecommended && !isCompleted ? Color.teal.opacity(0.5) : Color.clear, lineWidth: 2)
             )
             .cornerRadius(12)
         }
@@ -222,7 +222,7 @@ struct VerificationFlowView: View {
                 .font(.headline)
 
             benefitRow(icon: "eye.fill", text: "Stand out with verified badge on your profile")
-            benefitRow(icon: "heart.fill", text: "Get more matches from other verified users")
+            benefitRow(icon: "person.2.fill", text: "Connect with more verified language partners")
             benefitRow(icon: "shield.fill", text: "Build trust and safety in the community")
             benefitRow(icon: "star.fill", text: "Unlock premium features and visibility boosts")
         }
@@ -270,7 +270,7 @@ struct BackgroundCheckSheet: View {
                 VStack(spacing: 24) {
                     Image(systemName: "shield.checkered")
                         .font(.system(size: 80))
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
 
                     Text("Premium Background Check")
                         .font(.title2)
@@ -290,7 +290,7 @@ struct BackgroundCheckSheet: View {
                     Text("$29.99 one-time fee")
                         .font(.title3)
                         .fontWeight(.semibold)
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
 
                     Button(action: {}) {
                         Text("Start Background Check")
@@ -298,7 +298,7 @@ struct BackgroundCheckSheet: View {
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)
                             .padding()
-                            .background(Color.purple)
+                            .background(Color.teal)
                             .cornerRadius(12)
                     }
                 }

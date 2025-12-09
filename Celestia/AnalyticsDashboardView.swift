@@ -54,7 +54,7 @@ struct AnalyticsDashboardView: View {
                         Image(systemName: "arrow.clockwise")
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.purple, .pink],
+                                    colors: [.teal, .blue],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
@@ -121,7 +121,7 @@ struct OverviewCard: View {
             HStack {
                 Image(systemName: "eye.fill")
                     .font(.title2)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
 
                 Text("Profile Overview")
                     .font(.title3)
@@ -164,7 +164,7 @@ struct HeatmapCard: View {
             HStack {
                 Image(systemName: "chart.bar.fill")
                     .font(.title3)
-                    .foregroundColor(.pink)
+                    .foregroundColor(.blue)
 
                 Text("Hourly Activity")
                     .font(.headline)
@@ -181,7 +181,7 @@ struct HeatmapCard: View {
                         Rectangle()
                             .fill(
                                 LinearGradient(
-                                    colors: [.purple, .pink],
+                                    colors: [.teal, .blue],
                                     startPoint: .bottom,
                                     endPoint: .top
                                 )
@@ -226,7 +226,7 @@ struct PeakTimesCard: View {
 
                     HStack(spacing: 4) {
                         Image(systemName: "clock.arrow.circlepath")
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                         Text("\(heatmap.peakHour):00")
                             .font(.title2)
                             .fontWeight(.bold)
@@ -242,7 +242,7 @@ struct PeakTimesCard: View {
 
                     HStack(spacing: 4) {
                         Image(systemName: "calendar")
-                            .foregroundColor(.pink)
+                            .foregroundColor(.blue)
                         Text(heatmap.peakDay)
                             .font(.title3)
                             .fontWeight(.bold)
@@ -252,9 +252,9 @@ struct PeakTimesCard: View {
 
             Text("⏰ Be active during these times to maximize visibility!")
                 .font(.caption)
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
                 .padding(8)
-                .background(Color.purple.opacity(0.1))
+                .background(Color.teal.opacity(0.1))
                 .cornerRadius(8)
         }
         .padding()
@@ -288,7 +288,7 @@ struct ViewsSourceCard: View {
 
                     Text("\(count)")
                         .font(.headline)
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
                 }
                 .padding(.vertical, 4)
             }
@@ -340,7 +340,7 @@ struct MatchQualityScoreCard: View {
                     .trim(from: 0, to: score / 100)
                     .stroke(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         ),
@@ -355,7 +355,7 @@ struct MatchQualityScoreCard: View {
                         .font(.system(size: 44, weight: .bold))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
@@ -499,7 +499,7 @@ struct RecommendationCard: View {
                 Circle()
                     .fill(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -535,7 +535,7 @@ struct StatBox: View {
         VStack(spacing: 8) {
             Image(systemName: icon)
                 .font(.title2)
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
 
             Text(value)
                 .font(.title)

@@ -100,7 +100,7 @@ struct ProfileViewersView: View {
                     value: "\(viewModel.weekCount)",
                     label: "This Week",
                     icon: "chart.line.uptrend.xyaxis",
-                    color: .purple
+                    color: .teal
                 )
             }
         }
@@ -147,7 +147,7 @@ struct ProfileViewersView: View {
                     .padding()
                     .background(
                         LinearGradient(
-                            colors: [.orange, .pink],
+                            colors: [.orange, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -247,7 +247,7 @@ struct ProfileViewerCard: View {
                         CachedProfileImage(url: url, size: 60)
                     } else {
                         LinearGradient(
-                            colors: [.purple.opacity(0.6), .pink.opacity(0.5)],
+                            colors: [.teal.opacity(0.6), .blue.opacity(0.5)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )

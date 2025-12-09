@@ -26,7 +26,7 @@ struct TutorialView: View {
         ZStack {
             // Background gradient
             LinearGradient(
-                colors: [Color.purple.opacity(0.1), Color.pink.opacity(0.05)],
+                colors: [Color.teal.opacity(0.1), Color.blue.opacity(0.05)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -43,7 +43,7 @@ struct TutorialView: View {
                         Text("Skip")
                             .font(.subheadline)
                             .fontWeight(.medium)
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                     }
                     .padding()
                 }
@@ -70,14 +70,14 @@ struct TutorialView: View {
                                 Text("Back")
                             }
                             .fontWeight(.semibold)
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 16)
                             .background(Color.white)
                             .cornerRadius(16)
                             .overlay(
                                 RoundedRectangle(cornerRadius: 16)
-                                    .stroke(Color.purple, lineWidth: 2)
+                                    .stroke(Color.teal, lineWidth: 2)
                             )
                         }
                     }
@@ -102,13 +102,13 @@ struct TutorialView: View {
                         .padding(.vertical, 16)
                         .background(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
                         )
                         .cornerRadius(16)
-                        .shadow(color: .purple.opacity(0.3), radius: 10, y: 5)
+                        .shadow(color: .teal.opacity(0.3), radius: 10, y: 5)
                     }
                 }
                 .padding(.horizontal, 24)
@@ -229,7 +229,7 @@ struct Tutorial: Identifiable {
         title: String,
         description: String,
         icon: String,
-        accentColor: Color = .purple,
+        accentColor: Color = .teal,
         tips: [String] = [],
         animation: AnyView? = nil,
         interactiveDemo: AnyView? = nil
@@ -299,26 +299,26 @@ class TutorialManager: ObservableObject {
         return [
             Tutorial(
                 id: "welcome",
-                title: "Welcome to Celestia! 🌟",
-                description: "Your journey to meaningful connections starts here. Let's show you around!",
-                icon: "star.fill",
-                accentColor: .purple,
+                title: "Welcome to LangSwap! 🌍",
+                description: "Your journey to language fluency starts here. Let's show you around!",
+                icon: "globe",
+                accentColor: .teal,
                 tips: [
-                    "Be authentic and genuine",
-                    "Add photos that show your personality",
-                    "Write a bio that sparks conversation"
+                    "Be authentic about your language level",
+                    "Add photos so partners can recognize you",
+                    "Write a bio about your language goals"
                 ]
             ),
 
             Tutorial(
                 id: "scrolling",
                 title: "Discover & Scroll",
-                description: "Scroll through profiles one by one. Tap the heart to like or tap the profile card for more details!",
+                description: "Scroll through profiles one by one. Tap the connect button to request a language exchange!",
                 icon: "arrow.up.arrow.down",
-                accentColor: .pink,
+                accentColor: .blue,
                 tips: [
                     "Scroll up and down to browse profiles",
-                    "Tap the heart button to like someone",
+                    "Tap the connect button to request a partner",
                     "Tap the star to save profiles for later"
                 ],
                 interactiveDemo: AnyView(ScrollBrowseDemo())
@@ -326,27 +326,27 @@ class TutorialManager: ObservableObject {
 
             Tutorial(
                 id: "matching",
-                title: "Make Matches",
-                description: "When someone you liked also likes you back, you'll both be notified and can start chatting!",
-                icon: "heart.fill",
-                accentColor: .red,
+                title: "Find Language Partners",
+                description: "When someone you connected with also wants to practice with you, you'll both be notified and can start chatting!",
+                icon: "person.2.fill",
+                accentColor: .teal,
                 tips: [
-                    "Matches appear in your Matches tab",
+                    "Partners appear in your Partners tab",
                     "Send the first message to break the ice",
-                    "Be respectful and genuine"
+                    "Be respectful and patient with learners"
                 ]
             ),
 
             Tutorial(
                 id: "messaging",
-                title: "Start Conversations",
-                description: "Once matched, send a message to start getting to know each other better.",
+                title: "Start Practicing",
+                description: "Once connected, send a message to start your language exchange journey!",
                 icon: "message.fill",
                 accentColor: .blue,
                 tips: [
-                    "Ask about their interests",
-                    "Reference something from their profile",
-                    "Be yourself and have fun!"
+                    "Ask about their language goals",
+                    "Offer to help with their target language",
+                    "Be patient and have fun practicing!"
                 ],
                 interactiveDemo: AnyView(MessageDemo())
             ),
@@ -354,24 +354,24 @@ class TutorialManager: ObservableObject {
             Tutorial(
                 id: "profile_quality",
                 title: "Complete Your Profile",
-                description: "High-quality profiles get 5x more matches. Add photos, write a bio, and share your interests!",
+                description: "High-quality profiles get 5x more connections. Add photos, write a bio, and share your languages!",
                 icon: "person.crop.circle.fill.badge.checkmark",
                 accentColor: .green,
                 tips: [
                     "Add 4-6 clear photos",
-                    "Write a bio that shows your personality",
-                    "Select at least 5 interests"
+                    "Write a bio about your language journey",
+                    "List your native and learning languages"
                 ]
             ),
 
             Tutorial(
                 id: "safety",
                 title: "Stay Safe",
-                description: "Your safety is our priority. Report inappropriate behavior and never share personal info too soon.",
+                description: "Your safety is our priority. Report inappropriate behavior and keep initial meetings in public.",
                 icon: "shield.checkered",
                 accentColor: .orange,
                 tips: [
-                    "Meet in public places first",
+                    "Meet in public places like cafes or libraries",
                     "Tell a friend about your plans",
                     "Trust your instincts",
                     "Report and block suspicious accounts"
@@ -385,14 +385,14 @@ class TutorialManager: ObservableObject {
         case "super_like":
             return Tutorial(
                 id: "super_like",
-                title: "Super Like ⭐",
-                description: "Stand out from the crowd! Super Likes show you're really interested.",
+                title: "Super Connect ⭐",
+                description: "Stand out from the crowd! Super Connects show you're really interested in practicing together.",
                 icon: "star.circle.fill",
                 accentColor: .blue,
                 tips: [
-                    "You get 1 free Super Like per day",
+                    "You get 1 free Super Connect per day",
                     "Premium users get 5 per day",
-                    "Use them on profiles you really like!"
+                    "Use them on partners you really want to practice with!"
                 ]
             )
 
@@ -400,7 +400,7 @@ class TutorialManager: ObservableObject {
             return Tutorial(
                 id: "boost",
                 title: "Profile Boost 🚀",
-                description: "Get 10x more profile views for 30 minutes. Perfect for busy times!",
+                description: "Get 10x more profile views for 30 minutes. Perfect for finding language partners!",
                 icon: "flame.fill",
                 accentColor: .orange,
                 tips: [
@@ -470,9 +470,9 @@ struct ScrollBrowseDemo: View {
                                     isLiked[index].toggle()
                                 }
                             } label: {
-                                Image(systemName: isLiked[index] ? "heart.fill" : "heart")
+                                Image(systemName: isLiked[index] ? "person.2.fill" : "person.2")
                                     .font(.title3)
-                                    .foregroundColor(isLiked[index] ? .pink : .gray)
+                                    .foregroundColor(isLiked[index] ? .teal : .gray)
                                     .scaleEffect(isLiked[index] ? 1.2 : 1.0)
                             }
                         }
@@ -508,7 +508,7 @@ struct SwipeGestureDemo: View {
 
     var body: some View {
         VStack(spacing: 12) {
-            Text("Try it! Swipe left or right")
+            Text("Try it! Swipe to connect or pass")
                 .font(.caption)
                 .foregroundColor(.secondary)
 
@@ -597,9 +597,9 @@ struct MessageDemo: View {
                 // Sample message bubble
                 HStack {
                     Spacer()
-                    Text("Hey! Nice to match with you 👋")
+                    Text("Hey! Nice to connect with you 👋")
                         .padding(12)
-                        .background(Color.purple.opacity(0.2))
+                        .background(Color.teal.opacity(0.2))
                         .cornerRadius(16)
                 }
 
@@ -617,7 +617,7 @@ struct MessageDemo: View {
                     } label: {
                         Image(systemName: "arrow.up.circle.fill")
                             .font(.title2)
-                            .foregroundColor(message.isEmpty ? .gray : .purple)
+                            .foregroundColor(message.isEmpty ? .gray : .teal)
                     }
                 }
             }

@@ -354,7 +354,7 @@ struct MilestoneCelebrationView: View {
                         .padding()
                         .background(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )

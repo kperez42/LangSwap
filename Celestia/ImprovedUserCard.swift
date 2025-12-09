@@ -42,10 +42,10 @@ struct ImprovedUserCard: View {
         .accessibilityElement(children: .combine)
         .accessibilityLabel("\(user.fullName), \(user.age) years old")
         .accessibilityValue(buildAccessibilityValue())
-        .accessibilityHint("Swipe right to like, left to pass, or tap for details")
+        .accessibilityHint("Swipe right to connect, left to pass, or tap for details")
         .accessibilityIdentifier(AccessibilityIdentifier.userCard)
         .accessibilityActions([
-            AccessibilityCustomAction(name: "Like") {
+            AccessibilityCustomAction(name: "Connect") {
                 onSwipe(.right)
             },
             AccessibilityCustomAction(name: "Pass") {
@@ -157,9 +157,9 @@ struct ImprovedUserCard: View {
     private var placeholderGradient: some View {
         LinearGradient(
             colors: [
-                Color.purple.opacity(0.7),
-                Color.pink.opacity(0.6),
-                Color.blue.opacity(0.5)
+                Color.teal.opacity(0.7),
+                Color.blue.opacity(0.6),
+                Color.cyan.opacity(0.5)
             ],
             startPoint: .topLeading,
             endPoint: .bottomTrailing
@@ -267,10 +267,10 @@ struct ImprovedUserCard: View {
                             .accessibilityLabel("Height: \(height) centimeters")
                     }
 
-                    // Relationship Goal
+                    // Learning Goal
                     if let goal = user.relationshipGoal, goal != "Prefer not to say" {
-                        InfoChip(icon: "heart.circle", text: goal)
-                            .accessibilityLabel("Looking for: \(goal)")
+                        InfoChip(icon: "target", text: goal)
+                            .accessibilityLabel("Learning goal: \(goal)")
                     }
 
                     // Religion

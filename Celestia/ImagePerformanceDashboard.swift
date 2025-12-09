@@ -66,7 +66,7 @@ struct ImagePerformanceDashboard: View {
                     .font(.title2)
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -118,7 +118,7 @@ struct ImagePerformanceDashboard: View {
                 value: String(format: "%.1f", monitor.cdnHitRate * 100),
                 unit: "%",
                 icon: "network",
-                color: .purple,
+                color: .teal,
                 trend: monitor.cdnHitRate > 0.8 ? .improving : .stable
             )
 
@@ -146,7 +146,7 @@ struct ImagePerformanceDashboard: View {
                     RoundedRectangle(cornerRadius: 4)
                         .fill(
                             LinearGradient(
-                                colors: [.purple.opacity(0.7), .pink.opacity(0.7)],
+                                colors: [.teal.opacity(0.7), .blue.opacity(0.7)],
                                 startPoint: .bottom,
                                 endPoint: .top
                             )
@@ -171,7 +171,7 @@ struct ImagePerformanceDashboard: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
                 Image(systemName: "network")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                 Text("CDN Performance")
                     .font(.headline)
                 Spacer()
@@ -312,7 +312,7 @@ struct ImagePerformanceDashboard: View {
                 .padding()
                 .background(
                     LinearGradient(
-                        colors: [.purple, .pink],
+                        colors: [.teal, .blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     )

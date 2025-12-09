@@ -45,8 +45,8 @@ struct ProfileEnhancementView: View {
                 LinearGradient(
                     colors: [
                         Color.blue.opacity(0.08),
-                        Color.purple.opacity(0.05),
-                        Color.pink.opacity(0.03)
+                        Color.teal.opacity(0.05),
+                        Color.blue.opacity(0.03)
                     ],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
@@ -104,7 +104,7 @@ struct ProfileEnhancementView: View {
                     Circle()
                         .fill(
                             currentStep >= step ?
-                            LinearGradient(colors: [.blue, .purple], startPoint: .leading, endPoint: .trailing) :
+                            LinearGradient(colors: [.teal, .blue], startPoint: .leading, endPoint: .trailing) :
                             LinearGradient(colors: [Color.gray.opacity(0.3)], startPoint: .leading, endPoint: .trailing)
                         )
                         .frame(width: currentStep == step ? 12 : 8, height: currentStep == step ? 12 : 8)
@@ -117,7 +117,7 @@ struct ProfileEnhancementView: View {
                     .font(.headline)
                     .foregroundColor(.primary)
 
-                Text("Help us find your perfect match")
+                Text("Help us find your ideal language partners")
                     .font(.caption)
                     .foregroundColor(.secondary)
             }
@@ -150,7 +150,7 @@ struct ProfileEnhancementView: View {
                     Image(systemName: "graduationcap.fill")
                         .font(.system(size: 36))
                         .foregroundStyle(
-                            LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing)
+                            LinearGradient(colors: [.teal, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
                         )
                 }
 
@@ -172,7 +172,7 @@ struct ProfileEnhancementView: View {
                     optionSelector(
                         title: "Religion / Spirituality",
                         icon: "sparkles",
-                        color: .purple,
+                        color: .teal,
                         options: religionOptions,
                         selection: $religion
                     )
@@ -225,7 +225,7 @@ struct ProfileEnhancementView: View {
                     optionSelector(
                         title: "Drinking",
                         icon: "wineglass.fill",
-                        color: .purple,
+                        color: .teal,
                         options: drinkingOptions,
                         selection: $drinking
                     )
@@ -243,7 +243,7 @@ struct ProfileEnhancementView: View {
                 infoCard(
                     icon: "heart.fill",
                     text: "Lifestyle compatibility leads to stronger connections",
-                    color: .pink
+                    color: .teal
                 )
             }
             .padding(20)
@@ -428,7 +428,7 @@ struct ProfileEnhancementView: View {
                 .padding(.vertical, 16)
                 .background(
                     LinearGradient(
-                        colors: [.blue, .purple],
+                        colors: [.teal, .blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
@@ -511,13 +511,13 @@ struct ProfilePromptsOnboardingView: View {
                     VStack(spacing: 12) {
                         ZStack {
                             Circle()
-                                .fill(Color.pink.opacity(0.15))
+                                .fill(Color.blue.opacity(0.15))
                                 .frame(width: 80, height: 80)
 
                             Image(systemName: "text.bubble.fill")
                                 .font(.system(size: 36))
                                 .foregroundStyle(
-                                    LinearGradient(colors: [.pink, .purple], startPoint: .topLeading, endPoint: .bottomTrailing)
+                                    LinearGradient(colors: [.teal, .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
                                 )
                         }
 
@@ -565,14 +565,14 @@ struct ProfilePromptsOnboardingView: View {
                                         Spacer()
 
                                         Image(systemName: "plus.circle.fill")
-                                            .foregroundColor(.pink)
+                                            .foregroundColor(.teal)
                                     }
                                     .padding()
                                     .background(Color.white)
                                     .cornerRadius(12)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 12)
-                                            .stroke(Color.pink.opacity(0.2), lineWidth: 1)
+                                            .stroke(Color.blue.opacity(0.2), lineWidth: 1)
                                     )
                                 }
                             }
@@ -612,7 +612,7 @@ struct ProfilePromptsOnboardingView: View {
                         savePrompts()
                     }
                     .fontWeight(.semibold)
-                    .foregroundColor(.pink)
+                    .foregroundColor(.teal)
                     .disabled(prompts.isEmpty || isLoading)
                 }
             }
@@ -630,7 +630,7 @@ struct ProfilePromptsOnboardingView: View {
                 Text(prompt.question)
                     .font(.caption)
                     .fontWeight(.medium)
-                    .foregroundColor(.pink)
+                    .foregroundColor(.teal)
 
                 Spacer()
 
@@ -762,7 +762,7 @@ struct ProfileCompletionCard: View {
                         Circle()
                             .trim(from: 0, to: CGFloat(completionPercentage) / 100)
                             .stroke(
-                                LinearGradient(colors: [.blue, .purple], startPoint: .leading, endPoint: .trailing),
+                                LinearGradient(colors: [.teal, .blue], startPoint: .leading, endPoint: .trailing),
                                 style: StrokeStyle(lineWidth: 4, lineCap: .round)
                             )
                             .frame(width: 50, height: 50)
@@ -800,10 +800,10 @@ struct ProfileCompletionCard: View {
                                 .fontWeight(.medium)
                         }
                         .font(.subheadline)
-                        .foregroundColor(.pink)
+                        .foregroundColor(.teal)
                         .padding(.horizontal, 16)
                         .padding(.vertical, 10)
-                        .background(Color.pink.opacity(0.1))
+                        .background(Color.blue.opacity(0.1))
                         .cornerRadius(20)
                     }
                 }

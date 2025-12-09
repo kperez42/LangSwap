@@ -1,6 +1,6 @@
 //
 //  AuthService.swift
-//  Celestia
+//  LangSwap
 //
 //  Created by Kevin Perez on 10/29/25.
 //
@@ -240,7 +240,7 @@ class AuthService: ObservableObject, AuthServiceProtocol {
     }
 
     @MainActor
-    func createUser(withEmail email: String, password: String, fullName: String, age: Int, gender: String, lookingFor: String, location: String, country: String, referralCode: String = "", photos: [UIImage] = []) async throws {
+    func createUser(withEmail email: String, password: String, fullName: String, age: Int, gender: String, practiceWith: String, location: String, country: String, referralCode: String = "", photos: [UIImage] = []) async throws {
         isLoading = true
         errorMessage = nil
 
@@ -295,7 +295,7 @@ class AuthService: ObservableObject, AuthServiceProtocol {
                 fullName: sanitizedFullName,
                 age: age,
                 gender: gender,
-                lookingFor: lookingFor,
+                lookingFor: practiceWith,
                 bio: "",
                 location: location,
                 country: country,
@@ -766,8 +766,8 @@ class AuthService: ObservableObject, AuthServiceProtocol {
         let filterKeys = [
             "maxDistance", "minAge", "maxAge", "showVerifiedOnly",
             "selectedInterests", "educationLevels", "minHeight", "maxHeight",
-            "religions", "relationshipGoals", "smokingPreferences",
-            "drinkingPreferences", "petPreferences", "exercisePreferences", "dietPreferences"
+            "nativeLanguages", "learningGoals", "proficiencyLevels",
+            "practiceMethods", "availabilityPreferences", "timezonePreferences"
         ]
         for key in filterKeys {
             defaults.removeObject(forKey: key)

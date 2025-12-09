@@ -66,12 +66,12 @@ struct StripeIdentityVerificationView: View {
             // Stripe Identity Icon
             ZStack {
                 Circle()
-                    .fill(Color.purple.opacity(0.1))
+                    .fill(Color.teal.opacity(0.1))
                     .frame(width: 100, height: 100)
 
                 Image(systemName: "person.text.rectangle.fill")
                     .font(.system(size: 44))
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
             }
 
             Text("Verify Your Identity")
@@ -96,7 +96,7 @@ struct StripeIdentityVerificationView: View {
         VStack(spacing: 4) {
             Image(systemName: icon)
                 .font(.title3)
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
             Text(text)
                 .font(.caption)
                 .foregroundColor(.secondary)
@@ -113,10 +113,10 @@ struct StripeIdentityVerificationView: View {
                     .foregroundColor(.yellow)
                 Text("+35 Trust Score Points")
                     .font(.headline)
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
             }
             .padding()
-            .background(Color.purple.opacity(0.1))
+            .background(Color.teal.opacity(0.1))
             .cornerRadius(12)
 
             // What you'll need
@@ -147,7 +147,7 @@ struct StripeIdentityVerificationView: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(isLoading ? Color.gray : Color.purple)
+                .background(isLoading ? Color.gray : Color.teal)
                 .cornerRadius(12)
             }
             .disabled(isLoading)
@@ -171,7 +171,7 @@ struct StripeIdentityVerificationView: View {
     private func requirementRow(icon: String, text: String) -> some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
                 .frame(width: 24)
             Text(text)
                 .font(.subheadline)
@@ -183,8 +183,8 @@ struct StripeIdentityVerificationView: View {
             .font(.caption2)
             .padding(.horizontal, 8)
             .padding(.vertical, 4)
-            .background(Color.purple.opacity(0.1))
-            .foregroundColor(.purple)
+            .background(Color.teal.opacity(0.1))
+            .foregroundColor(.teal)
             .cornerRadius(4)
     }
 
@@ -275,7 +275,7 @@ struct StripeIdentityVerificationView: View {
         HStack(alignment: .top, spacing: 12) {
             ZStack {
                 Circle()
-                    .fill(Color.purple)
+                    .fill(Color.teal)
                     .frame(width: 28, height: 28)
                 Text("\(number)")
                     .font(.caption)

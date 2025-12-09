@@ -1,8 +1,8 @@
 //
 //  CurrentUserDetailView.swift
-//  Celestia
+//  LangSwap
 //
-//  Detail view for viewing own profile (similar to how other users see you)
+//  Detail view for viewing own profile (similar to how other language partners see you)
 //
 
 import SwiftUI
@@ -58,7 +58,7 @@ struct CurrentUserDetailView: View {
                     .padding(.vertical, 6)
                     .background(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -76,7 +76,7 @@ struct CurrentUserDetailView: View {
                                 .font(.system(size: 32, weight: .bold))
                                 .foregroundStyle(
                                     LinearGradient(
-                                        colors: [.purple, .pink],
+                                        colors: [.teal, .blue],
                                         startPoint: .leading,
                                         endPoint: .trailing
                                     )
@@ -96,7 +96,7 @@ struct CurrentUserDetailView: View {
                         // Location
                         HStack(spacing: 6) {
                             Image(systemName: "mappin.circle.fill")
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                             Text("\(user.location), \(user.country)")
                                 .foregroundColor(.secondary)
                         }
@@ -105,7 +105,7 @@ struct CurrentUserDetailView: View {
                         // Photo count
                         HStack(spacing: 6) {
                             Image(systemName: "photo.stack.fill")
-                                .foregroundColor(.purple)
+                                .foregroundColor(.teal)
                             Text("\(validPhotos.count) photo\(validPhotos.count == 1 ? "" : "s")")
                                 .foregroundColor(.secondary)
                         }
@@ -117,8 +117,8 @@ struct CurrentUserDetailView: View {
                         ProfileSectionCard(
                             icon: "quote.bubble.fill",
                             title: "About",
-                            iconColors: [.purple, .pink],
-                            borderColor: .purple
+                            iconColors: [.teal, .blue],
+                            borderColor: .teal
                         ) {
                             Text(user.bio)
                                 .font(.body)
@@ -148,12 +148,12 @@ struct CurrentUserDetailView: View {
                         ProfileSectionCard(
                             icon: "sparkles",
                             title: "Interests",
-                            iconColors: [.orange, .pink],
+                            iconColors: [.orange, .blue],
                             borderColor: .orange
                         ) {
                             FlowLayout2(spacing: 10) {
                                 ForEach(user.interests, id: \.self) { interest in
-                                    ProfileTagView(text: interest, colors: [.orange, .pink], textColor: .orange)
+                                    ProfileTagView(text: interest, colors: [.orange, .blue], textColor: .orange)
                                 }
                             }
                         }
@@ -164,8 +164,8 @@ struct CurrentUserDetailView: View {
                         ProfileSectionCard(
                             icon: "quote.bubble.fill",
                             title: "Get to Know Me",
-                            iconColors: [.purple, .pink],
-                            borderColor: .purple
+                            iconColors: [.teal, .blue],
+                            borderColor: .teal
                         ) {
                             VStack(spacing: 12) {
                                 ForEach(user.prompts) { prompt in
@@ -175,12 +175,12 @@ struct CurrentUserDetailView: View {
                         }
                     }
 
-                    // Details section (height, religion, relationship goal)
+                    // Details section (height, education, learning goal)
                     if hasAdvancedDetails {
                         ProfileSectionCard(
                             icon: "person.text.rectangle",
                             title: "Details",
-                            iconColors: [.indigo, .purple],
+                            iconColors: [.indigo, .blue],
                             borderColor: .indigo
                         ) {
                             VStack(spacing: 12) {
@@ -191,7 +191,7 @@ struct CurrentUserDetailView: View {
                                     DetailRow(icon: "graduationcap.fill", label: "Education", value: education)
                                 }
                                 if let goal = user.relationshipGoal, goal != "Prefer not to say" {
-                                    DetailRow(icon: "heart.circle", label: "Looking for", value: goal)
+                                    DetailRow(icon: "target", label: "Learning Goal", value: goal)
                                 }
                                 if let religion = user.religion, religion != "Prefer not to say" {
                                     DetailRow(icon: "sparkles", label: "Religion", value: religion)
@@ -228,12 +228,12 @@ struct CurrentUserDetailView: View {
                         }
                     }
 
-                    // Looking for section
+                    // Practice preferences section
                     ProfileSectionCard(
-                        icon: "heart.fill",
-                        title: "Looking for",
-                        iconColors: [.purple, .pink],
-                        borderColor: .purple
+                        icon: "person.2.fill",
+                        title: "Practice Preferences",
+                        iconColors: [.teal, .blue],
+                        borderColor: .teal
                     ) {
                         Text("\(user.lookingFor), ages \(user.ageRangeMin)-\(user.ageRangeMax)")
                             .font(.body)
@@ -281,13 +281,13 @@ struct CurrentUserDetailView: View {
                     .frame(width: 120, height: 60)
                     .background(
                         LinearGradient(
-                            colors: [Color.purple, Color.pink],
+                            colors: [Color.teal, Color.blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
                     )
                     .clipShape(Capsule())
-                    .shadow(color: Color.purple.opacity(0.4), radius: 10)
+                    .shadow(color: Color.teal.opacity(0.4), radius: 10)
                 }
                 .accessibilityLabel("Edit Profile")
             }

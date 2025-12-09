@@ -26,7 +26,7 @@ struct MainTabView: View {
             return true
         }
         guard let email = authService.currentUser?.email else { return false }
-        let adminEmails = ["perezkevin640@gmail.com", "admin@celestia.app"]
+        let adminEmails = ["perezkevin640@gmail.com", "admin@langswap.app"]
         return adminEmails.contains(email.lowercased())
     }
 
@@ -198,24 +198,24 @@ struct MainTabView: View {
                 .frame(height: 0.5)
 
             HStack(spacing: 0) {
-                // Discover
+                // Browse Partners
                 TabBarButton(
-                    icon: "flame.fill",
-                    title: "Discover",
+                    icon: "globe",
+                    title: "Browse",
                     isSelected: selectedTab == 0,
                     badgeCount: 0,
-                    color: .orange
+                    color: .blue
                 ) {
                     selectedTab = 0
                 }
 
-                // Likes
+                // Connections
                 TabBarButton(
-                    icon: "heart.fill",
-                    title: "Likes",
+                    icon: "person.badge.plus",
+                    title: "Requests",
                     isSelected: selectedTab == 1,
                     badgeCount: newMatchesCount,
-                    color: .pink
+                    color: .teal
                 ) {
                     selectedTab = 1
                 }
@@ -248,7 +248,7 @@ struct MainTabView: View {
                     title: "Profile",
                     isSelected: selectedTab == 4,
                     badgeCount: 0,
-                    color: .purple
+                    color: .teal
                 ) {
                     selectedTab = 4
                 }
@@ -367,16 +367,16 @@ struct TabBarButton: View {
 
     private var accessibilityHint: String {
         switch title {
-        case "Discover":
-            return "Browse potential matches"
-        case "Matches":
-            return "View your matches"
+        case "Browse":
+            return "Browse language exchange partners"
+        case "Requests":
+            return "View connection requests"
         case "Messages":
-            return "Read and send messages"
+            return "Read and send messages to partners"
         case "Saved":
             return "View saved profiles"
         case "Profile":
-            return "Edit your profile and settings"
+            return "Edit your language profile and settings"
         case "Admin":
             return "Admin moderation dashboard"
         default:
@@ -464,7 +464,7 @@ struct AnimatedTabIndicator: View {
             let tabWidth = geometry.size.width / CGFloat(totalTabs)
 
             RoundedRectangle(cornerRadius: 2)
-                .fill(Color.purple)
+                .fill(Color.teal)
                 .frame(width: tabWidth * 0.5, height: 3)
                 .offset(x: tabWidth * CGFloat(selectedTab) + tabWidth * 0.25)
         }

@@ -12,8 +12,9 @@ enum AppConstants {
     // MARK: - App Info
     enum App {
         static let name = "LangSwap"
-        static let tagline = "Find Your Language Exchange Partner"
-        static let description = "Connect with language learners worldwide"
+        static let tagline = "Practice Languages with Native Speakers"
+        static let description = "Connect with language learners worldwide for mutual language exchange"
+        static let category = "Education"
     }
 
     // MARK: - API Configuration

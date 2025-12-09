@@ -1,8 +1,8 @@
 //
 //  ProfileView.swift
-//  Celestia
+//  LangSwap
 //
-//  ELITE PROFILE VIEW - Your Digital Identity
+//  ELITE PROFILE VIEW - Your Language Learning Identity
 //  ACCESSIBILITY: Full VoiceOver support, Dynamic Type, Reduce Motion, and WCAG 2.1 AA compliant
 //
 
@@ -311,9 +311,9 @@ struct ProfileView: View {
             ZStack {
                 LinearGradient(
                     colors: [
-                        Color.purple.opacity(0.9),
-                        Color.pink.opacity(0.7),
-                        Color.blue.opacity(0.6)
+                        Color.teal.opacity(0.9),
+                        Color.blue.opacity(0.7),
+                        Color.cyan.opacity(0.6)
                     ],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
@@ -406,9 +406,9 @@ struct ProfileView: View {
                     // Share button - only show if user ID exists and URL is valid
                     if let userId = user.id,
                        !userId.isEmpty,
-                       let shareURL = URL(string: "https://celestia.app/profile/\(userId)"),
+                       let shareURL = URL(string: "https://langswap.app/profile/\(userId)"),
                        shareURL.scheme == "https" {
-                        ShareLink(item: shareURL, subject: Text("Check out \(user.fullName)'s profile"), message: Text("See \(user.fullName) on Celestia!")) {
+                        ShareLink(item: shareURL, subject: Text("Check out \(user.fullName)'s profile"), message: Text("See \(user.fullName) on LangSwap!")) {
                             Image(systemName: "square.and.arrow.up")
                                 .font(.title3)
                                 .foregroundColor(.white)
@@ -420,7 +420,7 @@ struct ProfileView: View {
                             HapticManager.shared.impact(.light)
                         })
                         .accessibilityLabel("Share profile")
-                        .accessibilityHint("Share your Celestia profile with others")
+                        .accessibilityHint("Share your LangSwap profile with others")
                     }
 
                     Spacer()
@@ -473,7 +473,7 @@ struct ProfileView: View {
                 Circle()
                     .fill(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -492,9 +492,9 @@ struct ProfileView: View {
         ZStack {
             LinearGradient(
                 colors: [
-                    Color.purple.opacity(0.8),
-                    Color.pink.opacity(0.7),
-                    Color.blue.opacity(0.6)
+                    Color.teal.opacity(0.8),
+                    Color.blue.opacity(0.7),
+                    Color.cyan.opacity(0.6)
                 ],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
@@ -514,7 +514,7 @@ struct ProfileView: View {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Profile Completion")
                         .font(.headline)
-                    Text("Complete your profile to get more matches")
+                    Text("Complete your profile to find more language partners")
                         .font(.caption)
                         .foregroundColor(.secondary)
                 }
@@ -529,7 +529,7 @@ struct ProfileView: View {
                         .trim(from: 0, to: CGFloat(profileCompletion) / 100)
                         .stroke(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
@@ -537,11 +537,11 @@ struct ProfileView: View {
                         )
                         .rotationEffect(.degrees(-90))
                         .animation(.spring(response: 1.0, dampingFraction: 0.7), value: profileCompletion)
-                    
+
                     Text("\(profileCompletion)%")
                         .font(.caption)
                         .fontWeight(.bold)
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
                 }
                 .frame(width: 50, height: 50)
             }
@@ -575,7 +575,7 @@ struct ProfileView: View {
         HStack(spacing: 10) {
             Image(systemName: icon)
                 .font(.caption)
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
                 .frame(width: 20)
             
             Text(text)
@@ -588,16 +588,16 @@ struct ProfileView: View {
 
     private func statsRow(user: User) -> some View {
         HStack(spacing: 0) {
-            // Liked
+            // Connections
             Button {
                 showingPremiumUpgrade = true
                 HapticManager.shared.impact(.light)
             } label: {
                 statCard(
-                    icon: "heart.fill",
+                    icon: "person.2.fill",
                     value: isLoadingStats ? "-" : "\(accurateLikesReceived)",
-                    label: "Liked",
-                    color: .pink
+                    label: "Connections",
+                    color: .teal
                 )
             }
 
@@ -624,16 +624,16 @@ struct ProfileView: View {
             Divider()
                 .frame(height: 50)
 
-            // Saved
+            // Partners
             Button {
                 showingPremiumUpgrade = true
                 HapticManager.shared.impact(.light)
             } label: {
                 statCard(
-                    icon: "bookmark.fill",
+                    icon: "globe",
                     value: isLoadingStats ? "-" : "\(accurateMatchCount)",
-                    label: "Saved",
-                    color: .purple
+                    label: "Partners",
+                    color: .blue
                 )
             }
         }
@@ -735,7 +735,7 @@ struct ProfileView: View {
             .padding(.vertical, 16)
             .background(
                 LinearGradient(
-                    colors: [Color.purple, Color.pink],
+                    colors: [Color.teal, Color.blue],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -810,7 +810,7 @@ struct ProfileView: View {
                     Circle()
                         .fill(
                             LinearGradient(
-                                colors: [Color.purple.opacity(0.15), Color.pink.opacity(0.1)],
+                                colors: [Color.teal.opacity(0.15), Color.blue.opacity(0.1)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -821,7 +821,7 @@ struct ProfileView: View {
                         .font(.title)
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -833,7 +833,7 @@ struct ProfileView: View {
                         .font(.headline)
                         .foregroundColor(.primary)
 
-                    Text("Unlimited likes & see who likes you")
+                    Text("Unlimited connections & see who wants to practice")
                         .font(.caption)
                         .foregroundColor(.secondary)
                         .lineLimit(1)
@@ -851,7 +851,7 @@ struct ProfileView: View {
             .shadow(color: .black.opacity(0.06), radius: 12, y: 4)
         }
         .accessibilityLabel("Upgrade to Premium")
-        .accessibilityHint("Unlock unlimited likes, see who likes you, and access all premium features")
+        .accessibilityHint("Unlock unlimited connections, see who wants to practice, and access all premium features")
         .padding(.horizontal, 20)
     }
 
@@ -867,7 +867,7 @@ struct ProfileView: View {
                     Circle()
                         .fill(
                             LinearGradient(
-                                colors: [Color.purple.opacity(0.15), Color.pink.opacity(0.1)],
+                                colors: [Color.teal.opacity(0.15), Color.blue.opacity(0.1)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -878,7 +878,7 @@ struct ProfileView: View {
                         .font(.title)
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.purple, .pink],
+                                colors: [.teal, .blue],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -947,7 +947,7 @@ struct ProfileView: View {
                     .font(.title3)
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -973,7 +973,7 @@ struct ProfileView: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.purple.opacity(0.1), lineWidth: 1)
+                .stroke(Color.teal.opacity(0.1), lineWidth: 1)
         )
         .padding(.horizontal, 20)
     }
@@ -989,7 +989,7 @@ struct ProfileView: View {
                             .font(.caption)
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.purple, .pink],
+                                    colors: [.teal, .blue],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
@@ -1000,7 +1000,7 @@ struct ProfileView: View {
                             .fontWeight(.semibold)
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.purple, .pink],
+                                    colors: [.teal, .blue],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
@@ -1024,7 +1024,7 @@ struct ProfileView: View {
                     RoundedRectangle(cornerRadius: 16)
                         .stroke(
                             LinearGradient(
-                                colors: [Color.purple.opacity(0.2), Color.pink.opacity(0.15)],
+                                colors: [Color.teal.opacity(0.2), Color.blue.opacity(0.15)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             ),
@@ -1042,7 +1042,7 @@ struct ProfileView: View {
         VStack(spacing: 16) {
             detailRow(icon: "person.fill", label: "Gender", value: user.gender)
             Divider()
-            detailRow(icon: "heart.circle.fill", label: "Looking for", value: user.lookingFor)
+            detailRow(icon: "person.2.circle.fill", label: "Practice with", value: user.lookingFor)
 
             // Height
             if let height = user.height {
@@ -1056,10 +1056,10 @@ struct ProfileView: View {
                 detailRow(icon: "graduationcap.fill", label: "Education", value: education)
             }
 
-            // Relationship goal
+            // Learning goal
             if let goal = user.relationshipGoal, goal != "Prefer not to say" {
                 Divider()
-                detailRow(icon: "heart.text.square", label: "Relationship goal", value: goal)
+                detailRow(icon: "target", label: "Learning goal", value: goal)
             }
 
             // Religion
@@ -1159,7 +1159,7 @@ struct ProfileView: View {
     private func detailRow(icon: String, label: String, value: String) -> some View {
         HStack(spacing: 12) {
             Image(systemName: icon)
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
                 .frame(width: 24)
             
             Text(label)
@@ -1200,7 +1200,7 @@ struct ProfileView: View {
                 .padding(.vertical, 6)
                 .background(
                     LinearGradient(
-                        colors: [.purple, .pink],
+                        colors: [.teal, .blue],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
@@ -1233,7 +1233,7 @@ struct ProfileView: View {
                                 RoundedRectangle(cornerRadius: 16)
                                     .stroke(
                                         LinearGradient(
-                                            colors: [.purple.opacity(0.3), .pink.opacity(0.2)],
+                                            colors: [.teal.opacity(0.3), .blue.opacity(0.2)],
                                             startPoint: .topLeading,
                                             endPoint: .bottomTrailing
                                         ),
@@ -1264,7 +1264,7 @@ struct ProfileView: View {
                     .font(.title3)
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.teal, .blue],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -1283,16 +1283,16 @@ struct ProfileView: View {
                         .padding(.vertical, 8)
                         .background(
                             LinearGradient(
-                                colors: [Color.purple.opacity(0.15), Color.pink.opacity(0.1)],
+                                colors: [Color.teal.opacity(0.15), Color.blue.opacity(0.1)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
                         )
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
                         .cornerRadius(20)
                         .overlay(
                             RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.purple.opacity(0.2), lineWidth: 1)
+                                .stroke(Color.teal.opacity(0.2), lineWidth: 1)
                         )
                 }
             }
@@ -1306,7 +1306,7 @@ struct ProfileView: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.purple.opacity(0.1), lineWidth: 1)
+                .stroke(Color.teal.opacity(0.1), lineWidth: 1)
         )
         .padding(.horizontal, 20)
     }
@@ -1320,7 +1320,7 @@ struct ProfileView: View {
                     .font(.title3)
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.pink, .purple],
+                            colors: [.blue, .teal],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -1339,16 +1339,16 @@ struct ProfileView: View {
                         .padding(.vertical, 8)
                         .background(
                             LinearGradient(
-                                colors: [Color.pink.opacity(0.15), Color.purple.opacity(0.1)],
+                                colors: [Color.blue.opacity(0.15), Color.teal.opacity(0.1)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
                         )
-                        .foregroundColor(.pink)
+                        .foregroundColor(.blue)
                         .cornerRadius(20)
                         .overlay(
                             RoundedRectangle(cornerRadius: 20)
-                                .stroke(Color.pink.opacity(0.2), lineWidth: 1)
+                                .stroke(Color.blue.opacity(0.2), lineWidth: 1)
                         )
                 }
             }
@@ -1362,7 +1362,7 @@ struct ProfileView: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.pink.opacity(0.1), lineWidth: 1)
+                .stroke(Color.blue.opacity(0.1), lineWidth: 1)
         )
         .padding(.horizontal, 20)
     }
@@ -1373,7 +1373,7 @@ struct ProfileView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 8) {
                 Image(systemName: "slider.horizontal.3")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                 Text("Discovery Preferences")
                     .font(.headline)
             }
@@ -1423,10 +1423,10 @@ struct ProfileView: View {
 
                 if user.matchCount >= 10 {
                     achievementBadge(
-                        icon: "heart.fill",
+                        icon: "person.2.fill",
                         title: "Popular",
-                        subtitle: "\(user.matchCount) matches",
-                        colors: [.pink, .purple]
+                        subtitle: "\(user.matchCount) partners",
+                        colors: [.teal, .blue]
                     )
                 }
 
@@ -1499,9 +1499,9 @@ struct ProfileView: View {
                 icon: "questionmark.circle.fill",
                 title: "Help & Support",
                 color: .blue,
-                accessibilityHint: "Contact Celestia support team for assistance"
+                accessibilityHint: "Contact LangSwap support team for assistance"
             ) {
-                guard let url = URL(string: "mailto:support@celestia.app"),
+                guard let url = URL(string: "mailto:support@langswap.app"),
                       UIApplication.shared.canOpenURL(url) else {
                     Logger.shared.error("Cannot open mail client - email URL invalid or no mail app configured", category: .general)
                     return
@@ -1522,7 +1522,7 @@ struct ProfileView: View {
                 icon: "arrow.right.square.fill",
                 title: "Sign Out",
                 color: .red,
-                accessibilityHint: "Sign out of your Celestia account"
+                accessibilityHint: "Sign out of your LangSwap account"
             ) {
                 showingLogoutConfirmation = true
             }
@@ -1572,7 +1572,7 @@ struct ProfileView: View {
                 // Hero header skeleton
                 ZStack {
                     LinearGradient(
-                        colors: [.purple.opacity(0.3), .pink.opacity(0.2)],
+                        colors: [.teal.opacity(0.3), .blue.opacity(0.2)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )

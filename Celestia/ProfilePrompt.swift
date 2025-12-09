@@ -1,8 +1,8 @@
 //
 //  ProfilePrompt.swift
-//  Celestia
+//  LangSwap
 //
-//  Personality prompts for engaging profiles
+//  Profile prompts for engaging language exchange profiles
 //
 
 import Foundation
@@ -31,123 +31,113 @@ struct ProfilePrompt: Codable, Identifiable, Equatable {
 
 struct PromptLibrary {
     static let allPrompts: [String] = [
-        // Lifestyle & Personality
-        "My ideal Sunday is...",
-        "The key to my heart is...",
-        "Don't judge me, but I love...",
-        "I'm the type of person who...",
-        "My perfect day includes...",
-        "You'll know I like you if...",
-        "My greatest passion is...",
-        "I find it attractive when...",
+        // Language Learning Journey
+        "Why I started learning this language...",
+        "My language learning story is...",
+        "The hardest part of learning a new language is...",
+        "My favorite way to practice is...",
+        "A language learning milestone I'm proud of...",
+        "What keeps me motivated to learn...",
 
-        // Relationship & Dating
-        "I'm looking for someone who...",
-        "The way to win me over is...",
-        "My love language is...",
-        "A relationship deal-breaker for me is...",
-        "I know I'm dating the right person when...",
-        "In a relationship, I value...",
-        "My idea of a perfect date is...",
+        // Cultural Interests
+        "I'm fascinated by this culture because...",
+        "My favorite thing about the culture is...",
+        "A cultural tradition I find interesting...",
+        "My dream destination for this language is...",
+        "A movie/show in my target language I love...",
+        "Music I listen to in my target language...",
 
-        // Quirks & Fun
-        "An unpopular opinion I have is...",
-        "My most controversial take is...",
-        "I'm weirdly attracted to...",
-        "A random fact I love is...",
-        "My guilty pleasure is...",
-        "I'm convinced that...",
-        "The dorkiest thing about me is...",
-
-        // Life Goals & Dreams
-        "My biggest goal this year is...",
-        "In 5 years, I'll be...",
-        "A bucket list item of mine is...",
-        "I won't shut up about...",
-        "The best thing I've done recently is...",
-        "I'm currently learning...",
-
-        // Favorites & Preferences
-        "My go-to karaoke song is...",
-        "The best way to start a conversation with me is...",
-        "My signature dish is...",
-        "The movie I can watch on repeat is...",
-        "My favorite way to spend a weekend is...",
-        "The song that never gets old is...",
-
-        // Deep Questions
-        "What makes me feel alive is...",
-        "The most meaningful thing to me is...",
-        "I believe strongly that...",
-        "My biggest motivation is...",
-        "What I'm most grateful for is...",
-
-        // Travel & Adventure
-        "My dream vacation is...",
-        "The best trip I've ever taken was...",
-        "A place I've always wanted to visit is...",
-        "My travel style is...",
-
-        // Social & Friends
+        // Conversation Starters
+        "Let's talk about...",
+        "A topic I never get tired of discussing...",
         "Ask me about...",
+        "I can teach you about...",
+        "I'd love to learn about...",
+        "Something I want to understand better...",
+
+        // Personality & Interests
+        "My interests outside of language learning...",
+        "When I'm not studying, you'll find me...",
+        "My favorite books/authors are...",
+        "I'm passionate about...",
+        "A fun fact about me...",
         "My friends would describe me as...",
-        "The best advice I've received is...",
-        "Something I'll teach you is...",
-        "Something you should know about me is...",
 
-        // Humor & Wit
-        "Two truths and a lie...",
-        "Let's debate...",
-        "Change my mind about...",
-        "I'll fall for you if...",
+        // Learning Goals
+        "My language learning goal for this year...",
+        "I want to be fluent enough to...",
+        "The reason I chose this language...",
+        "Where I see myself in my language journey...",
+        "Skills I want to improve most...",
+        "An exam I'm preparing for...",
+
+        // Exchange Preferences
+        "The best language partner for me is...",
+        "I learn best when...",
+        "Topics I enjoy discussing in my target language...",
+        "What I can offer as a language partner...",
+        "My ideal practice session looks like...",
+        "I prefer practicing through...",
+
+        // Fun & Creative
+        "A funny language mistake I made...",
+        "The word in my target language I love most...",
+        "Something that surprised me about learning languages...",
+        "If I could speak any language instantly, it would be...",
+        "My language learning hack is...",
+        "The best advice for language learners...",
+
+        // Background
+        "Languages I already speak...",
+        "My native language has taught me...",
+        "Growing up, languages were...",
+        "Travel experiences that inspired my learning...",
+        "How I use languages in my daily life...",
+
+        // Collaboration
+        "Let's practice together by...",
+        "I'm looking for partners who...",
         "Together we could...",
-        "We'll get along if...",
-
-        // Unique & Creative
-        "If I could have any superpower, it would be...",
-        "My zombie apocalypse survival plan is...",
-        "The hill I'll die on is...",
-        "My hot take is...",
-        "I'm still not over...",
-        "The award I deserve is..."
+        "I'm excited to help you with...",
+        "What I hope to gain from language exchange..."
     ]
 
     static let categories: [String: [String]] = [
-        "Lifestyle": [
-            "My ideal Sunday is...",
-            "My perfect day includes...",
-            "My greatest passion is...",
-            "My favorite way to spend a weekend is..."
+        "Language Journey": [
+            "Why I started learning this language...",
+            "My language learning story is...",
+            "A language learning milestone I'm proud of...",
+            "What keeps me motivated to learn..."
         ],
-        "Dating": [
-            "I'm looking for someone who...",
-            "The way to win me over is...",
-            "My love language is...",
-            "My idea of a perfect date is..."
+        "Cultural Exchange": [
+            "I'm fascinated by this culture because...",
+            "My favorite thing about the culture is...",
+            "A cultural tradition I find interesting...",
+            "My dream destination for this language is..."
         ],
-        "Personality": [
-            "I'm the type of person who...",
-            "You'll know I like you if...",
+        "Conversation Topics": [
+            "Let's talk about...",
+            "A topic I never get tired of discussing...",
+            "Ask me about...",
+            "I can teach you about..."
+        ],
+        "Learning Goals": [
+            "My language learning goal for this year...",
+            "I want to be fluent enough to...",
+            "Skills I want to improve most...",
+            "Where I see myself in my language journey..."
+        ],
+        "About Me": [
+            "My interests outside of language learning...",
+            "When I'm not studying, you'll find me...",
             "My friends would describe me as...",
-            "Something you should know about me is..."
+            "A fun fact about me..."
         ],
-        "Fun & Quirky": [
-            "Don't judge me, but I love...",
-            "My guilty pleasure is...",
-            "The dorkiest thing about me is...",
-            "Two truths and a lie..."
-        ],
-        "Goals & Dreams": [
-            "My biggest goal this year is...",
-            "In 5 years, I'll be...",
-            "A bucket list item of mine is...",
-            "I'm currently learning..."
-        ],
-        "Hot Takes": [
-            "An unpopular opinion I have is...",
-            "My most controversial take is...",
-            "The hill I'll die on is...",
-            "Change my mind about..."
+        "Exchange Partner": [
+            "The best language partner for me is...",
+            "My ideal practice session looks like...",
+            "What I can offer as a language partner...",
+            "I prefer practicing through..."
         ]
     ]
 
@@ -158,11 +148,11 @@ struct PromptLibrary {
     static func suggestedPrompts() -> [String] {
         // Return a curated mix of prompts
         return [
-            "My ideal Sunday is...",
-            "I'm looking for someone who...",
-            "Don't judge me, but I love...",
-            "My perfect day includes...",
-            "The key to my heart is..."
+            "Why I started learning this language...",
+            "The best language partner for me is...",
+            "Let's talk about...",
+            "My language learning goal for this year...",
+            "What I can offer as a language partner..."
         ]
     }
 }

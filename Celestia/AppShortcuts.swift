@@ -28,11 +28,11 @@ struct CelestiaAppShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: StartSwipingIntent(),
             phrases: [
-                "Start swiping on \(.applicationName)",
+                "Find partners on \(.applicationName)",
                 "Discover people on \(.applicationName)",
                 "Show me profiles on \(.applicationName)"
             ],
-            shortTitle: "Start Swiping",
+            shortTitle: "Find Partners",
             systemImageName: "person.2.circle.fill"
         )
 
@@ -114,19 +114,19 @@ struct ViewMatchesIntent: AppIntent {
     }
 }
 
-// MARK: - Start Swiping Intent
+// MARK: - Find Partners Intent
 
 @available(iOS 16.0, *)
 struct StartSwipingIntent: AppIntent {
-    static var title: LocalizedStringResource = "Start Swiping"
-    static var description = IntentDescription("Start discovering new people on Celestia")
+    static var title: LocalizedStringResource = "Find Partners"
+    static var description = IntentDescription("Start discovering language partners on LangSwap")
     static var openAppWhenRun: Bool = true
 
     @MainActor
     func perform() async throws -> some IntentResult {
         // Track analytics
         AnalyticsManager.shared.logEvent(.appShortcutUsed, parameters: [
-            "shortcut": "start_swiping"
+            "shortcut": "find_partners"
         ])
 
         return .result()
@@ -138,7 +138,7 @@ struct StartSwipingIntent: AppIntent {
 @available(iOS 16.0, *)
 struct CheckMessagesIntent: AppIntent {
     static var title: LocalizedStringResource = "Check Messages"
-    static var description = IntentDescription("Check your messages on Celestia")
+    static var description = IntentDescription("Check your messages on LangSwap")
     static var openAppWhenRun: Bool = true
 
     @MainActor

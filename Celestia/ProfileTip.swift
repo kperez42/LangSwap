@@ -31,7 +31,7 @@ struct ProfileTip: Identifiable {
             tips.append(ProfileTip(
                 icon: "photo.on.rectangle",
                 title: "Add Photos",
-                description: "Profiles with 3+ photos get 5x more matches",
+                description: "Profiles with 3+ photos get 5x more connections",
                 action: .addPhotos,
                 priority: 1
             ))
@@ -83,7 +83,7 @@ struct ProfileTip: Identifiable {
             tips.append(ProfileTip(
                 icon: "checkmark.seal.fill",
                 title: "Get Verified",
-                description: "Build trust and get 3x more matches",
+                description: "Build trust and get 3x more connections",
                 action: .getVerified,
                 priority: 0
             ))

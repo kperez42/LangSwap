@@ -1,21 +1,21 @@
 //
 //  PersonalizedOnboardingManager.swift
-//  Celestia
+//  LangSwap
 //
-//  Manages personalized onboarding paths based on user goals and preferences
-//  Adapts the onboarding experience to match user intentions
+//  Manages personalized onboarding paths based on language learning goals
+//  Adapts the onboarding experience to match user language exchange intentions
 //
 
 import Foundation
 import SwiftUI
 
-/// Manages personalized onboarding experiences based on user goals
+/// Manages personalized onboarding experiences based on language learning goals
 @MainActor
 class PersonalizedOnboardingManager: ObservableObject {
 
     static let shared = PersonalizedOnboardingManager()
 
-    @Published var selectedGoal: DatingGoal?
+    @Published var selectedGoal: LanguageGoal?
     @Published var recommendedPath: OnboardingPath?
     @Published var customizations: [String: Any] = [:]
 
@@ -23,72 +23,72 @@ class PersonalizedOnboardingManager: ObservableObject {
 
     // MARK: - Models
 
-    enum DatingGoal: String, Codable, CaseIterable {
-        case seriousRelationship = "serious_relationship"
-        case casualDating = "casual_dating"
-        case newFriends = "new_friends"
-        case networking = "networking"
-        case figureItOut = "figure_it_out"
+    enum LanguageGoal: String, Codable, CaseIterable {
+        case conversationFluency = "conversation_fluency"
+        case examPreparation = "exam_preparation"
+        case businessProfessional = "business_professional"
+        case travelCultural = "travel_cultural"
+        case academicStudy = "academic_study"
 
         var displayName: String {
             switch self {
-            case .seriousRelationship: return "Long-term relationship"
-            case .casualDating: return "Casual dating"
-            case .newFriends: return "New friends"
-            case .networking: return "Professional networking"
-            case .figureItOut: return "Open to see what happens"
+            case .conversationFluency: return "Conversation Fluency"
+            case .examPreparation: return "Exam Preparation"
+            case .businessProfessional: return "Business/Professional"
+            case .travelCultural: return "Travel & Culture"
+            case .academicStudy: return "Academic Study"
             }
         }
 
         var icon: String {
             switch self {
-            case .seriousRelationship: return "heart.fill"
-            case .casualDating: return "sparkles"
-            case .newFriends: return "person.2.fill"
-            case .networking: return "briefcase.fill"
-            case .figureItOut: return "star.fill"
+            case .conversationFluency: return "bubble.left.and.bubble.right.fill"
+            case .examPreparation: return "doc.text.fill"
+            case .businessProfessional: return "briefcase.fill"
+            case .travelCultural: return "airplane"
+            case .academicStudy: return "graduationcap.fill"
             }
         }
 
         var description: String {
             switch self {
-            case .seriousRelationship:
-                return "Looking for something meaningful and long-lasting"
-            case .casualDating:
-                return "Enjoying the journey, keeping it light"
-            case .newFriends:
-                return "Expanding your social circle"
-            case .networking:
-                return "Building professional connections"
-            case .figureItOut:
-                return "Exploring options and seeing where things go"
+            case .conversationFluency:
+                return "Practice speaking naturally with native speakers"
+            case .examPreparation:
+                return "Prepare for TOEFL, IELTS, DELE, JLPT, HSK, etc."
+            case .businessProfessional:
+                return "Learn professional vocabulary and communication"
+            case .travelCultural:
+                return "Learn practical phrases and cultural insights"
+            case .academicStudy:
+                return "Improve academic reading and writing skills"
             }
         }
 
         var color: Color {
             switch self {
-            case .seriousRelationship: return .red
-            case .casualDating: return .orange
-            case .newFriends: return .blue
-            case .networking: return .purple
-            case .figureItOut: return .green
+            case .conversationFluency: return .blue
+            case .examPreparation: return .teal
+            case .businessProfessional: return .indigo
+            case .travelCultural: return .teal
+            case .academicStudy: return .green
             }
         }
     }
 
     struct OnboardingPath {
-        let goal: DatingGoal
+        let goal: LanguageGoal
         let steps: [OnboardingPathStep]
         let focusAreas: [FocusArea]
         let recommendedFeatures: [String]
         let tutorialPriority: [String] // Tutorial IDs in priority order
 
         enum FocusArea: String {
-            case profileDepth = "profile_depth"
-            case photoQuality = "photo_quality"
-            case bioOptimization = "bio_optimization"
-            case interestMatching = "interest_matching"
-            case locationAccuracy = "location_accuracy"
+            case languageSelection = "language_selection"
+            case proficiencyLevel = "proficiency_level"
+            case learningGoals = "learning_goals"
+            case practiceSchedule = "practice_schedule"
+            case topicInterests = "topic_interests"
             case verificationTrust = "verification_trust"
         }
     }
@@ -115,7 +115,7 @@ class PersonalizedOnboardingManager: ObservableObject {
 
     // MARK: - Goal Selection
 
-    func selectGoal(_ goal: DatingGoal) {
+    func selectGoal(_ goal: LanguageGoal) {
         selectedGoal = goal
         recommendedPath = generatePath(for: goal)
         saveGoal()
@@ -127,199 +127,244 @@ class PersonalizedOnboardingManager: ObservableObject {
             "goal_name": goal.displayName
         ])
 
-        Logger.shared.info("User selected onboarding goal: \(goal.displayName)", category: .onboarding)
+        Logger.shared.info("User selected language learning goal: \(goal.displayName)", category: .onboarding)
     }
 
     // MARK: - Path Generation
 
-    private func generatePath(for goal: DatingGoal) -> OnboardingPath {
+    private func generatePath(for goal: LanguageGoal) -> OnboardingPath {
         switch goal {
-        case .seriousRelationship:
-            return createSeriousRelationshipPath()
-        case .casualDating:
-            return createCasualDatingPath()
-        case .newFriends:
-            return createNewFriendsPath()
-        case .networking:
-            return createNetworkingPath()
-        case .figureItOut:
-            return createOpenPath()
+        case .conversationFluency:
+            return createConversationFluencyPath()
+        case .examPreparation:
+            return createExamPreparationPath()
+        case .businessProfessional:
+            return createBusinessProfessionalPath()
+        case .travelCultural:
+            return createTravelCulturalPath()
+        case .academicStudy:
+            return createAcademicStudyPath()
         }
     }
 
-    private func createSeriousRelationshipPath() -> OnboardingPath {
+    private func createConversationFluencyPath() -> OnboardingPath {
         OnboardingPath(
-            goal: .seriousRelationship,
+            goal: .conversationFluency,
             steps: [
                 OnboardingPathStep(
-                    id: "detailed_profile",
-                    title: "Create a Detailed Profile",
-                    description: "Share your values, interests, and what you're looking for",
+                    id: "language_profile",
+                    title: "Set Up Your Language Profile",
+                    description: "Tell us what languages you speak and what you want to learn",
                     importance: .critical,
                     tips: [
-                        "Write a thoughtful bio about your personality and values",
-                        "Add 4-6 high-quality photos showing different aspects of your life",
-                        "Share your long-term goals and what matters to you"
+                        "Add all languages you can speak fluently",
+                        "Select the languages you're learning",
+                        "Be honest about your proficiency levels"
+                    ]
+                ),
+                OnboardingPathStep(
+                    id: "conversation_topics",
+                    title: "Choose Conversation Topics",
+                    description: "Select topics you enjoy discussing",
+                    importance: .critical,
+                    tips: [
+                        "Pick topics you're genuinely interested in",
+                        "Variety helps keep conversations engaging",
+                        "You can always update these later"
+                    ]
+                ),
+                OnboardingPathStep(
+                    id: "practice_schedule",
+                    title: "Set Your Availability",
+                    description: "When are you available for language practice?",
+                    importance: .recommended,
+                    tips: [
+                        "Consider time zone differences with partners",
+                        "Regular practice leads to faster improvement",
+                        "Even 15-30 minutes daily helps"
+                    ]
+                )
+            ],
+            focusAreas: [.languageSelection, .topicInterests, .practiceSchedule],
+            recommendedFeatures: ["Voice Messages", "Video Calls", "Text Chat"],
+            tutorialPriority: ["language_setup", "finding_partners", "messaging", "practice_tips"]
+        )
+    }
+
+    private func createExamPreparationPath() -> OnboardingPath {
+        OnboardingPath(
+            goal: .examPreparation,
+            steps: [
+                OnboardingPathStep(
+                    id: "exam_details",
+                    title: "Set Your Language Goals",
+                    description: "Tell us which exam you're preparing for",
+                    importance: .critical,
+                    tips: [
+                        "Specify the exam (TOEFL, IELTS, DELE, JLPT, HSK)",
+                        "Share your target score or level",
+                        "Mention your exam timeline"
+                    ]
+                ),
+                OnboardingPathStep(
+                    id: "current_level",
+                    title: "Assess Your Current Level",
+                    description: "Be honest about where you are now",
+                    importance: .critical,
+                    tips: [
+                        "Use CEFR levels (A1-C2) as reference",
+                        "Partners can help you prepare better if they know your level",
+                        "It's okay to start at any level"
+                    ]
+                ),
+                OnboardingPathStep(
+                    id: "practice_areas",
+                    title: "Identify Weak Areas",
+                    description: "What do you need the most help with?",
+                    importance: .recommended,
+                    tips: [
+                        "Speaking is often the hardest part of exams",
+                        "Find partners who can help with specific sections",
+                        "Regular practice is key to improvement"
+                    ]
+                )
+            ],
+            focusAreas: [.proficiencyLevel, .learningGoals, .practiceSchedule],
+            recommendedFeatures: ["Study Partners", "Speaking Practice", "Writing Feedback"],
+            tutorialPriority: ["language_setup", "finding_partners", "practice_tips", "messaging"]
+        )
+    }
+
+    private func createBusinessProfessionalPath() -> OnboardingPath {
+        OnboardingPath(
+            goal: .businessProfessional,
+            steps: [
+                OnboardingPathStep(
+                    id: "professional_profile",
+                    title: "Create Your Language Profile",
+                    description: "Highlight your professional language needs",
+                    importance: .critical,
+                    tips: [
+                        "Mention your industry or field",
+                        "Share what professional skills you want to develop",
+                        "Include your current proficiency level"
+                    ]
+                ),
+                OnboardingPathStep(
+                    id: "business_topics",
+                    title: "Select Business Topics",
+                    description: "What professional areas do you want to practice?",
+                    importance: .critical,
+                    tips: [
+                        "Meetings, presentations, negotiations",
+                        "Email and written communication",
+                        "Industry-specific vocabulary"
                     ]
                 ),
                 OnboardingPathStep(
                     id: "verify_profile",
                     title: "Verify Your Profile",
-                    description: "Build trust with verified photos",
-                    importance: .critical,
+                    description: "Build trust with other professionals",
+                    importance: .recommended,
                     tips: [
-                        "Verified profiles get 2x more meaningful matches",
-                        "Shows you're serious and authentic",
+                        "Verification increases response rates",
+                        "Professional partners appreciate authenticity",
                         "Takes less than 2 minutes"
                     ]
-                ),
-                OnboardingPathStep(
-                    id: "interests_values",
-                    title: "Share Your Interests & Values",
-                    description: "Help us find compatible matches",
-                    importance: .recommended,
-                    tips: [
-                        "Select interests that truly represent you",
-                        "Be specific about what you're looking for",
-                        "Authenticity attracts the right people"
-                    ]
                 )
             ],
-            focusAreas: [.profileDepth, .verificationTrust, .bioOptimization, .interestMatching],
-            recommendedFeatures: ["Video Prompts", "Voice Messages", "Verified Matches"],
-            tutorialPriority: ["profile_quality", "matching", "messaging", "safety", "scrolling"]
+            focusAreas: [.languageSelection, .learningGoals, .verificationTrust],
+            recommendedFeatures: ["Professional Mode", "Video Calls", "Voice Messages"],
+            tutorialPriority: ["language_setup", "finding_partners", "messaging", "verification"]
         )
     }
 
-    private func createCasualDatingPath() -> OnboardingPath {
+    private func createTravelCulturalPath() -> OnboardingPath {
         OnboardingPath(
-            goal: .casualDating,
+            goal: .travelCultural,
             steps: [
                 OnboardingPathStep(
-                    id: "fun_profile",
-                    title: "Create a Fun Profile",
-                    description: "Show your personality and what makes you interesting",
+                    id: "travel_languages",
+                    title: "Set Your Language Goals",
+                    description: "What languages do you want to practice for travel?",
                     importance: .critical,
                     tips: [
-                        "Add photos that show you having fun",
-                        "Keep your bio light and engaging",
-                        "Show different sides of your personality"
+                        "Focus on practical, everyday phrases",
+                        "Learn about local customs and etiquette",
+                        "Connect with native speakers before you travel"
                     ]
                 ),
                 OnboardingPathStep(
-                    id: "interests",
+                    id: "cultural_interests",
                     title: "Share Your Interests",
-                    description: "Find people with shared hobbies",
+                    description: "What aspects of the culture interest you?",
                     importance: .recommended,
                     tips: [
-                        "Select activities you enjoy",
-                        "Be open to new experiences",
-                        "Show what makes you unique"
-                    ]
-                )
-            ],
-            focusAreas: [.photoQuality, .interestMatching, .locationAccuracy],
-            recommendedFeatures: ["Quick Match", "Nearby Matches", "Icebreakers"],
-            tutorialPriority: ["scrolling", "matching", "messaging", "profile_quality"]
-        )
-    }
-
-    private func createNewFriendsPath() -> OnboardingPath {
-        OnboardingPath(
-            goal: .newFriends,
-            steps: [
-                OnboardingPathStep(
-                    id: "friendly_profile",
-                    title: "Create a Friendly Profile",
-                    description: "Show what kind of friend you'd be",
-                    importance: .critical,
-                    tips: [
-                        "Highlight your hobbies and interests",
-                        "Share what activities you enjoy",
-                        "Be genuine and approachable"
+                        "Food, music, history, traditions",
+                        "Local recommendations from natives",
+                        "Authentic cultural exchange"
                     ]
                 ),
                 OnboardingPathStep(
-                    id: "location_interests",
-                    title: "Share Location & Interests",
-                    description: "Find friends with shared activities nearby",
-                    importance: .critical,
+                    id: "travel_plans",
+                    title: "Share Your Plans",
+                    description: "Let partners know about your travel goals",
+                    importance: .optional,
                     tips: [
-                        "Add your city for local connections",
-                        "Select group activities you enjoy",
-                        "Be specific about your interests"
+                        "Mention countries or regions you want to visit",
+                        "Find partners from those areas",
+                        "Learn from real local experiences"
                     ]
                 )
             ],
-            focusAreas: [.interestMatching, .locationAccuracy, .bioOptimization],
-            recommendedFeatures: ["Group Activities", "Interest Groups", "Events"],
-            tutorialPriority: ["scrolling", "matching", "messaging", "profile_quality"]
+            focusAreas: [.languageSelection, .topicInterests, .practiceSchedule],
+            recommendedFeatures: ["Cultural Exchange", "Text Chat", "Voice Messages"],
+            tutorialPriority: ["language_setup", "finding_partners", "messaging", "cultural_tips"]
         )
     }
 
-    private func createNetworkingPath() -> OnboardingPath {
+    private func createAcademicStudyPath() -> OnboardingPath {
         OnboardingPath(
-            goal: .networking,
+            goal: .academicStudy,
             steps: [
                 OnboardingPathStep(
-                    id: "professional_profile",
-                    title: "Create a Professional Profile",
-                    description: "Highlight your professional interests and goals",
+                    id: "academic_profile",
+                    title: "Create Your Language Profile",
+                    description: "Tell us about your academic language goals",
                     importance: .critical,
                     tips: [
-                        "Share your professional background",
-                        "Mention industries or fields of interest",
-                        "Keep photos professional yet approachable"
+                        "Mention your field of study",
+                        "Share your current academic level",
+                        "Be specific about skills you want to improve"
                     ]
                 ),
                 OnboardingPathStep(
-                    id: "verify_credentials",
+                    id: "academic_needs",
+                    title: "Identify Your Needs",
+                    description: "What academic skills do you want to develop?",
+                    importance: .critical,
+                    tips: [
+                        "Reading academic papers",
+                        "Writing essays and research",
+                        "Academic presentations",
+                        "Vocabulary for your field"
+                    ]
+                ),
+                OnboardingPathStep(
+                    id: "verify_profile",
                     title: "Verify Your Profile",
-                    description: "Build professional credibility",
+                    description: "Build credibility with other learners",
                     importance: .recommended,
                     tips: [
-                        "Verification builds trust in professional contexts",
-                        "Shows you're a serious networker",
-                        "Increases connection rate"
+                        "Verification shows you're serious about learning",
+                        "Academic partners value authenticity",
+                        "Increases match quality"
                     ]
                 )
             ],
-            focusAreas: [.profileDepth, .verificationTrust, .locationAccuracy],
-            recommendedFeatures: ["Professional Mode", "Industry Tags", "LinkedIn Integration"],
-            tutorialPriority: ["profile_quality", "matching", "messaging"]
-        )
-    }
-
-    private func createOpenPath() -> OnboardingPath {
-        OnboardingPath(
-            goal: .figureItOut,
-            steps: [
-                OnboardingPathStep(
-                    id: "basic_profile",
-                    title: "Create Your Profile",
-                    description: "Start with the basics and explore from there",
-                    importance: .critical,
-                    tips: [
-                        "Add a few good photos",
-                        "Write a brief bio about yourself",
-                        "Select some interests you enjoy"
-                    ]
-                ),
-                OnboardingPathStep(
-                    id: "explore",
-                    title: "Start Exploring",
-                    description: "See who's out there and what feels right",
-                    importance: .recommended,
-                    tips: [
-                        "Try swiping to see different people",
-                        "You can always update your preferences",
-                        "Take your time finding what you're looking for"
-                    ]
-                )
-            ],
-            focusAreas: [.photoQuality, .bioOptimization, .interestMatching],
-            recommendedFeatures: ["Discovery", "Filters", "Profile Insights"],
-            tutorialPriority: ["welcome", "scrolling", "matching", "messaging", "profile_quality"]
+            focusAreas: [.proficiencyLevel, .learningGoals, .verificationTrust],
+            recommendedFeatures: ["Writing Feedback", "Reading Practice", "Study Groups"],
+            tutorialPriority: ["language_setup", "finding_partners", "practice_tips", "verification"]
         )
     }
 
@@ -337,7 +382,7 @@ class PersonalizedOnboardingManager: ObservableObject {
 
     func getPrioritizedTutorials() -> [String] {
         guard let path = recommendedPath else {
-            return ["welcome", "scrolling", "matching", "messaging"]
+            return ["welcome", "language_setup", "finding_partners", "messaging"]
         }
         return path.tutorialPriority
     }
@@ -357,7 +402,7 @@ class PersonalizedOnboardingManager: ObservableObject {
 
     private func loadSavedGoal() {
         if let data = UserDefaults.standard.data(forKey: userDefaultsKey),
-           let goal = try? JSONDecoder().decode(DatingGoal.self, from: data) {
+           let goal = try? JSONDecoder().decode(LanguageGoal.self, from: data) {
             selectedGoal = goal
             recommendedPath = generatePath(for: goal)
         }
@@ -370,17 +415,17 @@ struct OnboardingGoalSelectionView: View {
     @ObservedObject var manager = PersonalizedOnboardingManager.shared
     @Environment(\.dismiss) var dismiss
 
-    let onGoalSelected: (PersonalizedOnboardingManager.DatingGoal) -> Void
+    let onGoalSelected: (PersonalizedOnboardingManager.LanguageGoal) -> Void
 
     var body: some View {
         VStack(spacing: 0) {
             // Header
             VStack(spacing: 12) {
-                Text("What brings you here?")
+                Text("What's your language goal?")
                     .font(.title)
                     .fontWeight(.bold)
 
-                Text("This helps us personalize your experience")
+                Text("This helps us find the best language partners for you")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                     .multilineTextAlignment(.center)
@@ -391,7 +436,7 @@ struct OnboardingGoalSelectionView: View {
             // Goal Options
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 16) {
-                    ForEach(PersonalizedOnboardingManager.DatingGoal.allCases, id: \.self) { goal in
+                    ForEach(PersonalizedOnboardingManager.LanguageGoal.allCases, id: \.self) { goal in
                         GoalCard(goal: goal, isSelected: manager.selectedGoal == goal) {
                             withAnimation(.spring(response: 0.3)) {
                                 manager.selectGoal(goal)
@@ -422,13 +467,13 @@ struct OnboardingGoalSelectionView: View {
                     .padding(.vertical, 16)
                     .background(
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: [.blue, .teal],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
                     )
                     .cornerRadius(16)
-                    .shadow(color: .purple.opacity(0.3), radius: 10, y: 5)
+                    .shadow(color: .blue.opacity(0.3), radius: 10, y: 5)
                 }
                 .padding(.horizontal, 24)
                 .padding(.bottom, 32)
@@ -437,7 +482,7 @@ struct OnboardingGoalSelectionView: View {
         }
         .background(
             LinearGradient(
-                colors: [Color.purple.opacity(0.05), Color.pink.opacity(0.03)],
+                colors: [Color.blue.opacity(0.05), Color.teal.opacity(0.03)],
                 startPoint: .topLeading,
                 endPoint: .bottomTrailing
             )
@@ -447,7 +492,7 @@ struct OnboardingGoalSelectionView: View {
 }
 
 struct GoalCard: View {
-    let goal: PersonalizedOnboardingManager.DatingGoal
+    let goal: PersonalizedOnboardingManager.LanguageGoal
     let isSelected: Bool
     let onTap: () -> Void
 

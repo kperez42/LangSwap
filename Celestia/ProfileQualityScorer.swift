@@ -397,7 +397,7 @@ class ProfileQualityScorer: ObservableObject {
         case 85..<100:
             return ("Excellent", .blue, "Almost perfect! Keep it up")
         case 100:
-            return ("Perfect", .purple, "Your profile is amazing!")
+            return ("Perfect", .teal, "Your profile is amazing!")
         default:
             return ("Unknown", .gray, "")
         }

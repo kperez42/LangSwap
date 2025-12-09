@@ -124,7 +124,7 @@ struct ChatDetailView: View {
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
                     .background(
-                        LinearGradient(colors: [.orange, .pink], startPoint: .leading, endPoint: .trailing)
+                        LinearGradient(colors: [.orange, .blue], startPoint: .leading, endPoint: .trailing)
                     )
                     .cornerRadius(12)
             }
@@ -156,7 +156,7 @@ struct ChatDetailView: View {
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
                     .background(
-                        LinearGradient(colors: [.orange, .pink], startPoint: .leading, endPoint: .trailing)
+                        LinearGradient(colors: [.orange, .blue], startPoint: .leading, endPoint: .trailing)
                     )
                     .cornerRadius(16)
             }

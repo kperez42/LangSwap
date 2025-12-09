@@ -22,7 +22,7 @@ struct AdminModerationDashboard: View {
         ("Reports", "exclamationmark.triangle.fill", .orange),
         ("Appeals", "envelope.open.fill", .cyan),
         ("Suspicious", "eye.trianglebadge.exclamationmark", .red),
-        ("ID Review", "person.text.rectangle", .purple),
+        ("ID Review", "person.text.rectangle", .teal),
         ("Stats", "chart.bar.fill", .green)
     ]
 
@@ -103,7 +103,7 @@ struct AdminModerationDashboard: View {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(
                             LinearGradient(
-                                colors: [.purple.opacity(0.6), .indigo.opacity(0.6)],
+                                colors: [.teal.opacity(0.6), .indigo.opacity(0.6)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -114,7 +114,7 @@ struct AdminModerationDashboard: View {
                     RoundedRectangle(cornerRadius: 12)
                         .fill(
                             LinearGradient(
-                                colors: [.purple, .indigo],
+                                colors: [.teal, .indigo],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -625,7 +625,7 @@ struct AdminModerationDashboard: View {
         HStack(spacing: 8) {
             Image(systemName: "clock.arrow.circlepath")
                 .font(.system(size: 14, weight: .semibold))
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
             Text("Recent Activity")
                 .font(.system(size: 15, weight: .semibold))
             Spacer()
@@ -778,7 +778,7 @@ struct ReportRowView: View {
         case let r where r.contains("inappropriate"):
             return .orange
         case let r where r.contains("spam"):
-            return .purple
+            return .teal
         case let r where r.contains("fake"):
             return .blue
         default:
@@ -2853,7 +2853,7 @@ enum ModerationAction: String {
         switch self {
         case .dismiss: return .gray
         case .warn: return .orange
-        case .suspend: return .purple
+        case .suspend: return .teal
         case .ban: return .red
         }
     }
@@ -3133,10 +3133,10 @@ struct PendingProfileCard: View {
                             Image(systemName: "arrow.up.right")
                                 .font(.system(size: 10, weight: .bold))
                         }
-                        .foregroundColor(.purple)
+                        .foregroundColor(.teal)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 6)
-                        .background(Color.purple.opacity(0.1))
+                        .background(Color.teal.opacity(0.1))
                         .cornerRadius(8)
                     }
                 }
@@ -3152,10 +3152,10 @@ struct PendingProfileCard: View {
                                     Text(profile.lookingFor)
                                 }
                                 .font(.system(size: 11, weight: .medium))
-                                .foregroundColor(.pink)
+                                .foregroundColor(.blue)
                                 .padding(.horizontal, 8)
                                 .padding(.vertical, 5)
-                                .background(Color.pink.opacity(0.1))
+                                .background(Color.blue.opacity(0.1))
                                 .cornerRadius(6)
                             }
 
@@ -3715,7 +3715,7 @@ struct AdminPendingProfileDetailView: View {
 
             HStack(spacing: 6) {
                 Image(systemName: "mappin.circle.fill")
-                    .foregroundColor(.purple)
+                    .foregroundColor(.teal)
                 Text("\(profile.location)\(profile.country.isEmpty ? "" : ", \(profile.country)")")
                     .foregroundColor(.secondary)
             }
@@ -3761,7 +3761,7 @@ struct AdminPendingProfileDetailView: View {
         VStack(alignment: .leading, spacing: 8) {
             Label("About", systemImage: "text.quote")
                 .font(.headline)
-                .foregroundColor(.purple)
+                .foregroundColor(.teal)
 
             Text(profile.bio)
                 .font(.body)
@@ -3805,7 +3805,7 @@ struct AdminPendingProfileDetailView: View {
         VStack(alignment: .leading, spacing: 8) {
             Label("Interests", systemImage: "heart.fill")
                 .font(.headline)
-                .foregroundColor(.pink)
+                .foregroundColor(.blue)
 
             AdminFlowLayout(spacing: 8) {
                 ForEach(profile.interests, id: \.self) { interest in
@@ -3813,8 +3813,8 @@ struct AdminPendingProfileDetailView: View {
                         .font(.caption)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
-                        .background(Color.pink.opacity(0.1))
-                        .foregroundColor(.pink)
+                        .background(Color.blue.opacity(0.1))
+                        .foregroundColor(.blue)
                         .cornerRadius(16)
                 }
             }

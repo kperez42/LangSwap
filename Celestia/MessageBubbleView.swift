@@ -53,7 +53,7 @@ struct MessageBubble: View {
                         .background {
                             if isFromCurrentUser {
                                 LinearGradient(
-                                    colors: [Color.purple, Color.pink],
+                                    colors: [Color.teal, Color.blue],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
@@ -193,7 +193,7 @@ struct MessageBubbleGradient: View {
                                 .background {
                                     if isFromCurrentUser {
                                         LinearGradient(
-                                            colors: [Color.purple.opacity(0.9), Color.pink.opacity(0.9)],
+                                            colors: [Color.teal.opacity(0.9), Color.blue.opacity(0.9)],
                                             startPoint: .leading,
                                             endPoint: .trailing
                                         )
@@ -290,7 +290,7 @@ struct MessageBubbleGradient: View {
         } label: {
             HStack(spacing: 8) {
                 Rectangle()
-                    .fill(isFromCurrentUser ? Color.white.opacity(0.5) : Color.purple.opacity(0.5))
+                    .fill(isFromCurrentUser ? Color.white.opacity(0.5) : Color.teal.opacity(0.5))
                     .frame(width: 3)
                     .cornerRadius(2)
 
@@ -298,7 +298,7 @@ struct MessageBubbleGradient: View {
                     Text(replyTo.senderName)
                         .font(.caption)
                         .fontWeight(.semibold)
-                        .foregroundColor(isFromCurrentUser ? .white.opacity(0.9) : .purple)
+                        .foregroundColor(isFromCurrentUser ? .white.opacity(0.9) : .teal)
 
                     if let imageURL = replyTo.imageURL, !imageURL.isEmpty {
                         HStack(spacing: 4) {
@@ -348,11 +348,11 @@ struct MessageBubbleGradient: View {
                     }
                     .padding(.horizontal, 6)
                     .padding(.vertical, 3)
-                    .background(hasUserReacted ? Color.purple.opacity(0.2) : Color.gray.opacity(0.15))
+                    .background(hasUserReacted ? Color.teal.opacity(0.2) : Color.gray.opacity(0.15))
                     .cornerRadius(12)
                     .overlay(
                         RoundedRectangle(cornerRadius: 12)
-                            .stroke(hasUserReacted ? Color.purple.opacity(0.5) : Color.clear, lineWidth: 1)
+                            .stroke(hasUserReacted ? Color.teal.opacity(0.5) : Color.clear, lineWidth: 1)
                     )
                 }
                 .buttonStyle(.plain)
@@ -439,7 +439,7 @@ struct MessageBubbleGradient: View {
     private var bubbleBackground: some View {
         if isFromCurrentUser {
             LinearGradient(
-                colors: [Color.purple, Color.pink],
+                colors: [Color.teal, Color.blue],
                 startPoint: .leading,
                 endPoint: .trailing
             )

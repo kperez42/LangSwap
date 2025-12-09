@@ -57,9 +57,9 @@ struct InterestsView: View {
     private var headerView: some View {
         HStack {
             VStack(alignment: .leading, spacing: 4) {
-                Text("People Who Liked You")
+                Text("People Who Want to Connect")
                     .font(.headline)
-                
+
                 Text("\(interestService.receivedInterests.count) interested")
                     .font(.subheadline)
                     .foregroundColor(.secondary)
@@ -132,9 +132,9 @@ struct InterestsView: View {
     
     private var emptyStateView: some View {
         VStack(spacing: 20) {
-            Image(systemName: "heart.slash")
+            Image(systemName: "person.2.slash")
                 .font(.system(size: 60))
-                .foregroundColor(.purple.opacity(0.5))
+                .foregroundColor(.teal.opacity(0.5))
             
             Text("No Interests Yet")
                 .font(.title3)
@@ -160,13 +160,13 @@ struct InterestsView: View {
                     .font(.system(size: 80))
                     .foregroundColor(.yellow)
                 
-                Text("It's a Match! 🎉")
+                Text("Language Partner Found! 🎉")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
-                
+
                 if let user = matchedUser {
-                    Text("You and \(user.fullName) liked each other!")
+                    Text("You and \(user.fullName) want to practice together!")
                         .font(.title3)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -176,7 +176,7 @@ struct InterestsView: View {
                     showMatchAnimation = false
                 }
                 .buttonStyle(.borderedProminent)
-                .tint(.purple)
+                .tint(.teal)
                 
                 Button("Keep Browsing") {
                     showMatchAnimation = false
@@ -288,7 +288,7 @@ struct BasicInterestCard: View {
                     .scaledToFill()
             } placeholder: {
                 LinearGradient(
-                    colors: [Color.purple.opacity(0.6), Color.pink.opacity(0.5)],
+                    colors: [Color.teal.opacity(0.6), Color.blue.opacity(0.5)],
                     startPoint: .topLeading,
                     endPoint: .bottomTrailing
                 )
@@ -320,7 +320,7 @@ struct BasicInterestCard: View {
                     if let message = interest.message {
                         Text("💬 \(message)")
                             .font(.caption)
-                            .foregroundColor(.purple)
+                            .foregroundColor(.teal)
                             .lineLimit(2)
                     }
                 }
